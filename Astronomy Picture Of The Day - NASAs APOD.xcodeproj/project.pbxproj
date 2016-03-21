@@ -14,6 +14,7 @@
 		01C1B27C1CA0024500D96DF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C1B27A1CA0024500D96DF6 /* LaunchScreen.storyboard */; };
 		01C1B2871CA0024500D96DF6 /* Astronomy_Picture_Of_The_Day___NASAs_APODTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C1B2861CA0024500D96DF6 /* Astronomy_Picture_Of_The_Day___NASAs_APODTests.swift */; };
 		01C1B2921CA0024500D96DF6 /* Astronomy_Picture_Of_The_Day___NASAs_APODUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C1B2911CA0024500D96DF6 /* Astronomy_Picture_Of_The_Day___NASAs_APODUITests.swift */; };
+		01C1B2A31CA00C0E00D96DF6 /* APODAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C1B2A21CA00C0E00D96DF6 /* APODAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		01C1B28D1CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APODUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Astronomy Picture Of The Day - NASAs APODUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C1B2911CA0024500D96DF6 /* Astronomy_Picture_Of_The_Day___NASAs_APODUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Astronomy_Picture_Of_The_Day___NASAs_APODUITests.swift"; sourceTree = "<group>"; };
 		01C1B2931CA0024500D96DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01C1B2A21CA00C0E00D96DF6 /* APODAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APODAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +99,9 @@
 		01C1B2701CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APOD */ = {
 			isa = PBXGroup;
 			children = (
+				01C1B2A01CA00BE800D96DF6 /* Model */,
 				01C1B2711CA0024500D96DF6 /* AppDelegate.swift */,
-				01C1B2731CA0024500D96DF6 /* ViewController.swift */,
+				01C1B29F1CA00BE000D96DF6 /* Controller */,
 				01C1B2751CA0024500D96DF6 /* Main.storyboard */,
 				01C1B2781CA0024500D96DF6 /* Assets.xcassets */,
 				01C1B27A1CA0024500D96DF6 /* LaunchScreen.storyboard */,
@@ -123,6 +126,30 @@
 				01C1B2931CA0024500D96DF6 /* Info.plist */,
 			);
 			path = "Astronomy Picture Of The Day - NASAs APODUITests";
+			sourceTree = "<group>";
+		};
+		01C1B29F1CA00BE000D96DF6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				01C1B2731CA0024500D96DF6 /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		01C1B2A01CA00BE800D96DF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				01C1B2A11CA00BF300D96DF6 /* API */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		01C1B2A11CA00BF300D96DF6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				01C1B2A21CA00C0E00D96DF6 /* APODAPI.swift */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C1B2741CA0024500D96DF6 /* ViewController.swift in Sources */,
+				01C1B2A31CA00C0E00D96DF6 /* APODAPI.swift in Sources */,
 				01C1B2721CA0024500D96DF6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
