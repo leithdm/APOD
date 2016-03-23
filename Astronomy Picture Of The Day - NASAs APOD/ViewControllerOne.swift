@@ -8,11 +8,13 @@ protocol ViewControllerOneDelegate: class {
 	func viewControllerOneDidTapMenuButton(controller: ViewControllerOne)
 }
 
-class ViewControllerOne: UIViewController {
+class ViewControllerOne: UIViewController, UICollectionViewDataSource {
+	
+	var APODarray: [UIImage] = []
+	
 	weak var delegate: ViewControllerOneDelegate?
-	
-	@IBOutlet weak var imageAPOD: UIImageView!
-	
+	@IBOutlet weak var imageTitle: UILabel!
+	@IBOutlet weak var collectionView: UICollectionView!
 	
 	//MARK: lifecycle methods
 	
@@ -21,6 +23,12 @@ class ViewControllerOne: UIViewController {
 		
 		downloadPhotoProperties()
 	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		
+		let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
+		layout.itemSize = CGSize(width: collectionView.bounds.size.width, height: 400) 	}
 	
 	
 	//MARK: download photo properties
@@ -31,13 +39,41 @@ class ViewControllerOne: UIViewController {
 			let url = NSURL(string: data!)
 			let imageData = NSData(contentsOfURL: url!)
 			dispatch_async(dispatch_get_main_queue()) {
-				self.imageAPOD.image = UIImage(data: imageData!)
+				let image = UIImage(data: imageData!)
+				self.APODarray.append(image!)
+				self.APODarray.append(image!)
+				self.APODarray.append(image!)
+				self.imageTitle.text = data
+				self.collectionView.reloadData()
+				print(self.APODarray)
 			}
 		})
 	}
 	
-	
 	@IBAction func menuButtonTapped(sender: AnyObject) {
 		delegate?.viewControllerOneDidTapMenuButton(self)
+	}
+	
+	
+	//MARK: - Collection View
+	func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+		return 1
+	}
+	
+	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return APODarray.count
+	}
+	
+	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("APODCollectionViewCell", forIndexPath: indexPath) as! APODCollectionViewCell
+		
+		let image = APODarray[indexPath.row]
+		cell.imageView.image = image
+		
+		//		cell.imageAPOD.layer.shadowRadius = 4
+		//		cell.imageAPOD.layer.shadowOpacity = 0.5
+		//		cell.imageAPOD.layer.shadowOffset = CGSize.zero
+		
+		return cell
 	}
 }

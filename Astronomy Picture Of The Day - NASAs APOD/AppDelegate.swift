@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	struct Constants {
 		
 		//amount of mainViewController that overlaps with Menu
-		static let MenuOverlap: CGFloat = 100
+		static let MenuOverlap: CGFloat = 60
 	}
 	
 	//MARK: properties
