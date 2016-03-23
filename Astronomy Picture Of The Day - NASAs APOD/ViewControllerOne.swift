@@ -1,19 +1,20 @@
-//
-//  ViewController.swift
-//  Astronomy Picture Of The Day - NASAs APOD
-//
 //  Created by Darren Leith on 21/03/2016.
 //  Copyright © 2016 Darren Leith. All rights reserved.
 //
 
 import UIKit
 
-class PictureOfTheDayViewController: UIViewController {
+protocol ViewControllerOneDelegate: class {
+	func viewControllerOneDidTapMenuButton(controller: ViewControllerOne)
+}
+
+class ViewControllerOne: UIViewController {
+	weak var delegate: ViewControllerOneDelegate?
 	
 	@IBOutlet weak var imageAPOD: UIImageView!
 	
 	
-	//MARK: lifecycle methods 
+	//MARK: lifecycle methods
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -22,7 +23,7 @@ class PictureOfTheDayViewController: UIViewController {
 	}
 	
 	
-	//MARK: download photo properties 
+	//MARK: download photo properties
 	
 	func downloadPhotoProperties() {
 		
@@ -34,5 +35,9 @@ class PictureOfTheDayViewController: UIViewController {
 			}
 		})
 	}
-		
+	
+	
+	@IBAction func menuButtonTapped(sender: AnyObject) {
+		delegate?.viewControllerOneDidTapMenuButton(self)
+	}
 }

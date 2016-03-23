@@ -20,10 +20,26 @@ class Astronomy_Picture_Of_The_Day___NASAs_APODTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+	
+    func testCreateURLFromParameters() {
+		
+		let client = APODClient.sharedInstance
+		
+		let methodParameters: [String: AnyObject] = [
+			APODClient.APODParameterKeys.APIKey: "testkey",
+			APODClient.APODParameterKeys.HDImage: APODClient.APODParameterValues.HDImage
+		]
+		
+		let url = client.createURLFromParameters(methodParameters)
+		let expectedResult = NSURL(string: "https://api.nasa.gov/planetary/apod?hd=false&api_key=testkey")
+		
+		//Test 1
+		XCTAssertNotNil(url)
+		
+		//Test 2
+		XCTAssertEqual(url, expectedResult)
+		
     }
     
     func testPerformanceExample() {

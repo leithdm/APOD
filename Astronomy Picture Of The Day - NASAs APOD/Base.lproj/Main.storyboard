@@ -1,41 +1,224 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V1d-cC-928">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Picture Of The Day View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Main Menu-->
+        <scene sceneID="TwD-Tg-1q1">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PictureOfTheDayViewController" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MenuTableViewController" id="4NU-5c-oWf" customClass="MenuTableViewController" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5fn-Pd-V1t">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="Jdu-aP-hqJ">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="w7P-y5-vaU" style="IBUITableViewCellStyleDefault" id="RFv-LL-j8P">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RFv-LL-j8P" id="rKb-89-tgZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="APOD Picture Of The Day" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w7P-y5-vaU">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="GPh-Nr-7gq" style="IBUITableViewCellStyleDefault" id="4cR-gj-DLo">
+                                        <rect key="frame" x="0.0" y="108" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4cR-gj-DLo" id="qb9-4P-Coo">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Gallery" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GPh-Nr-7gq">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="sif-od-QbI" style="IBUITableViewCellStyleDefault" id="3qC-CQ-37Y">
+                                        <rect key="frame" x="0.0" y="152" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3qC-CQ-37Y" id="muG-fs-JxM">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Favourites" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sif-od-QbI">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="4V9-MX-eRa" style="IBUITableViewCellStyleDefault" id="j9v-YW-tCO">
+                                        <rect key="frame" x="0.0" y="196" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j9v-YW-tCO" id="uxh-Si-beI">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="About APOD" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4V9-MX-eRa">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="4NU-5c-oWf" id="nfR-5I-Ewh"/>
+                            <outlet property="delegate" destination="4NU-5c-oWf" id="12r-O9-0Gc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Main Menu" id="WQs-Zu-Hyx"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tDv-iP-K3I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1246" y="1127"/>
+        </scene>
+        <!--APOD Picture Of The Day-->
+        <scene sceneID="CFi-a6-8Aj">
+            <objects>
+                <viewController storyboardIdentifier="ViewControllerOne" id="khL-fS-72U" customClass="ViewControllerOne" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="mFt-QP-gFy"/>
+                        <viewControllerLayoutGuide type="bottom" id="7D0-uG-dZw"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="hb8-aP-BaC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jnz-rt-wwH">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pp4-n2-IDY">
+                                <rect key="frame" x="40" y="64" width="520" height="536"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="jnz-rt-wwH" secondAttribute="trailing" id="2Qd-Us-y4d"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="jnz-rt-wwH" secondAttribute="bottom" id="Ha4-tX-44a"/>
-                            <constraint firstItem="jnz-rt-wwH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rr7-To-1Ia"/>
-                            <constraint firstItem="jnz-rt-wwH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xNk-JW-RUG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pp4-n2-IDY" secondAttribute="trailing" constant="20" id="6GC-nP-Zu3"/>
+                            <constraint firstItem="pp4-n2-IDY" firstAttribute="leading" secondItem="hb8-aP-BaC" secondAttribute="leadingMargin" constant="20" id="N6d-1S-E7N"/>
+                            <constraint firstItem="7D0-uG-dZw" firstAttribute="top" secondItem="pp4-n2-IDY" secondAttribute="bottom" id="qTM-UK-5rv"/>
+                            <constraint firstItem="pp4-n2-IDY" firstAttribute="top" secondItem="mFt-QP-gFy" secondAttribute="bottom" id="qpu-8L-RjL"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="APOD Picture Of The Day" id="9Fm-JC-CzI">
+                        <barButtonItem key="leftBarButtonItem" image="burger" id="aIP-Ea-zHG">
+                            <connections>
+                                <action selector="menuButtonTapped:" destination="khL-fS-72U" id="hS5-8q-mDi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="imageAPOD" destination="jnz-rt-wwH" id="ypt-Zn-lSS"/>
+                        <outlet property="imageAPOD" destination="pp4-n2-IDY" id="mJd-WT-eea"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7yW-0D-gv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789" y="656"/>
+            <point key="canvasLocation" x="1246" y="1793"/>
+        </scene>
+        <!--Gallery-->
+        <scene sceneID="Ntr-vL-PLF">
+            <objects>
+                <viewController storyboardIdentifier="ViewControllerTwo" id="hJe-Nl-VyO" customClass="ViewControllerTwo" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uFe-Hf-VX7"/>
+                        <viewControllerLayoutGuide type="bottom" id="2pr-iE-wS9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Qbu-WE-Qzp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Gallery" id="yGT-zc-nmP">
+                        <barButtonItem key="leftBarButtonItem" image="burger" id="UM8-Rn-Uji">
+                            <connections>
+                                <action selector="menuButtonTapped:" destination="hJe-Nl-VyO" id="jXV-7m-uti"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gXZ-te-PKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1246" y="2478"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="L2F-bJ-r8n">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jjn-EP-sSc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fnH-i9-h5p">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4NU-5c-oWf" kind="relationship" relationship="rootViewController" id="hYP-Ny-PHu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ppu-B0-eDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="578" y="1127"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rK0-yb-j9D">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V1d-cC-928" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fog-wp-SU6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="khL-fS-72U" kind="relationship" relationship="rootViewController" id="V8C-wm-ba5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fQh-Qh-uWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="578" y="1793"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nXZ-Qp-vLY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i5r-mQ-Nrd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O2i-fV-B2P">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hJe-Nl-VyO" kind="relationship" relationship="rootViewController" id="MTZ-dD-7BH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P99-6r-mUn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="587" y="2478"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="burger" width="24" height="24"/>
+    </resources>
 </document>

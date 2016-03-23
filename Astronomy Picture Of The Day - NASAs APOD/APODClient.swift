@@ -11,7 +11,6 @@ import UIKit
 
 class APODClient {
 	
-	
 	static let sharedInstance = APODClient()
 	let session = NSURLSession.sharedSession()
 	
@@ -31,10 +30,9 @@ class APODClient {
 	}
 	
 	struct APODParameterValues {
-		static let APIKey = ""
+		static let APIKey = "IyeTTjPu0uEWXZhhXCLriSpOgoIViYvI8LXeVqF5"
 		static let HDImage = "false"
 	}
-	
 	
 	//MARK: download photo properties
 	
@@ -58,7 +56,6 @@ class APODClient {
 		task.resume()
 	}
 	
-	
 	//MARK: parse photo properties
 	
 	private func parseDownloadPhotoProperties(data: NSData, completionHandler: (data: String?, error: String?) -> Void) {
@@ -81,7 +78,7 @@ class APODClient {
 	
 	//MARK: create URL from parameters
 	
-	private func createURLFromParameters(parameters: [String:AnyObject]) -> NSURL {
+	func createURLFromParameters(parameters: [String:AnyObject]) -> NSURL {
 		let components = NSURLComponents()
 		components.scheme = APOD.APIScheme
 		components.host = APOD.APIHost
@@ -94,5 +91,13 @@ class APODClient {
 		}
 		print("Specified URL: \(components.URL!)")
 		return components.URL!
+	}
+	
+	//MARK: helper methods
+	
+	func dateToString(date: NSDate) -> String {
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "YYYY-MM-DD"
+		return dateFormatter.stringFromDate(date)
 	}
 }
