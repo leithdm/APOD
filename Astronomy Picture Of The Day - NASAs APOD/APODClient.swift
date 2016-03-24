@@ -34,11 +34,13 @@ class APODClient {
 		static let HDImage = "false"
 	}
 	
+	
 	//MARK: download photo properties
 	
-	func downloadPhotoProperties(completionHandler: (data: String?, error: String?) -> Void) {
+	func downloadPhotoProperties(date: String, completionHandler: (data: [String: String]?, error: String?) -> Void) {
 		
 		let methodParameters: [String: AnyObject] = [
+			APODParameterKeys.Date: date,
 			APODParameterKeys.APIKey: APODParameterValues.APIKey,
 			APODParameterKeys.HDImage: APODParameterValues.HDImage
 		]
@@ -56,9 +58,10 @@ class APODClient {
 		task.resume()
 	}
 	
+	
 	//MARK: parse photo properties
 	
-	private func parseDownloadPhotoProperties(data: NSData, completionHandler: (data: String?, error: String?) -> Void) {
+	func parseDownloadPhotoProperties(data: NSData, completionHandler: (data: [String: String]?, error: String?) -> Void) {
 		
 		var parsedData: AnyObject!
 		
@@ -69,11 +72,33 @@ class APODClient {
 			return
 		}
 		
-		guard let url = parsedData["url"] as? String else {
-			completionHandler(data: nil, error: "Error parsing the data")
+		guard let date = parsedData["date"] as? String else {
+			completionHandler(data: nil, error: "Error parsing the date")
 			return
 		}
-		completionHandler(data: url, error: nil)
+		
+		guard let url = parsedData["url"] as? String else {
+			completionHandler(data: nil, error: "Error parsing the url")
+			return
+		}
+		
+		guard let title = parsedData["title"] as? String else {
+			completionHandler(data: nil, error: "Error parsing the title")
+			return
+		}
+		
+		guard let explanation = parsedData["explanation"] as? String else {
+			completionHandler(data: nil, error: "Error parsing the explanation text")
+			return
+		}
+		
+		var returnedData: [String: String] = [:]
+		returnedData["date"] = date
+		returnedData["url"] = url
+		returnedData["title"] = title
+		returnedData["explanation"] = explanation
+		
+		completionHandler(data: returnedData, error: nil)
 	}
 	
 	//MARK: create URL from parameters
@@ -89,7 +114,7 @@ class APODClient {
 			let queryItem = NSURLQueryItem(name: key, value: "\(value)")
 			components.queryItems!.append(queryItem)
 		}
-		print("Specified URL: \(components.URL!)")
+		//		print("Specified URL: \(components.URL!)")
 		return components.URL!
 	}
 	
@@ -99,5 +124,34 @@ class APODClient {
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "YYYY-MM-DD"
 		return dateFormatter.stringFromDate(date)
+	}
+	
+	
+	//an array of strings for every date from 15th July 1995 to present
+	
+	func getAllAPODDates() -> [String] {
+		var returnArray = [String]()
+		
+		//TODO: remove magic number and date format
+		let originDateString = "1995-07-15"
+		
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		
+		let dateValue1 = dateFormatter.dateFromString(originDateString) as NSDate!
+		let dateValue2 = NSDate()
+		
+		let calendar = NSCalendar.currentCalendar()
+		let flags: NSCalendarUnit = NSCalendarUnit.Day
+		
+		let components = calendar.components(flags, fromDate: dateValue1, toDate: dateValue2, options: NSCalendarOptions.MatchStrictly)
+		
+		for index in 0...components.day {
+			let components = NSDateComponents()
+			components.day = index
+			let newDate = calendar.dateByAddingComponents(components, toDate: dateValue1, options: NSCalendarOptions.MatchStrictly)!
+			returnArray.insert(dateFormatter.stringFromDate(newDate), atIndex: 0)
+		}
+		return returnArray
 	}
 }

@@ -12,6 +12,8 @@
 		018B63871CA2DF3900152514 /* ViewControllerTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63831CA2DF3900152514 /* ViewControllerTwo.swift */; };
 		018B63881CA2DF3900152514 /* ViewControllerOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63841CA2DF3900152514 /* ViewControllerOne.swift */; };
 		018B63941CA2E9B000152514 /* APODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */; };
+		019EBF471CA3E36100AE2B85 /* APOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019EBF461CA3E36100AE2B85 /* APOD.swift */; };
+		019EBF491CA3FD4200AE2B85 /* noPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 019EBF481CA3FD4200AE2B85 /* noPhoto.png */; };
 		01C1B2721CA0024500D96DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C1B2711CA0024500D96DF6 /* AppDelegate.swift */; };
 		01C1B2771CA0024500D96DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C1B2751CA0024500D96DF6 /* Main.storyboard */; };
 		01C1B2791CA0024500D96DF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C1B2781CA0024500D96DF6 /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 		018B63831CA2DF3900152514 /* ViewControllerTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTwo.swift; sourceTree = "<group>"; };
 		018B63841CA2DF3900152514 /* ViewControllerOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerOne.swift; sourceTree = "<group>"; };
 		018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APODCollectionViewCell.swift; sourceTree = "<group>"; };
+		019EBF461CA3E36100AE2B85 /* APOD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APOD.swift; sourceTree = "<group>"; };
+		019EBF481CA3FD4200AE2B85 /* noPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noPhoto.png; sourceTree = "<group>"; };
 		01C1B26E1CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APOD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Astronomy Picture Of The Day - NASAs APOD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C1B2711CA0024500D96DF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01C1B2761CA0024500D96DF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,11 +91,21 @@
 		018B63801CA2DED300152514 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				019EBF481CA3FD4200AE2B85 /* noPhoto.png */,
 				01C1B27D1CA0024500D96DF6 /* Info.plist */,
 				01C1B27A1CA0024500D96DF6 /* LaunchScreen.storyboard */,
-				01C1B2711CA0024500D96DF6 /* AppDelegate.swift */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		019EBF4A1CA40D1200AE2B85 /* SideBar */ = {
+			isa = PBXGroup;
+			children = (
+				01C1B2711CA0024500D96DF6 /* AppDelegate.swift */,
+				018B63821CA2DF3900152514 /* MenuTableViewController.swift */,
+				018B63811CA2DF3900152514 /* SidebarViewController.swift */,
+			);
+			name = SideBar;
 			sourceTree = "<group>";
 		};
 		01C1B2651CA0024500D96DF6 = {
@@ -118,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				01C1B2A01CA00BE800D96DF6 /* Model */,
+				019EBF4A1CA40D1200AE2B85 /* SideBar */,
 				01C1B29F1CA00BE000D96DF6 /* Controller */,
 				01C1B2751CA0024500D96DF6 /* Main.storyboard */,
 				01C1B2781CA0024500D96DF6 /* Assets.xcassets */,
@@ -147,8 +162,6 @@
 		01C1B29F1CA00BE000D96DF6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				018B63811CA2DF3900152514 /* SidebarViewController.swift */,
-				018B63821CA2DF3900152514 /* MenuTableViewController.swift */,
 				018B63841CA2DF3900152514 /* ViewControllerOne.swift */,
 				018B63831CA2DF3900152514 /* ViewControllerTwo.swift */,
 				018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */,
@@ -159,6 +172,7 @@
 		01C1B2A01CA00BE800D96DF6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				019EBF461CA3E36100AE2B85 /* APOD.swift */,
 				01C1B2A11CA00BF300D96DF6 /* API */,
 			);
 			name = Model;
@@ -277,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C1B27C1CA0024500D96DF6 /* LaunchScreen.storyboard in Resources */,
+				019EBF491CA3FD4200AE2B85 /* noPhoto.png in Resources */,
 				01C1B2791CA0024500D96DF6 /* Assets.xcassets in Resources */,
 				01C1B2771CA0024500D96DF6 /* Main.storyboard in Resources */,
 			);
@@ -304,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C1B2A31CA00C0E00D96DF6 /* APODClient.swift in Sources */,
+				019EBF471CA3E36100AE2B85 /* APOD.swift in Sources */,
 				018B63941CA2E9B000152514 /* APODCollectionViewCell.swift in Sources */,
 				018B63861CA2DF3900152514 /* MenuTableViewController.swift in Sources */,
 				01C1B2721CA0024500D96DF6 /* AppDelegate.swift in Sources */,

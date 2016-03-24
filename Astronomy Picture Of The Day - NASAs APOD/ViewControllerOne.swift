@@ -8,46 +8,69 @@ protocol ViewControllerOneDelegate: class {
 	func viewControllerOneDidTapMenuButton(controller: ViewControllerOne)
 }
 
-class ViewControllerOne: UIViewController, UICollectionViewDataSource {
+class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	
-	var APODarray: [UIImage] = []
+	var APODarray: [APOD] = []
+	private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
 	
 	weak var delegate: ViewControllerOneDelegate?
-	@IBOutlet weak var imageTitle: UILabel!
 	@IBOutlet weak var collectionView: UICollectionView!
 	
 	//MARK: lifecycle methods
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		downloadPhotoProperties()
 	}
+	
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		
+		//TODO: update for landscape
 		let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
-		layout.itemSize = CGSize(width: collectionView.bounds.size.width, height: 400) 	}
-	
+		layout.itemSize = CGSize(width: collectionView.bounds.size.width, height: collectionView.bounds.size.height/2)
+	}
+
 	
 	//MARK: download photo properties
 	
 	func downloadPhotoProperties() {
 		
-		APODClient.sharedInstance.downloadPhotoProperties({ (data, error) in
-			let url = NSURL(string: data!)
+		let dates = APODClient.sharedInstance.getAllAPODDates()
+		
+		for i in 0..<8 {
+		
+		APODClient.sharedInstance.downloadPhotoProperties(dates[i], completionHandler: { (data, error) in
+			
+			guard error == nil else {
+				print("error")
+				return
+			}
+			
+			guard let data: [String: String] = data else {
+				print("error")
+				return
+			}
+			
+			print(data)
+			
+			//create an APOD image object
+			let newAPOD = APOD(dateString: data["date"]!)
+			newAPOD.explanation = data["explanation"]
+			newAPOD.title = data["title"]
+			newAPOD.url = data["url"]
+			
+			//create an image based on url string
+			let url = NSURL(string: newAPOD.url!)
 			let imageData = NSData(contentsOfURL: url!)
 			dispatch_async(dispatch_get_main_queue()) {
-				let image = UIImage(data: imageData!)
-				self.APODarray.append(image!)
-				self.APODarray.append(image!)
-				self.APODarray.append(image!)
-				self.imageTitle.text = data
+				newAPOD.image = UIImage(data: imageData!)
+				self.APODarray.append(newAPOD)
 				self.collectionView.reloadData()
-				print(self.APODarray)
 			}
 		})
+		}
 	}
 	
 	@IBAction func menuButtonTapped(sender: AnyObject) {
@@ -66,14 +89,18 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource {
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("APODCollectionViewCell", forIndexPath: indexPath) as! APODCollectionViewCell
+		 cell.backgroundColor = UIColor.blackColor()
 		
-		let image = APODarray[indexPath.row]
-		cell.imageView.image = image
-		
-		//		cell.imageAPOD.layer.shadowRadius = 4
-		//		cell.imageAPOD.layer.shadowOpacity = 0.5
-		//		cell.imageAPOD.layer.shadowOffset = CGSize.zero
-		
+		let APOD = APODarray[indexPath.row]
+		cell.imageView.image = APOD.image
+//		cell.imageTitle.text = APOD.title
 		return cell
 	}
+	
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+		return CGSize(width: 100, height: 100)
+
+	}
+	
+	
 }

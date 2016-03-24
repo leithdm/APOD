@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main Menu-->
@@ -98,7 +99,7 @@
             </objects>
             <point key="canvasLocation" x="1246" y="1127"/>
         </scene>
-        <!--Todays APOD-->
+        <!--View Controller One-->
         <scene sceneID="CFi-a6-8Aj">
             <objects>
                 <viewController storyboardIdentifier="ViewControllerOne" id="khL-fS-72U" customClass="ViewControllerOne" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
@@ -110,35 +111,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpw-C0-lIk">
-                                <rect key="frame" x="0.0" y="475" width="600" height="125"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bCB-R1-Itr">
-                                <rect key="frame" x="0.0" y="64" width="600" height="412"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="QLb-lz-MB2">
-                                    <size key="itemSize" width="300" height="409.5"/>
+                                    <size key="itemSize" width="200" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="APODCollectionViewCell" id="9sO-GH-xCR" customClass="APODCollectionViewCell" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1.5" width="300" height="409.5"/>
+                                        <rect key="frame" x="0.0" y="64" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="409.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ua6-ag-Kww">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="409.5"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ua6-ag-Kww">
+                                                    <rect key="frame" x="13" y="13" width="174" height="174"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="ua6-ag-Kww" secondAttribute="trailing" constant="5" id="CGL-iv-gah"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="ua6-ag-Kww" secondAttribute="bottom" constant="5" id="a51-4o-8Uo"/>
+                                            <constraint firstItem="ua6-ag-Kww" firstAttribute="top" secondItem="9sO-GH-xCR" secondAttribute="topMargin" constant="5" id="aEv-y5-hiV"/>
+                                            <constraint firstItem="ua6-ag-Kww" firstAttribute="leading" secondItem="9sO-GH-xCR" secondAttribute="leadingMargin" constant="5" id="xgd-jj-apC"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="ua6-ag-Kww" id="Bv3-mh-VLv"/>
                                         </connections>
@@ -151,7 +152,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Todays APOD" id="9Fm-JC-CzI">
+                    <navigationItem key="navigationItem" id="9Fm-JC-CzI">
                         <barButtonItem key="leftBarButtonItem" image="burger" id="aIP-Ea-zHG">
                             <connections>
                                 <action selector="menuButtonTapped:" destination="khL-fS-72U" id="hS5-8q-mDi"/>
@@ -160,12 +161,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="bCB-R1-Itr" id="VmT-2G-eAu"/>
-                        <outlet property="imageTitle" destination="xpw-C0-lIk" id="YR5-Me-Ucb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7yW-0D-gv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1246" y="1793"/>
+            <point key="canvasLocation" x="1246" y="1792"/>
         </scene>
         <!--Gallery-->
         <scene sceneID="Ntr-vL-PLF">

@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	struct Constants {
 		
 		//amount of mainViewController that overlaps with Menu
-		static let MenuOverlap: CGFloat = 60
+		static let MenuOverlap: CGFloat = 80
 	}
 	
 	//MARK: properties
@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-		
 		
 		//instantiate child view controllers
 		let vc1 = storyboard.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
