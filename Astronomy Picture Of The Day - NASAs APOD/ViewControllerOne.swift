@@ -88,10 +88,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("APODCollectionViewCell", forIndexPath: indexPath) as! APODCollectionViewCell
-		cell.backgroundColor = UIColor.yellowColor()
+
+		//setup scrollview
+		
+		cell.setup()
 		
 		let APOD = APODarray[indexPath.row]
 		cell.imageView.image = APOD.image
+	
 		if APOD.dateString != nil {
 			self.title = formatDateString(APOD.dateString!)
 		}
@@ -102,6 +106,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
 		
+		//TODO: remove magic numbers
 		return CGSize(width: collectionView.frame.size.width - 10, height: collectionView.frame.size.height - 80)
 	}
 	
