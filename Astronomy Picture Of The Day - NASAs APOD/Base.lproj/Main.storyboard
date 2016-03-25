@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main Menu-->
@@ -111,7 +110,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bCB-R1-Itr">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bCB-R1-Itr">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="QLb-lz-MB2">
@@ -128,17 +127,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ua6-ag-Kww">
-                                                    <rect key="frame" x="13" y="13" width="174" height="174"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPhoto.png" translatesAutoresizingMaskIntoConstraints="NO" id="ua6-ag-Kww">
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailingMargin" secondItem="ua6-ag-Kww" secondAttribute="trailing" constant="5" id="CGL-iv-gah"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="ua6-ag-Kww" secondAttribute="bottom" constant="5" id="a51-4o-8Uo"/>
-                                            <constraint firstItem="ua6-ag-Kww" firstAttribute="top" secondItem="9sO-GH-xCR" secondAttribute="topMargin" constant="5" id="aEv-y5-hiV"/>
-                                            <constraint firstItem="ua6-ag-Kww" firstAttribute="leading" secondItem="9sO-GH-xCR" secondAttribute="leadingMargin" constant="5" id="xgd-jj-apC"/>
+                                            <constraint firstAttribute="trailing" secondItem="ua6-ag-Kww" secondAttribute="trailing" id="L7D-Yy-QZe"/>
+                                            <constraint firstAttribute="bottom" secondItem="ua6-ag-Kww" secondAttribute="bottom" id="NNA-ZV-LUT"/>
+                                            <constraint firstItem="ua6-ag-Kww" firstAttribute="top" secondItem="9sO-GH-xCR" secondAttribute="top" id="Qjv-dS-Xzb"/>
+                                            <constraint firstItem="ua6-ag-Kww" firstAttribute="leading" secondItem="9sO-GH-xCR" secondAttribute="leading" id="zun-zb-1NH"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="ua6-ag-Kww" id="Bv3-mh-VLv"/>
@@ -147,10 +148,11 @@
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="khL-fS-72U" id="XOa-Cc-cgr"/>
+                                    <outlet property="delegate" destination="khL-fS-72U" id="6Kp-QB-TF5"/>
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="9Fm-JC-CzI">
                         <barButtonItem key="leftBarButtonItem" image="burger" id="aIP-Ea-zHG">
@@ -249,5 +251,6 @@
     </scenes>
     <resources>
         <image name="burger" width="24" height="24"/>
+        <image name="noPhoto.png" width="281" height="241"/>
     </resources>
 </document>

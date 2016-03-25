@@ -23,14 +23,12 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		downloadPhotoProperties()
 	}
 	
-	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		
-		//TODO: update for landscape
-		let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
-		layout.itemSize = CGSize(width: collectionView.bounds.size.width, height: collectionView.bounds.size.height/2)
+		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
 	}
+
 
 	
 	//MARK: download photo properties
@@ -40,36 +38,36 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		let dates = APODClient.sharedInstance.getAllAPODDates()
 		
 		for i in 0..<8 {
-		
-		APODClient.sharedInstance.downloadPhotoProperties(dates[i], completionHandler: { (data, error) in
 			
-			guard error == nil else {
-				print("error")
-				return
-			}
-			
-			guard let data: [String: String] = data else {
-				print("error")
-				return
-			}
-			
-			print(data)
-			
-			//create an APOD image object
-			let newAPOD = APOD(dateString: data["date"]!)
-			newAPOD.explanation = data["explanation"]
-			newAPOD.title = data["title"]
-			newAPOD.url = data["url"]
-			
-			//create an image based on url string
-			let url = NSURL(string: newAPOD.url!)
-			let imageData = NSData(contentsOfURL: url!)
-			dispatch_async(dispatch_get_main_queue()) {
-				newAPOD.image = UIImage(data: imageData!)
-				self.APODarray.append(newAPOD)
-				self.collectionView.reloadData()
-			}
-		})
+			APODClient.sharedInstance.downloadPhotoProperties(dates[i], completionHandler: { (data, error) in
+				
+				guard error == nil else {
+					print("error")
+					return
+				}
+				
+				guard let data: [String: String] = data else {
+					print("error")
+					return
+				}
+				
+				print(data)
+				
+				//create an APOD image object
+				let newAPOD = APOD(dateString: data["date"]!)
+				newAPOD.explanation = data["explanation"]
+				newAPOD.title = data["title"]
+				newAPOD.url = data["url"]
+				
+				//create an image based on url string
+				let url = NSURL(string: newAPOD.url!)
+				let imageData = NSData(contentsOfURL: url!)
+				dispatch_async(dispatch_get_main_queue()) {
+					newAPOD.image = UIImage(data: imageData!)
+					self.APODarray.append(newAPOD)
+					self.collectionView.reloadData()
+				}
+			})
 		}
 	}
 	
@@ -78,7 +76,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	
-	//MARK: - Collection View
+	//MARK: collection View
 	func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 		return 1
 	}
@@ -89,18 +87,27 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("APODCollectionViewCell", forIndexPath: indexPath) as! APODCollectionViewCell
-		 cell.backgroundColor = UIColor.blackColor()
+		cell.backgroundColor = UIColor.yellowColor()
 		
 		let APOD = APODarray[indexPath.row]
 		cell.imageView.image = APOD.image
-//		cell.imageTitle.text = APOD.title
+		//		cell.imageTitle.text = APOD.title
 		return cell
 	}
 	
+	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-		return CGSize(width: 100, height: 100)
 
+		return CGSize(width: collectionView.frame.size.width - 10, height: collectionView.frame.size.height)
 	}
 	
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
+	{
+		return UIEdgeInsetsMake(0, 5, 0, 5)
+	}
+	
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+		return 10
+	}
 	
 }
