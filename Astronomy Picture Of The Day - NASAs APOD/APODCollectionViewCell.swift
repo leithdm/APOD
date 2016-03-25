@@ -10,5 +10,8 @@ import UIKit
 
 class APODCollectionViewCell: UICollectionViewCell {
 	
-	@IBOutlet weak var imageView: UIImageView!	
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var imageTitle: UILabel!
+	@IBOutlet weak var moreDetail: UIBarButtonItem!
+	
 }

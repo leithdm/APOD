@@ -11,12 +11,12 @@ import UIKit
 
 class APOD {
 	
-	var dateString: String
+	var dateString: String?
 	var explanation: String?
 	var title: String?
 	var url: String?
 	var image: UIImage?
-	
+		
 	init(dateString: String) {
 		self.dateString = dateString
 	}

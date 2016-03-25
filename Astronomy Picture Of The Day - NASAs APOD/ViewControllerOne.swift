@@ -10,11 +10,12 @@ protocol ViewControllerOneDelegate: class {
 
 class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	
-	var APODarray: [APOD] = []
-	private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+	//MARK: properties
 	
+	var APODarray: [APOD] = []
 	weak var delegate: ViewControllerOneDelegate?
 	@IBOutlet weak var collectionView: UICollectionView!
+	
 	
 	//MARK: lifecycle methods
 	
@@ -25,22 +26,21 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		
 		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
 	}
-
-
 	
+
 	//MARK: download photo properties
 	
 	func downloadPhotoProperties() {
 		
 		let dates = APODClient.sharedInstance.getAllAPODDates()
 		
+		//sample data to begin with
 		for i in 0..<8 {
 			
 			APODClient.sharedInstance.downloadPhotoProperties(dates[i], completionHandler: { (data, error) in
-				
+
 				guard error == nil else {
 					print("error")
 					return
@@ -51,9 +51,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 					return
 				}
 				
-				print(data)
-				
-				//create an APOD image object
+				//create an APOD
 				let newAPOD = APOD(dateString: data["date"]!)
 				newAPOD.explanation = data["explanation"]
 				newAPOD.title = data["title"]
@@ -71,12 +69,15 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 	
+	//MARK: menu button delegate methods
+	
 	@IBAction func menuButtonTapped(sender: AnyObject) {
 		delegate?.viewControllerOneDidTapMenuButton(self)
 	}
 	
 	
-	//MARK: collection View
+	//MARK: collection view
+	
 	func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 		return 1
 	}
@@ -91,14 +92,17 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		
 		let APOD = APODarray[indexPath.row]
 		cell.imageView.image = APOD.image
-		//		cell.imageTitle.text = APOD.title
+		if APOD.dateString != nil {
+			self.title = formatDateString(APOD.dateString!)
+		}
+		
+		cell.imageTitle.text = APOD.title
 		return cell
 	}
 	
-	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-
-		return CGSize(width: collectionView.frame.size.width - 10, height: collectionView.frame.size.height)
+		
+		return CGSize(width: collectionView.frame.size.width - 10, height: collectionView.frame.size.height - 80)
 	}
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
@@ -110,4 +114,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		return 10
 	}
 	
+	//MARK: helper methods
+	
+	func formatDateString(date: String) -> String?  {
+		let formatter = NSDateFormatter()
+		formatter.dateFormat = "yyyy-MM-dd"
+		let existingDate = formatter.dateFromString(date)
+		let newFormatter = NSDateFormatter()
+		newFormatter.dateFormat = "dd MMMM yyyy"
+		return newFormatter.stringFromDate(existingDate!)
+	}
 }

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main Menu-->
@@ -128,21 +129,45 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPhoto.png" translatesAutoresizingMaskIntoConstraints="NO" id="ua6-ag-Kww">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="156"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
+                                                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-C6-v2f">
+                                                    <rect key="frame" x="0.0" y="156" width="200" height="44"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <items>
+                                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Gi4-EZ-hIb"/>
+                                                        <barButtonItem systemItem="add" id="4Uy-x5-mbX"/>
+                                                    </items>
+                                                </toolbar>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7e-BR-aTK">
+                                                    <rect key="frame" x="8" y="164" width="151" height="28"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="ua6-ag-Kww" secondAttribute="trailing" id="L7D-Yy-QZe"/>
-                                            <constraint firstAttribute="bottom" secondItem="ua6-ag-Kww" secondAttribute="bottom" id="NNA-ZV-LUT"/>
+                                            <constraint firstAttribute="bottom" secondItem="ua6-ag-Kww" secondAttribute="bottom" constant="44" id="NNA-ZV-LUT"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="A7e-BR-aTK" secondAttribute="trailing" constant="33" id="Py8-dU-PKz"/>
+                                            <constraint firstItem="X6E-C6-v2f" firstAttribute="top" secondItem="ua6-ag-Kww" secondAttribute="bottom" id="Qef-tj-D6Y"/>
                                             <constraint firstItem="ua6-ag-Kww" firstAttribute="top" secondItem="9sO-GH-xCR" secondAttribute="top" id="Qjv-dS-Xzb"/>
+                                            <constraint firstItem="X6E-C6-v2f" firstAttribute="leading" secondItem="9sO-GH-xCR" secondAttribute="leading" id="WXf-YK-8Hi"/>
+                                            <constraint firstAttribute="bottom" secondItem="X6E-C6-v2f" secondAttribute="bottom" id="Z98-9v-EYr"/>
+                                            <constraint firstAttribute="trailing" secondItem="X6E-C6-v2f" secondAttribute="trailing" id="at1-JJ-Aja"/>
+                                            <constraint firstItem="A7e-BR-aTK" firstAttribute="leading" secondItem="9sO-GH-xCR" secondAttribute="leadingMargin" id="fk3-lq-eVG"/>
+                                            <constraint firstItem="A7e-BR-aTK" firstAttribute="top" secondItem="ua6-ag-Kww" secondAttribute="bottom" constant="8" symbolic="YES" id="fzY-Rf-gUZ"/>
+                                            <constraint firstItem="A7e-BR-aTK" firstAttribute="centerY" secondItem="X6E-C6-v2f" secondAttribute="centerY" id="x1p-OH-RO9"/>
                                             <constraint firstItem="ua6-ag-Kww" firstAttribute="leading" secondItem="9sO-GH-xCR" secondAttribute="leading" id="zun-zb-1NH"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="imageTitle" destination="A7e-BR-aTK" id="LCA-S3-kdO"/>
                                             <outlet property="imageView" destination="ua6-ag-Kww" id="Bv3-mh-VLv"/>
+                                            <outlet property="moreDetail" destination="4Uy-x5-mbX" id="blc-LP-9kI"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
