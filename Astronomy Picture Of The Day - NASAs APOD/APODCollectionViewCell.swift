@@ -18,8 +18,9 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
 	
 	
 	func setup() {
-		let pinch = UIPinchGestureRecognizer(target: self, action: #selector(zoomImage))
-		imageView.addGestureRecognizer(pinch)
+		let tap = UITapGestureRecognizer(target: self, action: #selector(tapImage))
+		tap.numberOfTapsRequired = 2
+		scrollView.addGestureRecognizer(tap)
 		imageView.userInteractionEnabled = true
 		scrollView.delegate = self
 		setZoomParametersForSize(scrollView.bounds.size)
@@ -36,8 +37,12 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
 	
 	//MARK: zoom image
 	
-	func zoomImage(gesture: UIPinchGestureRecognizer!) {
-		setZoomParametersForSize(scrollView.bounds.size)
+	func tapImage(gesture: UIPinchGestureRecognizer!) {
+		if scrollView.zoomScale > scrollView.minimumZoomScale {
+			scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+		} else {
+			scrollView.setZoomScale(self.scrollView.maximumZoomScale , animated: true)
+		}
 	}
 	
 	func setZoomParametersForSize(scrollViewSize: CGSize) {
