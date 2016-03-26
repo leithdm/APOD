@@ -37,7 +37,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		let dates = APODClient.sharedInstance.getAllAPODDates()
 		
 		//sample data to begin with
-		for i in 0..<8 {
+		for i in 0..<20 {
 			
 			APODClient.sharedInstance.downloadPhotoProperties(dates[i], completionHandler: { (data, error) in
 
@@ -58,12 +58,21 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				newAPOD.url = data["url"]
 				
 				//create an image based on url string
+				if newAPOD.url!.containsString("youtube") {
+					newAPOD.image = UIImage(named: "noPhoto.png")
+					dispatch_async(dispatch_get_main_queue()) {
+						self.APODarray.append(newAPOD)
+						self.collectionView.reloadData()
+					}
+				} else {
 				let url = NSURL(string: newAPOD.url!)
 				let imageData = NSData(contentsOfURL: url!)
+
 				dispatch_async(dispatch_get_main_queue()) {
 					newAPOD.image = UIImage(data: imageData!)
 					self.APODarray.append(newAPOD)
 					self.collectionView.reloadData()
+				}
 				}
 			})
 		}
