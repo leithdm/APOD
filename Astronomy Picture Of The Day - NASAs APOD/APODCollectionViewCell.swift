@@ -9,25 +9,40 @@
 import Foundation
 import UIKit
 
-class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
+class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 	
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var imageTitle: UILabel!
 	@IBOutlet weak var moreDetail: UIBarButtonItem!
 	@IBOutlet weak var scrollView: UIScrollView!
-	
+	var swipeRight: UISwipeGestureRecognizer!
 	
 	func setup() {
-		let tap = UITapGestureRecognizer(target: self, action: "tapImage:")
+		//add tap getsture recognizer
+		let tap = UITapGestureRecognizer(target: self, action: #selector(tapImage))
 		tap.numberOfTapsRequired = 2
 		scrollView.addGestureRecognizer(tap)
 		imageView.userInteractionEnabled = true
 		scrollView.delegate = self
 		setZoomParametersForSize(scrollView.bounds.size)
+		
+		//add swipe right gesture recognizer
+		/*
+		swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeRight))
+		swipeRight.delegate = self
+		scrollView.addGestureRecognizer(swipeRight)
+		swipeRight.numberOfTouchesRequired = 1
+		swipeRight.direction = .Right
+		scrollView.addGestureRecognizer(swipeRight)
+		*/
 	}
 	
 	func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
 		return imageView
+	}
+	
+	func didSwipeRight(gesture: UISwipeGestureRecognizer!) {
+		print("swipe RIGHT")
 	}
 	
 	
@@ -46,10 +61,6 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
 	}
 	
 	func setZoomParametersForSize(scrollViewSize: CGSize) {
-//		let imageSize = imageView.bounds.size
-//		let widthScale = scrollViewSize.width / imageSize.width
-//		let heightScale = scrollViewSize.height / imageSize.height
-//		let minScale = min(widthScale, heightScale)
 		scrollView.minimumZoomScale = 1.0
 		scrollView.maximumZoomScale = 5.0
 		scrollView.zoomScale = 1.0

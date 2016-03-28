@@ -16,6 +16,8 @@ class APOD {
 	var title: String?
 	var url: String?
 	var image: UIImage?
+	var activityIndicator: UIActivityIndicatorView?
+	var loadingLabel: UILabel?
 		
 	init(dateString: String) {
 		self.dateString = dateString
