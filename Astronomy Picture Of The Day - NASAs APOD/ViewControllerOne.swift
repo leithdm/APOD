@@ -17,31 +17,59 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	@IBOutlet weak var collectionView: UICollectionView!
 	static var APODCount = 0
 	let dates = APODClient.sharedInstance.getAllAPODDates()
-	var swipeLeft: UISwipeGestureRecognizer!
+	var swipeLeft: UIPanGestureRecognizer!
 	var dowloadInProgress = false
+	var prevOffset: CGFloat = 0.0
+	var downloads: CGFloat = 1
 	
 	//MARK: lifecycle methods
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		setUpSwipeGestureRecognizer()
+//		setUpSwipeGestureRecognizer()
 		createDummyCells()
 	}
 	
-	func setUpSwipeGestureRecognizer() {
-		//add swipe right gesture recognizer
-		swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeLeft))
-		swipeLeft.delegate = self
-		swipeLeft.numberOfTouchesRequired = 1
-		swipeLeft.direction = .Left
-		view.addGestureRecognizer(swipeLeft)
+//	func setUpSwipeGestureRecognizer() {
+//		//add swipe right gesture recognizer
+//		swipeLeft = UIPanGestureRecognizer(target: self, action: #selector(didPan))
+//
+//
+////		swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeLeft))
+//		swipeLeft.delegate = self
+////		swipeLeft.numberOfTouchesRequired = 1
+////		swipeLeft.direction = .Up
+//		view.addGestureRecognizer(swipeLeft)
+//	}
+
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+
+		if (self.prevOffset > scrollView.contentOffset.x) {
+		print("swiping right")
+		}
+		else if (self.prevOffset < scrollView.contentOffset.x) {
+		print("swiping left")
+			print(scrollView.contentOffset.x / downloads)
+			print(collectionView.frame.width)
+			if scrollView.contentOffset.x / downloads >= collectionView.frame.width {
+			downloadPhotoProperties()
+			downloads+=1
+			}
+		}
+
+		self.prevOffset = scrollView.contentOffset.x;
+		print("i scrolled")
 	}
-	
-	func didSwipeLeft(gesture: UISwipeGestureRecognizer) {
-		print("swipe left called")
-		downloadPhotoProperties()
-	}
-	
+
+//	func didPan(gesture: UIPanGestureRecognizer) {
+//		print("i panned")
+//	}
+//	
+//	func didSwipeLeft(gesture: UISwipeGestureRecognizer) {
+//		print("swipe left called")
+//		downloadPhotoProperties()
+//	}
+
 	func createDummyCells() {
 		for i in 0..<dates.count {
 			let newAPOD = APOD(dateString: dates[i])
@@ -152,12 +180,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	
-	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-		if !dowloadInProgress {
-		downloadPhotoProperties()
-		}
-	}
-	
+//	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+//		if !dowloadInProgress {
+//		downloadPhotoProperties()
+//		}
+//	}
+
+
+
 	
 	
 	//MARK: helper methods
