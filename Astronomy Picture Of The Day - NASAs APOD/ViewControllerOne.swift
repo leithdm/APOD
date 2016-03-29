@@ -19,7 +19,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	var prevOffset: CGFloat = 0.0
 	var noAPODsDownloaded = 1
 	var currentAPOD = 1
-	static var APODCount = 0
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	weak var delegate: ViewControllerOneDelegate?
 	
@@ -33,7 +32,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		downloadPhotoProperties([ViewControllerOne.dates[0]])
+		downloadPhotoProperties([ViewControllerOne.dates.first!])
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -103,13 +102,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 					APOD.title = data["title"]
 					APOD.url = data["url"]
 					
-					//create an image based on url string
-					if APOD.url!.containsString("youtube") {
+					if !APOD.url!.containsString("http://apod.nasa.gov/") {
+						//typically a youtube video
 						APOD.image = UIImage(named: "noPhoto.png")
 						dispatch_async(dispatch_get_main_queue()) {
 							self.collectionView.reloadData()
 						}
 					} else {
+						//create an image based on url string
 						let url = NSURL(string: APOD.url!)
 						let imageData = NSData(contentsOfURL: url!)
 						
@@ -118,7 +118,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 							self.collectionView.reloadData()
 						}
 					}
-					ViewControllerOne.APODCount += 1
 					self.dowloadInProgress = false
 				}
 			}
@@ -144,16 +143,28 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("APODCollectionViewCell", forIndexPath: indexPath) as! APODCollectionViewCell
-		
-		cell.setup() //double tap zoom
-		let APOD = APODarray[indexPath.item]
-		cell.imageView.image = APOD.image
-		
-		if APOD.dateString != nil {
-			self.title = formatDateString(APOD.dateString!)
-		}
-		cell.imageTitle.text = APOD.title
+		configureCell(cell, atIndexPath: indexPath)
 		return cell
+	}
+	
+	func configureCell(cell: APODCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
+		cell.setup()
+		let APOD = APODarray[indexPath.item]
+		cell.setupActivityIndicator(cell)
+		
+		if let image = APOD.image {
+			cell.activityIndicator.stopAnimating()
+			cell.imageView.image = image
+			cell.imageTitle.text = APOD.title
+			title = formatDateString(APOD.dateString!)
+
+		} else {
+			cell.activityIndicator.startAnimating()
+			title = ""
+			cell.imageView.image = nil
+			cell.imageTitle.text = ""
+
+		}
 	}
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {

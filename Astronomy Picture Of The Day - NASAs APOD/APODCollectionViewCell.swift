@@ -15,7 +15,7 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	@IBOutlet weak var imageTitle: UILabel!
 	@IBOutlet weak var moreDetail: UIBarButtonItem!
 	@IBOutlet weak var scrollView: UIScrollView!
-	var swipeRight: UISwipeGestureRecognizer!
+	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
 	func setup() {
 		//add tap getsture recognizer
@@ -25,26 +25,17 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 		imageView.userInteractionEnabled = true
 		scrollView.delegate = self
 		setZoomParametersForSize(scrollView.bounds.size)
-		
-		//add swipe right gesture recognizer
-		/*
-		swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeRight))
-		swipeRight.delegate = self
-		scrollView.addGestureRecognizer(swipeRight)
-		swipeRight.numberOfTouchesRequired = 1
-		swipeRight.direction = .Right
-		scrollView.addGestureRecognizer(swipeRight)
-		*/
+	}
+	
+	func setupActivityIndicator(cell: APODCollectionViewCell) {
+		cell.activityIndicator.startAnimating()
+		cell.activityIndicator.hidesWhenStopped = true
+		cell.activityIndicator.activityIndicatorViewStyle = .WhiteLarge
 	}
 	
 	func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
 		return imageView
 	}
-	
-	func didSwipeRight(gesture: UISwipeGestureRecognizer!) {
-		print("swipe RIGHT")
-	}
-	
 	
 	@IBAction func moreDetailClicked(sender: AnyObject) {
 		print("present more detail")

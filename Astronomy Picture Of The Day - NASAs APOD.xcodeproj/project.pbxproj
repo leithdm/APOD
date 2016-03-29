@@ -164,7 +164,6 @@
 			children = (
 				018B63841CA2DF3900152514 /* ViewControllerOne.swift */,
 				018B63831CA2DF3900152514 /* ViewControllerTwo.swift */,
-				018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -173,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				019EBF461CA3E36100AE2B85 /* APOD.swift */,
+				018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */,
 				01C1B2A11CA00BF300D96DF6 /* API */,
 			);
 			name = Model;
