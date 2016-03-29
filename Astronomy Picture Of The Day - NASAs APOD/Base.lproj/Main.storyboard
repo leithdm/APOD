@@ -129,25 +129,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86P-n2-MKt">
-                                                    <rect key="frame" x="0.0" y="0.0" width="364" height="303"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="364" height="267"/>
                                                     <subviews>
                                                         <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ua6-ag-Kww">
-                                                            <rect key="frame" x="0.0" y="0.0" width="364" height="303"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="364" height="267"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </imageView>
                                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-vP-yFu">
-                                                            <rect key="frame" x="157" y="126" width="50" height="50"/>
+                                                            <rect key="frame" x="157" y="108" width="50" height="50"/>
                                                             <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="HjP-NH-KGJ"/>
                                                                 <constraint firstAttribute="width" constant="50" id="vRo-hb-Qy6"/>
                                                             </constraints>
                                                         </activityIndicatorView>
-                                                        <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCl-Ai-9q8">
-                                                            <rect key="frame" x="0.0" y="0.0" width="364" height="303"/>
+                                                        <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCl-Ai-9q8">
+                                                            <rect key="frame" x="0.0" y="0.0" width="364" height="267"/>
                                                             <subviews>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rS0-fi-HZ2">
-                                                                    <rect key="frame" x="8" y="44" width="348" height="259"/>
+                                                                    <rect key="frame" x="8" y="0.0" width="348" height="267"/>
                                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -155,38 +155,13 @@
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                                 </textView>
-                                                                <toolbar clearsContextBeforeDrawing="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQu-IP-uIu">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="364" height="44"/>
-                                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <items>
-                                                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="exB-0m-IxV"/>
-                                                                        <barButtonItem title="Item" systemItem="done" id="rFm-Nx-tAZ">
-                                                                            <connections>
-                                                                                <action selector="closeMoreDetail:" destination="9sO-GH-xCR" id="OLU-68-fYa"/>
-                                                                            </connections>
-                                                                        </barButtonItem>
-                                                                    </items>
-                                                                </toolbar>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Od-YA-L5G">
-                                                                    <rect key="frame" x="8" y="8" width="307" height="28"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstItem="2Od-YA-L5G" firstAttribute="centerY" secondItem="fQu-IP-uIu" secondAttribute="centerY" id="Fww-wx-suW"/>
-                                                                <constraint firstAttribute="bottom" secondItem="rS0-fi-HZ2" secondAttribute="bottom" id="IK3-9h-Mzw"/>
-                                                                <constraint firstItem="rS0-fi-HZ2" firstAttribute="top" secondItem="fQu-IP-uIu" secondAttribute="bottom" id="ORP-6M-sCe"/>
-                                                                <constraint firstAttribute="trailing" secondItem="rS0-fi-HZ2" secondAttribute="trailing" constant="8" id="PZg-54-Szi"/>
-                                                                <constraint firstItem="2Od-YA-L5G" firstAttribute="leading" secondItem="dCl-Ai-9q8" secondAttribute="leadingMargin" id="c8N-la-li8"/>
-                                                                <constraint firstItem="fQu-IP-uIu" firstAttribute="top" secondItem="dCl-Ai-9q8" secondAttribute="top" id="iLi-nR-nJx"/>
-                                                                <constraint firstItem="rS0-fi-HZ2" firstAttribute="leading" secondItem="dCl-Ai-9q8" secondAttribute="leading" constant="8" id="iTa-3l-EzY"/>
-                                                                <constraint firstAttribute="trailing" secondItem="fQu-IP-uIu" secondAttribute="trailing" id="miZ-pK-u2Z"/>
-                                                                <constraint firstItem="rS0-fi-HZ2" firstAttribute="top" secondItem="2Od-YA-L5G" secondAttribute="bottom" constant="8" symbolic="YES" id="qiM-F2-poD"/>
-                                                                <constraint firstItem="fQu-IP-uIu" firstAttribute="leading" secondItem="dCl-Ai-9q8" secondAttribute="leading" id="upJ-MB-UH0"/>
-                                                                <constraint firstAttribute="trailing" secondItem="2Od-YA-L5G" secondAttribute="trailing" constant="49" id="v1w-na-K7z"/>
+                                                                <constraint firstItem="rS0-fi-HZ2" firstAttribute="leading" secondItem="dCl-Ai-9q8" secondAttribute="leadingMargin" id="Qmv-d5-701"/>
+                                                                <constraint firstAttribute="bottom" secondItem="rS0-fi-HZ2" secondAttribute="bottom" id="RtG-rc-FLU"/>
+                                                                <constraint firstItem="rS0-fi-HZ2" firstAttribute="trailing" secondItem="dCl-Ai-9q8" secondAttribute="trailingMargin" id="ej2-lp-7Rt"/>
+                                                                <constraint firstItem="rS0-fi-HZ2" firstAttribute="top" secondItem="dCl-Ai-9q8" secondAttribute="top" id="iXA-cK-KW2"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -209,9 +184,12 @@
                                                         <outlet property="delegate" destination="bCB-R1-Itr" id="owZ-jt-sAI"/>
                                                     </connections>
                                                 </scrollView>
-                                                <toolbar clearsContextBeforeDrawing="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-C6-v2f">
-                                                    <rect key="frame" x="0.0" y="303" width="364" height="44"/>
+                                                <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-C6-v2f">
+                                                    <rect key="frame" x="0.0" y="267" width="364" height="80"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="80" id="qvy-iL-HdU"/>
+                                                    </constraints>
                                                     <items>
                                                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Gi4-EZ-hIb"/>
                                                         <barButtonItem title="Item" systemItem="search" id="3EE-Sg-ELv">
@@ -221,9 +199,9 @@
                                                         </barButtonItem>
                                                     </items>
                                                 </toolbar>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7e-BR-aTK">
-                                                    <rect key="frame" x="8" y="311" width="315" height="28"/>
-                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7e-BR-aTK">
+                                                    <rect key="frame" x="8" y="267" width="302" height="80"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -233,9 +211,8 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="86P-n2-MKt" firstAttribute="bottom" secondItem="X6E-C6-v2f" secondAttribute="top" id="5Jv-7I-LFO"/>
-                                            <constraint firstAttribute="bottom" secondItem="86P-n2-MKt" secondAttribute="bottom" constant="44" id="DEV-uh-7gU"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="A7e-BR-aTK" secondAttribute="trailing" constant="33" id="Py8-dU-PKz"/>
-                                            <constraint firstItem="A7e-BR-aTK" firstAttribute="top" secondItem="86P-n2-MKt" secondAttribute="bottom" constant="8" symbolic="YES" id="Vek-QH-PDu"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="A7e-BR-aTK" secondAttribute="trailing" constant="46" id="Py8-dU-PKz"/>
+                                            <constraint firstItem="A7e-BR-aTK" firstAttribute="top" secondItem="86P-n2-MKt" secondAttribute="bottom" id="Vek-QH-PDu"/>
                                             <constraint firstItem="X6E-C6-v2f" firstAttribute="leading" secondItem="9sO-GH-xCR" secondAttribute="leading" id="WXf-YK-8Hi"/>
                                             <constraint firstAttribute="bottom" secondItem="X6E-C6-v2f" secondAttribute="bottom" id="Z98-9v-EYr"/>
                                             <constraint firstAttribute="trailing" secondItem="X6E-C6-v2f" secondAttribute="trailing" id="at1-JJ-Aja"/>
@@ -247,13 +224,12 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="activityIndicator" destination="j2y-vP-yFu" id="k6U-k2-HtF"/>
-                                            <outlet property="detailLabel" destination="2Od-YA-L5G" id="EvF-gz-xll"/>
                                             <outlet property="detailTextView" destination="rS0-fi-HZ2" id="e12-Il-4cO"/>
-                                            <outlet property="detailToolbar" destination="fQu-IP-uIu" id="FqB-KG-Mvi"/>
                                             <outlet property="detailView" destination="dCl-Ai-9q8" id="bmf-Xs-GFm"/>
                                             <outlet property="imageTitle" destination="A7e-BR-aTK" id="LCA-S3-kdO"/>
                                             <outlet property="imageView" destination="ua6-ag-Kww" id="Bv3-mh-VLv"/>
                                             <outlet property="scrollView" destination="86P-n2-MKt" id="pkj-ph-whh"/>
+                                            <outlet property="titleBottomToolbar" destination="X6E-C6-v2f" id="6l8-gy-IbM"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

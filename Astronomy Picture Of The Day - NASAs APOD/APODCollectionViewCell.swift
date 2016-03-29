@@ -15,18 +15,10 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	@IBOutlet weak var imageTitle: UILabel!
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-	var explanation: String?
-
-	/*
-	var customTextView: UIView!
-	var textInCustomView: UITextView!
-	*/
-
+	@IBOutlet weak var titleBottomToolbar: UIToolbar!
 	@IBOutlet weak var detailView: UIView!
 	@IBOutlet weak var detailTextView: UITextView!
-	@IBOutlet weak var detailToolbar: UIToolbar!
-	@IBOutlet weak var detailLabel: UILabel!
-
+	var explanation: String?
 
 	func setup() {
 		//add tap getsture recognizer
@@ -42,15 +34,13 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	func hideDetailView() {
 		detailView.hidden = true
 		detailTextView.hidden = true
-		detailToolbar.hidden = true
-		detailLabel.hidden = true
+		titleBottomToolbar.hidden = false
+		imageTitle.hidden = false
 	}
 
 	func showDetailView() {
 		detailView.hidden = false
 		detailTextView.hidden = false
-		detailToolbar.hidden = false
-		detailLabel.hidden = false
 	}
 	
 	func setupActivityIndicator(cell: APODCollectionViewCell) {
@@ -68,54 +58,7 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 		detailTextView.text = explanation
 	}
 
-	@IBAction func closeMoreDetail(sender: UIBarButtonItem) {
-		hideDetailView()
-	}
 
-
-	@IBAction func moreDetailClicked(sender: UIBarButtonItem) {
-		/*
-		customTextView = UIView(frame: CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height))
-		let gesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissCustomTextView))
-		gesture.direction = .Down
-		customTextView.addGestureRecognizer(gesture)
-		
-		textInCustomView = UITextView(frame: CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height))
-		textInCustomView.editable = false
-		moreDetail.enabled = false
-		textInCustomView.text = explanation
-		
-		customTextView.addSubview(textInCustomView)
-		scrollView.addSubview(customTextView)
-		*/
-
-		print("clicked")
-
-
-	}
-
-	/*
-	//TODO: not being called
-	func scrollViewDidScroll(scrollView: UIScrollView) {
-		print("scroll view called")
-		if customTextView != nil {
-			customTextView.removeFromSuperview()
-			moreDetail.enabled = true
-		}
-	}
-	*/
-	
-	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-		print("end decelerating called")
-	}
-	
-	/*
-	func dismissCustomTextView(gesture: UISwipeGestureRecognizer) {
-		moreDetail.enabled = true
-		customTextView.removeFromSuperview()
-	}
-	*/
-	
 	//MARK: zoom image
 	
 	func tapImage(gesture: UIPinchGestureRecognizer!) {
