@@ -58,8 +58,8 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
 		
 		//Debugging
-		print("downloads is : \(noAPODsDownloaded)")
-		print("current is \(currentAPOD)")
+		print("no. of APODs downloaded: \(noAPODsDownloaded)")
+		print("current cell: \(currentAPOD)")
 		//
 		
 		var testDates: [String] = []
@@ -69,7 +69,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 		
 		//Debugging
-		print("new dates to download are \(testDates)")
+		print("new dates to download: \(testDates)")
 		//
 		
 		currentAPOD = noAPODsDownloaded
@@ -156,6 +156,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			cell.activityIndicator.stopAnimating()
 			cell.imageView.image = image
 			cell.imageTitle.text = APOD.title
+			cell.explanation = APOD.explanation
 			title = formatDateString(APOD.dateString!)
 
 		} else {
@@ -199,9 +200,10 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	func createBlankAPODCells() {
 		for i in 0..<ViewControllerOne.dates.count {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[i])
-			print("creating dummy cell \(i)")
 			APODarray.append(newAPOD)
 		}
 	}
+	
+
 	
 }

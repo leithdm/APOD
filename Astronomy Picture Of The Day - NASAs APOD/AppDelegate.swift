@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window = UIWindow(frame: UIScreen.mainScreen().bounds)
 		window?.backgroundColor = UIColor.whiteColor()
 		window?.rootViewController = sideBarVC
+		window?.tintColor = UIColor.blackColor()
 		window?.makeKeyAndVisible()
 		
 		return true

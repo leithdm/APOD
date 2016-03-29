@@ -16,6 +16,9 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	@IBOutlet weak var moreDetail: UIBarButtonItem!
 	@IBOutlet weak var scrollView: UIScrollView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+	var explanation: String?
+	var customTextView: UIView!
+	var textInCustomView: UITextView!
 	
 	func setup() {
 		//add tap getsture recognizer
@@ -38,7 +41,38 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	}
 	
 	@IBAction func moreDetailClicked(sender: AnyObject) {
-		print("present more detail")
+		customTextView = UIView(frame: CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height))
+		let gesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissCustomTextView))
+		gesture.direction = .Down
+		customTextView.addGestureRecognizer(gesture)
+		
+		textInCustomView = UITextView(frame: CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height))
+		textInCustomView.editable = false
+		moreDetail.enabled = false
+		textInCustomView.text = explanation
+		
+		customTextView.addSubview(textInCustomView)
+		scrollView.addSubview(customTextView)
+		
+	}
+	
+	//TODO: not being called
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		print("scroll view called")
+		if customTextView != nil {
+			customTextView.removeFromSuperview()
+			moreDetail.enabled = true
+		}
+	}
+	
+	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+		print("end decelerating called")
+	}
+	
+	
+	func dismissCustomTextView(gesture: UISwipeGestureRecognizer) {
+		moreDetail.enabled = true
+		customTextView.removeFromSuperview()
 	}
 	
 	//MARK: zoom image
