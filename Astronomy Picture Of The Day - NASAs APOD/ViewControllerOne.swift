@@ -159,6 +159,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	
+	
 	//MARK: helper methods
 	
 	func formatDateString(date: String) -> String?  {
