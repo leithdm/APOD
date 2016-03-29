@@ -187,8 +187,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 //	}
 
 
-
-	
 	
 	//MARK: helper methods
 	
