@@ -30,15 +30,17 @@ class APODClient {
 	}
 	
 	struct APODParameterValues {
-		static let APIKey = "IyeTTjPu0uEWXZhhXCLriSpOgoIViYvI8LXeVqF5"
+		static let APIKey = "O7rxgK1W0aIobHi6EQFa1NjTNRPvTAQ73A3cwcoz"
 		static let HDImage = "false"
 	}
 	
 	
-	//MARK: download photo properties
+	//MARK: download photo properties for array of dates
 	
-	func downloadPhotoProperties(date: String, completionHandler: (data: [String: String]?, error: String?) -> Void) {
+	func downloadArrayPhotoProperties(dates: [String], completionHandler: (data: [String: String]?, error: String?) -> Void) {
 		
+		for date in dates {
+			
 		let methodParameters: [String: AnyObject] = [
 			APODParameterKeys.Date: date,
 			APODParameterKeys.APIKey: APODParameterValues.APIKey,
@@ -48,6 +50,19 @@ class APODClient {
 		let request = NSURLRequest(URL: createURLFromParameters(methodParameters))
 		let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
 			
+			print("downloading data for \(date)")
+			
+			guard (error == nil) else {
+				completionHandler(data: nil, error: "There was an error with your request: \(error?.localizedDescription)")
+				return
+			}
+			
+			guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+				completionHandler(data: nil, error: "Your request returned a status code other than 2xx!")
+				return
+			}
+			
+			
 			guard let data = data else {
 				completionHandler(data: nil, error: "Error downloading data from server")
 				return
@@ -56,8 +71,8 @@ class APODClient {
 			self.parseDownloadPhotoProperties(data, completionHandler: completionHandler)
 		}
 		task.resume()
+		}
 	}
-	
 	
 	//MARK: parse photo properties
 	
@@ -99,6 +114,29 @@ class APODClient {
 		returnedData["explanation"] = explanation
 		
 		completionHandler(data: returnedData, error: nil)
+	}
+	
+	//MARK: download photo properties for single date
+	
+	func downloadPhotoProperties(date: String, completionHandler: (data: [String: String]?, error: String?) -> Void) {
+		
+		let methodParameters: [String: AnyObject] = [
+			APODParameterKeys.Date: date,
+			APODParameterKeys.APIKey: APODParameterValues.APIKey,
+			APODParameterKeys.HDImage: APODParameterValues.HDImage
+		]
+		
+		let request = NSURLRequest(URL: createURLFromParameters(methodParameters))
+		let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+			
+			guard let data = data else {
+				completionHandler(data: nil, error: "Error downloading data from server")
+				return
+			}
+			
+			self.parseDownloadPhotoProperties(data, completionHandler: completionHandler)
+		}
+		task.resume()
 	}
 	
 	//MARK: create URL from parameters

@@ -12,74 +12,28 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	//MARK: properties
 	
-	var APODarray: [APOD] = []
-	weak var delegate: ViewControllerOneDelegate?
 	@IBOutlet weak var collectionView: UICollectionView!
-	static var APODCount = 0
-	let dates = APODClient.sharedInstance.getAllAPODDates()
-	var swipeLeft: UIPanGestureRecognizer!
+	
+	var APODarray: [APOD] = []
 	var dowloadInProgress = false
 	var prevOffset: CGFloat = 0.0
-	var downloads: CGFloat = 1
+	var noAPODsDownloaded = 1
+	var currentAPOD = 1
+	static var APODCount = 0
+	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
+	weak var delegate: ViewControllerOneDelegate?
+	
 	
 	//MARK: lifecycle methods
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-//		setUpSwipeGestureRecognizer()
-		createDummyCells()
-	}
-	
-//	func setUpSwipeGestureRecognizer() {
-//		//add swipe right gesture recognizer
-//		swipeLeft = UIPanGestureRecognizer(target: self, action: #selector(didPan))
-//
-//
-////		swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeLeft))
-//		swipeLeft.delegate = self
-////		swipeLeft.numberOfTouchesRequired = 1
-////		swipeLeft.direction = .Up
-//		view.addGestureRecognizer(swipeLeft)
-//	}
-
-	func scrollViewDidScroll(scrollView: UIScrollView) {
-
-		if (self.prevOffset > scrollView.contentOffset.x) {
-		print("swiping right")
-		}
-		else if (self.prevOffset < scrollView.contentOffset.x) {
-		print("swiping left")
-			print(scrollView.contentOffset.x / downloads)
-			print(collectionView.frame.width)
-			if scrollView.contentOffset.x / downloads >= collectionView.frame.width {
-			downloadPhotoProperties()
-			downloads+=1
-			}
-		}
-
-		self.prevOffset = scrollView.contentOffset.x;
-		print("i scrolled")
-	}
-
-//	func didPan(gesture: UIPanGestureRecognizer) {
-//		print("i panned")
-//	}
-//	
-//	func didSwipeLeft(gesture: UISwipeGestureRecognizer) {
-//		print("swipe left called")
-//		downloadPhotoProperties()
-//	}
-
-	func createDummyCells() {
-		for i in 0..<dates.count {
-			let newAPOD = APOD(dateString: dates[i])
-			APODarray.append(newAPOD)
-		}
+		createBlankAPODCells()
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		downloadPhotoProperties()
+		downloadPhotoProperties([ViewControllerOne.dates[0]])
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -88,48 +42,86 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	
+	//MARK: scroll view methods
+	
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		
+		//determine if swiped left to get a new APOD
+		if (self.prevOffset < scrollView.contentOffset.x) {
+			if scrollView.contentOffset.x / CGFloat(noAPODsDownloaded) >= collectionView.frame.width {
+				noAPODsDownloaded += 1
+			}
+		}
+		self.prevOffset = scrollView.contentOffset.x;
+	}
+	
+	
+	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+		
+		//Debugging
+		print("downloads is : \(noAPODsDownloaded)")
+		print("current is \(currentAPOD)")
+		//
+		
+		var testDates: [String] = []
+		
+		for i in currentAPOD..<noAPODsDownloaded {
+			testDates.append(ViewControllerOne.dates[i])
+		}
+		
+		//Debugging
+		print("new dates to download are \(testDates)")
+		//
+		
+		currentAPOD = noAPODsDownloaded
+		downloadPhotoProperties(testDates)
+	}
+	
+	
 	//MARK: download photo properties
 	
-	func downloadPhotoProperties() {
+	func downloadPhotoProperties(dates: [String]) {
 		
-		dowloadInProgress = true
-		
-		APODClient.sharedInstance.downloadPhotoProperties(dates[ViewControllerOne.APODCount], completionHandler: { (data, error) in
+		APODClient.sharedInstance.downloadArrayPhotoProperties(dates, completionHandler: { (data, error) in
 			
 			guard error == nil else {
-				print("error")
+				print("error in downloading photo array properties")
 				return
 			}
 			
 			guard let data: [String: String] = data else {
-				print("error")
+				print("error retrieving data")
 				return
 			}
 			
-			
-			//create an APOD
-			let APOD = self.APODarray[ViewControllerOne.APODCount]
-			APOD.explanation = data["explanation"]
-			APOD.title = data["title"]
-			APOD.url = data["url"]
-			
-			//create an image based on url string
-			if APOD.url!.containsString("youtube") {
-				APOD.image = UIImage(named: "noPhoto.png")
-				dispatch_async(dispatch_get_main_queue()) {
-					self.collectionView.reloadData()
-				}
-			} else {
-				let url = NSURL(string: APOD.url!)
-				let imageData = NSData(contentsOfURL: url!)
+			//using the date as the match criteria, compare the downloaded data with the relevant blank APOD cell
+			for APOD in self.APODarray {
 				
-				dispatch_async(dispatch_get_main_queue()) {
-					APOD.image = UIImage(data: imageData!)
-					self.collectionView.reloadData()
+				//ensures the correct ADOD is paired with correct cell
+				if APOD.dateString == data["date"] {
+					APOD.explanation = data["explanation"]
+					APOD.title = data["title"]
+					APOD.url = data["url"]
+					
+					//create an image based on url string
+					if APOD.url!.containsString("youtube") {
+						APOD.image = UIImage(named: "noPhoto.png")
+						dispatch_async(dispatch_get_main_queue()) {
+							self.collectionView.reloadData()
+						}
+					} else {
+						let url = NSURL(string: APOD.url!)
+						let imageData = NSData(contentsOfURL: url!)
+						
+						dispatch_async(dispatch_get_main_queue()) {
+							APOD.image = UIImage(data: imageData!)
+							self.collectionView.reloadData()
+						}
+					}
+					ViewControllerOne.APODCount += 1
+					self.dowloadInProgress = false
 				}
 			}
-			ViewControllerOne.APODCount += 1
-			self.dowloadInProgress = false
 		})
 	}
 	
@@ -180,16 +172,9 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	
-//	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-//		if !dowloadInProgress {
-//		downloadPhotoProperties()
-//		}
-//	}
-
-
-	
 	//MARK: helper methods
 	
+	//format the date to be in format e.g. 01 January 20xx
 	func formatDateString(date: String) -> String?  {
 		let formatter = NSDateFormatter()
 		formatter.dateFormat = "yyyy-MM-dd"
@@ -198,4 +183,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		newFormatter.dateFormat = "dd MMMM yyyy"
 		return newFormatter.stringFromDate(existingDate!)
 	}
+	
+	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
+	func createBlankAPODCells() {
+		for i in 0..<ViewControllerOne.dates.count {
+			let newAPOD = APOD(dateString: ViewControllerOne.dates[i])
+			print("creating dummy cell \(i)")
+			APODarray.append(newAPOD)
+		}
+	}
+	
 }
