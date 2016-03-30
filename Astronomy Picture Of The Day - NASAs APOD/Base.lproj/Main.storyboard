@@ -263,42 +263,8 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7yW-0D-gv8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Y1h-km-ae9">
-                    <rect key="frame" x="0.0" y="0.0" width="364" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <items>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="dSo-Vy-acn"/>
-                        <barButtonItem systemItem="add" id="Xlm-Hf-N0b"/>
-                    </items>
-                </toolbar>
             </objects>
-            <point key="canvasLocation" x="1246" y="1792"/>
-        </scene>
-        <!--Gallery-->
-        <scene sceneID="Ntr-vL-PLF">
-            <objects>
-                <viewController storyboardIdentifier="ViewControllerTwo" id="hJe-Nl-VyO" customClass="ViewControllerTwo" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="uFe-Hf-VX7"/>
-                        <viewControllerLayoutGuide type="bottom" id="2pr-iE-wS9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Qbu-WE-Qzp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Gallery" id="yGT-zc-nmP">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="UM8-Rn-Uji">
-                            <connections>
-                                <action selector="menuButtonTapped:" destination="hJe-Nl-VyO" id="jXV-7m-uti"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gXZ-te-PKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1246" y="2478"/>
+            <point key="canvasLocation" x="1246" y="1793"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="L2F-bJ-r8n">
@@ -336,23 +302,148 @@
             </objects>
             <point key="canvasLocation" x="578" y="1793"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nXZ-Qp-vLY">
+        <!--View Controller Two-->
+        <scene sceneID="lxu-To-Q5x">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i5r-mQ-Nrd" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerTwo" id="qmu-aJ-MRN" customClass="ViewControllerTwo" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OE7-0B-pRT"/>
+                        <viewControllerLayoutGuide type="bottom" id="fVN-oa-EVc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ykL-IZ-dd1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NtC-1F-ACv">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="QeW-pj-2nb">
+                                    <size key="itemSize" width="364" height="347"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GalleryAPODCollectionViewCell" id="D7f-bW-7NO" customClass="GalleryAPODCollectionViewCell" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target">
+                                        <rect key="frame" x="118" y="64" width="364" height="347"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wGj-Sd-o53">
+                                                    <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="X07-QO-CEh">
+                                                    <rect key="frame" x="157" y="149" width="50" height="50"/>
+                                                    <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="d4t-8x-LO6"/>
+                                                        <constraint firstAttribute="height" constant="50" id="l73-B4-dIB"/>
+                                                    </constraints>
+                                                </activityIndicatorView>
+                                                <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N9v-1t-HLk">
+                                                    <rect key="frame" x="0.0" y="267" width="364" height="80"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <items/>
+                                                </toolbar>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMb-Vl-o9V">
+                                                    <rect key="frame" x="8" y="273" width="348" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="qvQ-ms-imC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5h9-U6-rvB">
+                                                    <rect key="frame" x="8" y="303" width="348" height="36"/>
+                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="5h9-U6-rvB" firstAttribute="top" secondItem="TMb-Vl-o9V" secondAttribute="bottom" constant="8" symbolic="YES" id="G59-Nd-x9R"/>
+                                            <constraint firstItem="5h9-U6-rvB" firstAttribute="bottom" secondItem="D7f-bW-7NO" secondAttribute="bottomMargin" id="J9r-ez-LFH"/>
+                                            <constraint firstItem="N9v-1t-HLk" firstAttribute="trailing" secondItem="wGj-Sd-o53" secondAttribute="trailing" id="Rkr-uY-oHi"/>
+                                            <constraint firstItem="TMb-Vl-o9V" firstAttribute="top" secondItem="X07-QO-CEh" secondAttribute="bottom" constant="74" id="Uud-Yh-fHh"/>
+                                            <constraint firstItem="TMb-Vl-o9V" firstAttribute="centerX" secondItem="X07-QO-CEh" secondAttribute="centerX" id="aBo-Kz-2uE"/>
+                                            <constraint firstAttribute="trailing" secondItem="wGj-Sd-o53" secondAttribute="trailing" id="aZ7-ck-TPK"/>
+                                            <constraint firstItem="N9v-1t-HLk" firstAttribute="leading" secondItem="wGj-Sd-o53" secondAttribute="leading" id="bSI-lN-yyb"/>
+                                            <constraint firstItem="wGj-Sd-o53" firstAttribute="top" secondItem="D7f-bW-7NO" secondAttribute="top" id="ewG-Ji-iKh"/>
+                                            <constraint firstItem="X07-QO-CEh" firstAttribute="centerY" secondItem="D7f-bW-7NO" secondAttribute="centerY" id="faY-aY-SUm"/>
+                                            <constraint firstItem="N9v-1t-HLk" firstAttribute="top" secondItem="X07-QO-CEh" secondAttribute="bottom" constant="68" id="fqS-OL-f3v"/>
+                                            <constraint firstItem="5h9-U6-rvB" firstAttribute="leading" secondItem="TMb-Vl-o9V" secondAttribute="leading" id="h4H-98-3TJ"/>
+                                            <constraint firstItem="N9v-1t-HLk" firstAttribute="centerX" secondItem="5h9-U6-rvB" secondAttribute="centerX" id="iMO-Qv-Qyu"/>
+                                            <constraint firstItem="TMb-Vl-o9V" firstAttribute="leading" secondItem="D7f-bW-7NO" secondAttribute="leadingMargin" id="iZ7-7B-0Ak"/>
+                                            <constraint firstAttribute="bottom" secondItem="wGj-Sd-o53" secondAttribute="bottom" id="kJx-c5-dFb"/>
+                                            <constraint firstItem="wGj-Sd-o53" firstAttribute="leading" secondItem="D7f-bW-7NO" secondAttribute="leading" id="olB-2v-ZZ6"/>
+                                            <constraint firstItem="N9v-1t-HLk" firstAttribute="bottom" secondItem="wGj-Sd-o53" secondAttribute="bottom" id="oyw-fm-vdp"/>
+                                            <constraint firstItem="X07-QO-CEh" firstAttribute="centerX" secondItem="D7f-bW-7NO" secondAttribute="centerX" id="y2r-V2-uso"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="activityIndicator" destination="X07-QO-CEh" id="kYW-vr-d8w"/>
+                                            <outlet property="imageDate" destination="TMb-Vl-o9V" id="hel-8U-RKx"/>
+                                            <outlet property="imageTitle" destination="5h9-U6-rvB" id="H6j-cv-fdM"/>
+                                            <outlet property="imageView" destination="wGj-Sd-o53" id="yRf-wE-wYp"/>
+                                            <outlet property="titleBottomToolbar" destination="N9v-1t-HLk" id="ezd-5w-2Qk"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="qmu-aJ-MRN" id="LM6-o4-HDm"/>
+                                    <outlet property="delegate" destination="qmu-aJ-MRN" id="70U-t1-5wP"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="W8f-v5-HcB">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="hn7-kc-wil">
+                            <connections>
+                                <action selector="menuButtonTapped:" destination="qmu-aJ-MRN" id="dbf-ym-rMI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="NtC-1F-ACv" id="sWU-pO-QEm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rjr-gH-1E7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="MvX-EI-SNB">
+                    <rect key="frame" x="0.0" y="0.0" width="364" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <items>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="jtt-f7-IFP"/>
+                        <barButtonItem systemItem="add" id="vVg-rN-t76"/>
+                    </items>
+                </toolbar>
+            </objects>
+            <point key="canvasLocation" x="1239" y="2499"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bZL-8r-nAR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jvc-Km-ow8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O2i-fV-B2P">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ncl-N9-7Hx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="hJe-Nl-VyO" kind="relationship" relationship="rootViewController" id="MTZ-dD-7BH"/>
+                        <segue destination="qmu-aJ-MRN" kind="relationship" relationship="rootViewController" id="HkG-yF-Ql6"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P99-6r-mUn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NPe-E0-37E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="587" y="2478"/>
+            <point key="canvasLocation" x="571" y="2499"/>
         </scene>
     </scenes>
     <resources>

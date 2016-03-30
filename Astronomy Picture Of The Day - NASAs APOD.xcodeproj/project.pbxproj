@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */; };
 		018B63851CA2DF3900152514 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63811CA2DF3900152514 /* SidebarViewController.swift */; };
 		018B63861CA2DF3900152514 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63821CA2DF3900152514 /* MenuTableViewController.swift */; };
 		018B63871CA2DF3900152514 /* ViewControllerTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63831CA2DF3900152514 /* ViewControllerTwo.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryAPODCollectionViewCell.swift; sourceTree = "<group>"; };
 		018B63811CA2DF3900152514 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		018B63821CA2DF3900152514 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		018B63831CA2DF3900152514 /* ViewControllerTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTwo.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */,
+				0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */,
 				018B63841CA2DF3900152514 /* ViewControllerOne.swift */,
 				018B63831CA2DF3900152514 /* ViewControllerTwo.swift */,
 			);
@@ -336,6 +339,7 @@
 				01C1B2721CA0024500D96DF6 /* AppDelegate.swift in Sources */,
 				018B63881CA2DF3900152514 /* ViewControllerOne.swift in Sources */,
 				018B63851CA2DF3900152514 /* SidebarViewController.swift in Sources */,
+				0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */,
 				01F475AA1CABFDEB00AC35EF /* Model.xcdatamodeld in Sources */,
 				018B63871CA2DF3900152514 /* ViewControllerTwo.swift in Sources */,
 			);
