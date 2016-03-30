@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol ViewControllerOneDelegate: class {
 	func viewControllerOneDidTapMenuButton(controller: ViewControllerOne)
@@ -23,16 +24,25 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	weak var delegate: ViewControllerOneDelegate?
 	
 	
+	//MARK: core data
+	
+	lazy var sharedContext: NSManagedObjectContext = {
+		return CoreDataStackManager.sharedInstance.managedObjectContext
+	}()
+	
+	
 	//MARK: lifecycle methods
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		createBlankAPODCells()
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		downloadPhotoProperties([ViewControllerOne.dates.first!])
+		if APODarray.isEmpty {
+			createBlankAPODCells()
+			downloadPhotoProperties([ViewControllerOne.dates.first!])
+		}
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -116,6 +126,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 						dispatch_async(dispatch_get_main_queue()) {
 							APOD.image = UIImage(data: imageData!)
 							self.collectionView.reloadData()
+							CoreDataStackManager.sharedInstance.saveContext()
 						}
 					}
 					self.dowloadInProgress = false
@@ -152,6 +163,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		let APOD = APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 		
+		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
 			//show the toolbar
 			cell.titleBottomToolbar.hidden = false
@@ -165,7 +177,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			cell.explanation = APOD.explanation
 			title = formatDateString(APOD.dateString!)
 
-		} else {
+		} else { //download from the remote server
 			//hide the toolbar
 			cell.titleBottomToolbar.hidden = true
 			
@@ -176,6 +188,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			title = ""
 			cell.imageView.image = nil
 			cell.imageTitle.text = ""
+			
 
 		}
 	}
@@ -211,11 +224,16 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
 	func createBlankAPODCells() {
 		for i in 0..<ViewControllerOne.dates.count {
-			let newAPOD = APOD(dateString: ViewControllerOne.dates[i])
+			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
 			APODarray.append(newAPOD)
 		}
 	}
 	
 
+	func performUIUpdatesOnMain(updates: () -> Void) {
+		dispatch_async(dispatch_get_main_queue()) {
+			updates()
+		}
+	}
 	
 }

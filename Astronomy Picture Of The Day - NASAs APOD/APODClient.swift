@@ -34,6 +34,11 @@ class APODClient {
 		static let HDImage = "false"
 	}
 	
+	struct Caches {
+		static let imageCache = ImageCache()
+	}
+	
+	
 	
 	//MARK: download photo properties for array of dates
 	

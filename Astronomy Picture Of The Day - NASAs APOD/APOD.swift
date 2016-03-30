@@ -8,19 +8,37 @@
 
 import Foundation
 import UIKit
+import CoreData
 
-class APOD {
+class APOD: NSManagedObject {
 	
-	var dateString: String?
-	var explanation: String?
-	var title: String?
-	var url: String?
-	var image: UIImage?
-	var activityIndicator: UIActivityIndicatorView?
-	var loadingLabel: UILabel?
+	@NSManaged var dateString: String?
+	@NSManaged var explanation: String?
+	@NSManaged var title: String?
+	@NSManaged var url: String?
+	
+	override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+		super.init(entity: entity, insertIntoManagedObjectContext: context)
+	}
+	
+	init(dateString: String, context: NSManagedObjectContext) {
+		let entity = NSEntityDescription.entityForName("APOD", inManagedObjectContext: context)!
+		super.init(entity: entity, insertIntoManagedObjectContext: context)
 		
-	init(dateString: String) {
 		self.dateString = dateString
+	}
+	
+	//images are retrieved/set via the Documents directory
+	var image: UIImage? {
+		get {
+			print("getting image")
+			return APODClient.Caches.imageCache.imageWithIdentifier("\(dateString)")
+		}
+		
+		set {
+			print("setting image")
+			APODClient.Caches.imageCache.storeImage(newValue, withIdentifier: "\(dateString)") //newValue being the default value
+		}
 	}
 	
 }
