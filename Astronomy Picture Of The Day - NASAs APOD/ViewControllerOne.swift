@@ -28,12 +28,19 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	lazy var sharedContext: NSManagedObjectContext = {
 		return CoreDataStackManager.sharedInstance.managedObjectContext
 	}()
-	
+
+	//file path for saving the number of downloaded images
+	var noOfDownloadsFilePath : String {
+		let manager = NSFileManager.defaultManager()
+		let url = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
+		return url.URLByAppendingPathComponent("noOfDownloads").path!
+	}
 	
 	//MARK: lifecycle methods
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		restoreNoOfDownloads()
 		APODarray = fetchAllAPODS()
 	}
 	
@@ -71,7 +78,12 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		//determine if swiped left to get a new APOD
 		if (self.prevOffset < scrollView.contentOffset.x) {
 			if scrollView.contentOffset.x / CGFloat(noAPODsDownloaded) >= collectionView.frame.width {
+				//TODO: replace magic number of 25
+				if noAPODsDownloaded == 25 {
+					createBlankAPODCells()
+				}
 				noAPODsDownloaded += 1
+				saveNoOfDownloads()
 			}
 		}
 		self.prevOffset = scrollView.contentOffset.x;
@@ -80,24 +92,19 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: downloading new photo properties when scrolling
 	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-		
-		//Debugging
 		print("no. of APODs downloaded: \(noAPODsDownloaded)")
 		print("current cell: \(currentAPOD)")
-		//
-		
+
 		var testDates: [String] = []
-		
 		for i in currentAPOD..<noAPODsDownloaded {
 			testDates.append(ViewControllerOne.dates[i])
 		}
-		
-		//Debugging
+
 		print("new dates to download: \(testDates)")
-		//
-		
-		currentAPOD = noAPODsDownloaded
+
 		getPhotoProperties(testDates)
+		currentAPOD = noAPODsDownloaded
+		saveNoOfDownloads()
 	}
 	
 	
@@ -120,14 +127,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			//using the date as the match criteria, compare the downloaded data with the relevant blank APOD cell
 			for APOD in self.APODarray {
 				
-				//ensures the correct ADOD is paired with correct cell
+				//ensures the correct APOD is paired with correct cell
 				if APOD.dateString == data["date"] {
 					APOD.explanation = data["explanation"]
 					APOD.title = data["title"]
 					APOD.url = data["url"]
 					
 					if !APOD.url!.containsString("http://apod.nasa.gov/") {
-						//typically a youtube video
+						//typically a video cannot be displayed as an image
 						dispatch_async(dispatch_get_main_queue()) {
 							APOD.image = UIImage(named: "noPhoto.png")
 							self.collectionView.reloadData()
@@ -175,6 +182,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func configureCell(cell: APODCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
 		cell.setup()
+
 		let APOD = APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 		
@@ -183,7 +191,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			//show the toolbar
 			cell.titleBottomToolbar.hidden = false
 			
-			//remove loading
+			//remove loading image text
 			cell.loadingImageText.hidden = true
 			
 			cell.activityIndicator.stopAnimating()
@@ -191,7 +199,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			cell.imageTitle.text = APOD.title
 			cell.explanation = APOD.explanation
 			title = formatDateString(APOD.dateString!)
-
 		} else { //download from the remote server
 			//hide the toolbar
 			cell.titleBottomToolbar.hidden = true
@@ -203,8 +210,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			title = ""
 			cell.imageView.image = nil
 			cell.imageTitle.text = ""
-			
-
 		}
 	}
 	
@@ -238,7 +243,8 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
 	func createBlankAPODCells() {
-		for i in 0..<ViewControllerOne.dates.count {
+		//TODO: 50 is not quite right. Must ensure have enough blank cells
+		for i in 0..<50 {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
 			APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
@@ -249,6 +255,23 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	func performUIUpdatesOnMain(updates: () -> Void) {
 		dispatch_async(dispatch_get_main_queue()) {
 			updates()
+		}
+	}
+
+	//MARK: save and restore number of downloads
+
+	func saveNoOfDownloads() {
+		let dictionary = [
+			"noAPODsDownloaded" : noAPODsDownloaded,
+			"currentAPOD"		: currentAPOD
+		]
+		NSKeyedArchiver.archiveRootObject(dictionary, toFile: noOfDownloadsFilePath)
+	}
+
+	func restoreNoOfDownloads() {
+		if let dictionary = NSKeyedUnarchiver.unarchiveObjectWithFile(noOfDownloadsFilePath) as? [String : AnyObject] {
+			noAPODsDownloaded = dictionary["noAPODsDownloaded"] as! Int
+			currentAPOD = dictionary["currentAPOD"] as! Int
 		}
 	}
 	
