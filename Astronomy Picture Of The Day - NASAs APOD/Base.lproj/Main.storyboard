@@ -122,7 +122,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="APODCollectionViewCell" id="9sO-GH-xCR" customClass="APODCollectionViewCell" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="159" width="364" height="347"/>
+                                        <rect key="frame" x="0.0" y="158.5" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
@@ -146,11 +146,11 @@
                                                         <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCl-Ai-9q8">
                                                             <rect key="frame" x="0.0" y="0.0" width="364" height="267"/>
                                                             <subviews>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rS0-fi-HZ2">
-                                                                    <rect key="frame" x="8" y="0.0" width="348" height="267"/>
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rS0-fi-HZ2">
+                                                                    <rect key="frame" x="8" y="8" width="348" height="251"/>
                                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                                    <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -159,9 +159,9 @@
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstItem="rS0-fi-HZ2" firstAttribute="leading" secondItem="dCl-Ai-9q8" secondAttribute="leadingMargin" id="Qmv-d5-701"/>
-                                                                <constraint firstAttribute="bottom" secondItem="rS0-fi-HZ2" secondAttribute="bottom" id="RtG-rc-FLU"/>
+                                                                <constraint firstAttribute="bottom" secondItem="rS0-fi-HZ2" secondAttribute="bottom" constant="8" id="RtG-rc-FLU"/>
                                                                 <constraint firstItem="rS0-fi-HZ2" firstAttribute="trailing" secondItem="dCl-Ai-9q8" secondAttribute="trailingMargin" id="ej2-lp-7Rt"/>
-                                                                <constraint firstItem="rS0-fi-HZ2" firstAttribute="top" secondItem="dCl-Ai-9q8" secondAttribute="top" id="iXA-cK-KW2"/>
+                                                                <constraint firstItem="rS0-fi-HZ2" firstAttribute="top" secondItem="dCl-Ai-9q8" secondAttribute="top" constant="8" id="iXA-cK-KW2"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -192,7 +192,7 @@
                                                     </constraints>
                                                     <items>
                                                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Gi4-EZ-hIb"/>
-                                                        <barButtonItem title="Item" systemItem="search" id="3EE-Sg-ELv">
+                                                        <barButtonItem image="upArrow" id="3EE-Sg-ELv">
                                                             <connections>
                                                                 <action selector="showMoreDetail:" destination="9sO-GH-xCR" id="1fo-Eu-Xtw"/>
                                                             </connections>
@@ -200,7 +200,7 @@
                                                     </items>
                                                 </toolbar>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7e-BR-aTK">
-                                                    <rect key="frame" x="8" y="267" width="302" height="80"/>
+                                                    <rect key="frame" x="8" y="267" width="280" height="80"/>
                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -211,7 +211,7 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="86P-n2-MKt" firstAttribute="bottom" secondItem="X6E-C6-v2f" secondAttribute="top" id="5Jv-7I-LFO"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="A7e-BR-aTK" secondAttribute="trailing" constant="46" id="Py8-dU-PKz"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="A7e-BR-aTK" secondAttribute="trailing" constant="68" id="Py8-dU-PKz"/>
                                             <constraint firstItem="A7e-BR-aTK" firstAttribute="top" secondItem="86P-n2-MKt" secondAttribute="bottom" id="Vek-QH-PDu"/>
                                             <constraint firstItem="X6E-C6-v2f" firstAttribute="leading" secondItem="9sO-GH-xCR" secondAttribute="leading" id="WXf-YK-8Hi"/>
                                             <constraint firstAttribute="bottom" secondItem="X6E-C6-v2f" secondAttribute="bottom" id="Z98-9v-EYr"/>
@@ -225,6 +225,7 @@
                                         <connections>
                                             <outlet property="activityIndicator" destination="j2y-vP-yFu" id="k6U-k2-HtF"/>
                                             <outlet property="detailTextView" destination="rS0-fi-HZ2" id="e12-Il-4cO"/>
+                                            <outlet property="detailToolbarButton" destination="3EE-Sg-ELv" id="6Zj-4E-rsI"/>
                                             <outlet property="detailView" destination="dCl-Ai-9q8" id="bmf-Xs-GFm"/>
                                             <outlet property="imageTitle" destination="A7e-BR-aTK" id="LCA-S3-kdO"/>
                                             <outlet property="imageView" destination="ua6-ag-Kww" id="Bv3-mh-VLv"/>
@@ -242,7 +243,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="9Fm-JC-CzI">
-                        <barButtonItem key="leftBarButtonItem" image="burger" id="aIP-Ea-zHG">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="aIP-Ea-zHG">
                             <connections>
                                 <action selector="menuButtonTapped:" destination="khL-fS-72U" id="hS5-8q-mDi"/>
                             </connections>
@@ -279,7 +280,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Gallery" id="yGT-zc-nmP">
-                        <barButtonItem key="leftBarButtonItem" image="burger" id="UM8-Rn-Uji">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="UM8-Rn-Uji">
                             <connections>
                                 <action selector="menuButtonTapped:" destination="hJe-Nl-VyO" id="jXV-7m-uti"/>
                             </connections>
@@ -346,7 +347,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="burger" width="24" height="24"/>
+        <image name="menu" width="24" height="24"/>
+        <image name="upArrow" width="36" height="36"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
