@@ -153,6 +153,12 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		cell.setupActivityIndicator(cell)
 		
 		if let image = APOD.image {
+			//show the toolbar
+			cell.titleBottomToolbar.hidden = false
+			
+			//remove loading
+			cell.loadingImageText.hidden = true
+			
 			cell.activityIndicator.stopAnimating()
 			cell.imageView.image = image
 			cell.imageTitle.text = APOD.title
@@ -160,6 +166,12 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			title = formatDateString(APOD.dateString!)
 
 		} else {
+			//hide the toolbar
+			cell.titleBottomToolbar.hidden = true
+			
+			//show loading
+			cell.loadingImageText.hidden = false
+			
 			cell.activityIndicator.startAnimating()
 			title = ""
 			cell.imageView.image = nil

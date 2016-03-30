@@ -19,6 +19,8 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	@IBOutlet weak var detailView: UIView! //explanation text view
 	@IBOutlet weak var detailTextView: UITextView! //explanation textView
 	@IBOutlet var detailToolbarButton: UIBarButtonItem!
+	@IBOutlet weak var loadingImageText: UILabel!
+	
 	var detailViewVisible: Bool = false //explanation text visibility
 	var explanation: String?
 
