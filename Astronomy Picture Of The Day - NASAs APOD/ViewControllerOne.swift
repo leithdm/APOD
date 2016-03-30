@@ -15,8 +15,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	@IBOutlet weak var collectionView: UICollectionView!
 	
-	var APODarray: [APOD] = []
-	var dowloadInProgress = false
+	var APODarray = [APOD]()
 	var prevOffset: CGFloat = 0.0
 	var noAPODsDownloaded = 1
 	var currentAPOD = 1
@@ -35,19 +34,33 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		APODarray = fetchAllAPODS()
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		
+		//if the APOD array is empty we want to download the APOD for today's date
 		if APODarray.isEmpty {
 			createBlankAPODCells()
-			downloadPhotoProperties([ViewControllerOne.dates.first!])
+			getPhotoProperties([ViewControllerOne.dates.first!])
 		}
 	}
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
+	}
+	
+	//MARK: core data
+	func fetchAllAPODS() -> [APOD] {
+		let fetchRequest = NSFetchRequest(entityName: "APOD")
+		
+		do {
+		 return try sharedContext.executeFetchRequest(fetchRequest) as! [APOD]
+		} catch {
+			return [APOD]()
+		}
 	}
 	
 	
@@ -64,6 +77,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		self.prevOffset = scrollView.contentOffset.x;
 	}
 	
+	//MARK: downloading new photo properties when scrolling
 	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
 		
@@ -83,13 +97,13 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		//
 		
 		currentAPOD = noAPODsDownloaded
-		downloadPhotoProperties(testDates)
+		getPhotoProperties(testDates)
 	}
 	
 	
 	//MARK: download photo properties
 	
-	func downloadPhotoProperties(dates: [String]) {
+	func getPhotoProperties(dates: [String]) {
 		
 		APODClient.sharedInstance.downloadArrayPhotoProperties(dates, completionHandler: { (data, error) in
 			
@@ -114,9 +128,10 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 					
 					if !APOD.url!.containsString("http://apod.nasa.gov/") {
 						//typically a youtube video
-						APOD.image = UIImage(named: "noPhoto.png")
 						dispatch_async(dispatch_get_main_queue()) {
+							APOD.image = UIImage(named: "noPhoto.png")
 							self.collectionView.reloadData()
+							CoreDataStackManager.sharedInstance.saveContext()
 						}
 					} else {
 						//create an image based on url string
@@ -129,7 +144,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 							CoreDataStackManager.sharedInstance.saveContext()
 						}
 					}
-					self.dowloadInProgress = false
+					return
 				}
 			}
 		})
@@ -226,6 +241,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		for i in 0..<ViewControllerOne.dates.count {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
 			APODarray.append(newAPOD)
+			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}
 	
