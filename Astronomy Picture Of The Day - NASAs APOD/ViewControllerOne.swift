@@ -18,7 +18,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	var APODarray = [APOD]()
 	var prevOffset: CGFloat = 0.0
 	var noAPODsDownloaded = 0
-	var currentAPOD = 1
+	var currentAPOD = 0
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	weak var delegate: ViewControllerOneDelegate?
 	
@@ -51,7 +51,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		if APODarray.isEmpty {
 			createBlankAPODCells()
 			getPhotoProperties([ViewControllerOne.dates.first!])
-			noAPODsDownloaded += 1
 		}
 	}
 	
@@ -89,13 +88,13 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		print("index of image is: \(index)")
 		print("noAPODsDownloaded: \(noAPODsDownloaded)")
 		
-		if noAPODsDownloaded < index || noAPODsDownloaded == 1 && index == 1 {
+		if noAPODsDownloaded < index {
 			var datesToDownload: [String] = []
-			for i in noAPODsDownloaded + 1...index {
+			for i in (noAPODsDownloaded + 1)...index {
 				datesToDownload.insert(ViewControllerOne.dates[i], atIndex: 0)
 			}
 			
-			print("new dates to download: \(datesToDownload)")
+			print("datesToDownload: \(datesToDownload)")
 			
 			getPhotoProperties(datesToDownload)
 			noAPODsDownloaded = index
