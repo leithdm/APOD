@@ -47,7 +47,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		//if the APOD array is empty we want to download the APOD for today's date
+		//if the APOD array is empty we want to fill it with blank cells and download the APOD for today's date
 		if APODarray.isEmpty {
 			createBlankAPODCells()
 			getPhotoProperties([ViewControllerOne.dates.first!])

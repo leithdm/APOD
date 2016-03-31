@@ -15,7 +15,7 @@ class GalleryAPODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate,
 	@IBOutlet weak var imageDate: UILabel!
 	@IBOutlet weak var imageTitle: UILabel!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-	@IBOutlet weak var titleBottomToolbar: UIToolbar!
+	@IBOutlet weak var imageInfoView: UIView!
 
 
 	func setupActivityIndicator(cell: GalleryAPODCollectionViewCell) {

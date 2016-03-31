@@ -40,13 +40,17 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		restoreNoOfDownloads()
-		APODarray = fetchAllAPODS()
+//		restoreNoOfDownloads()
+//		APODarray = fetchAllAPODS()
+//		collectionView.reloadData()
 	}
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-
+		restoreNoOfDownloads()
+		APODarray = fetchAllAPODS()
+		collectionView.reloadData()
+		
 		//if the APOD array is empty we want to download the APOD for today's date
 		if APODarray.isEmpty {
 			createBlankAPODCells()
@@ -188,26 +192,28 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
 			//show the toolbar
-			cell.titleBottomToolbar.hidden = false
+			cell.imageInfoView.hidden = false
 
 			cell.activityIndicator.stopAnimating()
 			cell.imageView.image = image
+			cell.imageDate.text = formatDateString(APOD.dateString!)
 			cell.imageTitle.text = APOD.title
-			title = formatDateString(APOD.dateString!)
+//			title = formatDateString(APOD.dateString!)
 		} else { //download from the remote server
 			//hide the toolbar
-			cell.titleBottomToolbar.hidden = true
+			cell.imageInfoView.hidden = true
 			cell.activityIndicator.startAnimating()
-			title = ""
+//			title = ""
 			cell.imageView.image = nil
 			cell.imageTitle.text = ""
+			cell.imageDate.text = ""
 		}
 	}
 
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
 
 		//TODO: remove magic numbers
-		return CGSize(width: collectionView.frame.size.width/2, height: 300)
+		return CGSize(width: collectionView.frame.size.width/2 - 10, height: collectionView.frame.size.width/2 - 10)
 	}
 
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
