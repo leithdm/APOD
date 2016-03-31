@@ -40,22 +40,16 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-//		restoreNoOfDownloads()
-//		APODarray = fetchAllAPODS()
-//		collectionView.reloadData()
 	}
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		restoreNoOfDownloads()
 		APODarray = fetchAllAPODS()
 		collectionView.reloadData()
-		
-		//if the APOD array is empty we want to download the APOD for today's date
-		if APODarray.isEmpty {
-			createBlankAPODCells()
-			getPhotoProperties([ViewControllerOne.dates.first!])
-		}
+//		createBlankAPODCells()
+		getImages(8)
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -75,42 +69,37 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 
-	//MARK: scroll view methods
-
-	func scrollViewDidScroll(scrollView: UIScrollView) {
-
-		//determine if swiped left to get a new APOD
-		if (self.prevOffset < scrollView.contentOffset.x) {
-			if scrollView.contentOffset.x / CGFloat(noAPODsDownloaded) >= collectionView.frame.width {
-				//TODO: replace magic number of 25
-				if noAPODsDownloaded == 25 {
-					createBlankAPODCells()
-				}
-				noAPODsDownloaded += 1
-				saveNoOfDownloads()
-			}
-		}
-		self.prevOffset = scrollView.contentOffset.x;
-	}
-
 	//MARK: downloading new photo properties when scrolling
 
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-		print("no. of APODs downloaded: \(noAPODsDownloaded)")
-		print("current cell: \(currentAPOD)")
-
-		var testDates: [String] = []
-		for i in currentAPOD..<noAPODsDownloaded {
-			testDates.append(ViewControllerOne.dates[i])
-		}
-
-		print("new dates to download: \(testDates)")
-
-		getPhotoProperties(testDates)
-		currentAPOD = noAPODsDownloaded
-		saveNoOfDownloads()
+		getImages()
 	}
-
+	
+	func getImages(max: Int = 0) {
+		var max = max
+		for cell in collectionView.visibleCells() {
+			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
+			if index.item > max {
+				max = index.item
+			}
+		}
+		print("max: \(max)")
+		print("noAPODsDownloaded: \(noAPODsDownloaded)")
+		
+		if noAPODsDownloaded < max {
+			var testDates: [String] = []
+			for i in noAPODsDownloaded...max {
+				testDates.append(ViewControllerOne.dates[i])
+			}
+			
+			print("new dates to download: \(testDates)")
+			
+			getPhotoProperties(testDates)
+			noAPODsDownloaded = max
+			currentAPOD = noAPODsDownloaded
+			saveNoOfDownloads()
+		}
+	}
 
 	//MARK: download photo properties
 
@@ -191,22 +180,20 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
-			//show the toolbar
 			cell.imageInfoView.hidden = false
-
 			cell.activityIndicator.stopAnimating()
 			cell.imageView.image = image
 			cell.imageDate.text = formatDateString(APOD.dateString!)
 			cell.imageTitle.text = APOD.title
 //			title = formatDateString(APOD.dateString!)
 		} else { //download from the remote server
-			//hide the toolbar
+
 			cell.imageInfoView.hidden = true
 			cell.activityIndicator.startAnimating()
-//			title = ""
 			cell.imageView.image = nil
 			cell.imageTitle.text = ""
 			cell.imageDate.text = ""
+			//title = ""
 		}
 	}
 
@@ -240,10 +227,10 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
 	func createBlankAPODCells() {
-		//TODO: 50 is not quite right. Must ensure have enough blank cells
-		for i in 0..<50 {
+		for i in APODarray.count..<100 {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
 			APODarray.append(newAPOD)
+			collectionView.reloadData()
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}

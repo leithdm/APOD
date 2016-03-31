@@ -17,7 +17,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	var APODarray = [APOD]()
 	var prevOffset: CGFloat = 0.0
-	var noAPODsDownloaded = 1
+	var noAPODsDownloaded = 0
 	var currentAPOD = 1
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	weak var delegate: ViewControllerOneDelegate?
@@ -40,17 +40,18 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		restoreNoOfDownloads()
-		APODarray = fetchAllAPODS()
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		restoreNoOfDownloads()
+		APODarray = fetchAllAPODS()
 		
 		//if the APOD array is empty we want to fill it with blank cells and download the APOD for today's date
 		if APODarray.isEmpty {
 			createBlankAPODCells()
 			getPhotoProperties([ViewControllerOne.dates.first!])
+			noAPODsDownloaded += 1
 		}
 	}
 	
@@ -62,49 +63,45 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: core data
 	func fetchAllAPODS() -> [APOD] {
 		let fetchRequest = NSFetchRequest(entityName: "APOD")
-		
 		do {
 		 return try sharedContext.executeFetchRequest(fetchRequest) as! [APOD]
 		} catch {
 			return [APOD]()
 		}
 	}
-	
-	
-	//MARK: scroll view methods
-	
-	func scrollViewDidScroll(scrollView: UIScrollView) {
-		
-		//determine if swiped left to get a new APOD
-		if (self.prevOffset < scrollView.contentOffset.x) {
-			if scrollView.contentOffset.x / CGFloat(noAPODsDownloaded) >= collectionView.frame.width {
-				//TODO: replace magic number of 25
-				if noAPODsDownloaded == 25 {
-					createBlankAPODCells()
-				}
-				noAPODsDownloaded += 1
-				saveNoOfDownloads()
-			}
-		}
-		self.prevOffset = scrollView.contentOffset.x;
-	}
+
 	
 	//MARK: downloading new photo properties when scrolling
 	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-		print("no. of APODs downloaded: \(noAPODsDownloaded)")
-		print("current cell: \(currentAPOD)")
+		getImages()
+	}
+	
+	
+	func getImages() {
 
-		var testDates: [String] = []
-		for i in currentAPOD..<noAPODsDownloaded {
-			testDates.append(ViewControllerOne.dates[i])
+		var index: Int = 0
+		for cell in collectionView.visibleCells() {
+			let i = collectionView.indexPathForCell(cell)!
+			index = i.item
 		}
-
-		print("new dates to download: \(testDates)")
-
-		getPhotoProperties(testDates)
-		currentAPOD = noAPODsDownloaded
-		saveNoOfDownloads()
+		
+		print("index of image is: \(index)")
+		print("noAPODsDownloaded: \(noAPODsDownloaded)")
+		
+		if noAPODsDownloaded < index || noAPODsDownloaded == 1 && index == 1 {
+			var datesToDownload: [String] = []
+			for i in noAPODsDownloaded + 1...index {
+				datesToDownload.insert(ViewControllerOne.dates[i], atIndex: 0)
+			}
+			
+			print("new dates to download: \(datesToDownload)")
+			
+			getPhotoProperties(datesToDownload)
+			noAPODsDownloaded = index
+			currentAPOD = noAPODsDownloaded
+			saveNoOfDownloads()
+		}
 	}
 	
 	

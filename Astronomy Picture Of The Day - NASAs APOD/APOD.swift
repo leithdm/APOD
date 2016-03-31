@@ -31,12 +31,10 @@ class APOD: NSManagedObject {
 	//images are retrieved/set via the Documents directory
 	var image: UIImage? {
 		get {
-			print("getting image")
 			return APODClient.Caches.imageCache.imageWithIdentifier("\(dateString)")
 		}
 		
 		set {
-			print("setting image")
 			APODClient.Caches.imageCache.storeImage(newValue, withIdentifier: "\(dateString)") //newValue being the default value
 		}
 	}

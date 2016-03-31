@@ -39,37 +39,8 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 		//initial detail view setup
 		initialDetailViewSetup()
 		
-		//tap gesture for toolBar
-		let toolbarTap = UITapGestureRecognizer(target: self, action: #selector(tapToolBar))
-		toolbarTap.numberOfTapsRequired = 1
-		titleBottomToolbar.addGestureRecognizer(toolbarTap)
-		
-		//swipe gesture for scrollview
-		let scrollViewSwipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpOnView))
-		scrollViewSwipeUp.direction = .Up
-		scrollView.addGestureRecognizer(scrollViewSwipeUp)
-		
-		//swipe gestures for toolBar
-		let toolBarSwipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpOnView))
-		toolBarSwipeUp.direction = .Up
-		titleBottomToolbar.addGestureRecognizer(toolBarSwipeUp)
-		
-		let toolBarSwipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeDownOnView))
-		toolBarSwipeDown.direction = .Down
-		titleBottomToolbar.addGestureRecognizer(toolBarSwipeDown)
 	}
 	
-	func swipeUpOnView(gesture: UISwipeGestureRecognizer!) {
-		if !detailViewVisible {
-			showDetailView()
-		}
-	}
-	
-	func swipeDownOnView(gesture: UISwipeGestureRecognizer!) {
-		if detailViewVisible {
-			hideDetailView()
-		}
-	}
 
 	func initialDetailViewSetup() {
 		detailToolbarButton.image = UIImage(named: "upArrow")
