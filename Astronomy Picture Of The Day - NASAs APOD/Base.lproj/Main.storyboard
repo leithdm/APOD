@@ -289,7 +289,7 @@
         <!--Navigation Controller-->
         <scene sceneID="rK0-yb-j9D">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V1d-cC-928" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnTap="YES" id="V1d-cC-928" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fog-wp-SU6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -433,7 +433,7 @@
         <!--Navigation Controller-->
         <scene sceneID="bZL-8r-nAR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jvc-Km-ow8" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnTap="YES" id="Jvc-Km-ow8" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ncl-N9-7Hx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

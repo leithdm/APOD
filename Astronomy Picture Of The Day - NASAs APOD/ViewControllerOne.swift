@@ -21,7 +21,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	var currentAPOD = 0
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	weak var delegate: ViewControllerOneDelegate?
-	
+	var apodIndex: NSIndexPath?
 	
 	//MARK: core data
 	
@@ -46,7 +46,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		super.viewWillAppear(animated)
 		restoreNoOfDownloads()
 		APODarray = fetchAllAPODS()
-		
+
 		//if the APOD array is empty we want to fill it with blank cells and download the APOD for today's date
 		if APODarray.isEmpty {
 			createBlankAPODCells()
@@ -57,6 +57,8 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
+
+//		if !scrollViewDidEnd
 	}
 	
 	//MARK: core data
@@ -175,6 +177,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		configureCell(cell, atIndexPath: indexPath)
 		return cell
 	}
+
 	
 	func configureCell(cell: APODCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
 		cell.setup()

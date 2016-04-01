@@ -19,7 +19,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	var prevOffset: CGFloat = 0.0
 	var noAPODsDownloaded = 1
 	var currentAPOD = 1
-	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	weak var delegate: ViewControllerTwoDelegate?
 
 
@@ -40,6 +39,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		title = formatDateStringForTitle(ViewControllerOne.dates[0])
 	}
 
 	override func viewWillAppear(animated: Bool) {
@@ -48,7 +48,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		restoreNoOfDownloads()
 		APODarray = fetchAllAPODS()
 		collectionView.reloadData()
-//		createBlankAPODCells()
+		//TODO: remove magic number
 		getImages(8)
 	}
 
@@ -85,19 +85,22 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		}
 		print("max: \(max)")
 		print("noAPODsDownloaded: \(noAPODsDownloaded)")
-		
+
+		title = formatDateStringForTitle(ViewControllerOne.dates[max])
+
 		if noAPODsDownloaded < max {
-			var testDates: [String] = []
+			var datesToDownload: [String] = []
 			for i in noAPODsDownloaded...max {
-				testDates.append(ViewControllerOne.dates[i])
+				datesToDownload.append(ViewControllerOne.dates[i])
 			}
 			
-			print("new dates to download: \(testDates)")
+			print("new dates to download: \(datesToDownload)")
 			
-			getPhotoProperties(testDates)
+			getPhotoProperties(datesToDownload)
 			noAPODsDownloaded = max
 			currentAPOD = noAPODsDownloaded
 			saveNoOfDownloads()
+			title = formatDateStringForTitle(ViewControllerOne.dates[max])
 		}
 	}
 
@@ -128,21 +131,20 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 					if !APOD.url!.containsString("http://apod.nasa.gov/") {
 						//typically a video cannot be displayed as an image
-						dispatch_async(dispatch_get_main_queue()) {
+						self.performUIUpdatesOnMain({
 							APOD.image = UIImage(named: "noPhoto.png")
 							self.collectionView.reloadData()
 							CoreDataStackManager.sharedInstance.saveContext()
-						}
+						})
 					} else {
 						//create an image based on url string
 						let url = NSURL(string: APOD.url!)
 						let imageData = NSData(contentsOfURL: url!)
-
-						dispatch_async(dispatch_get_main_queue()) {
+						self.performUIUpdatesOnMain({ 
 							APOD.image = UIImage(data: imageData!)
 							self.collectionView.reloadData()
 							CoreDataStackManager.sharedInstance.saveContext()
-						}
+						})
 					}
 					return
 				}
@@ -185,15 +187,12 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			cell.imageView.image = image
 			cell.imageDate.text = formatDateString(APOD.dateString!)
 			cell.imageTitle.text = APOD.title
-//			title = formatDateString(APOD.dateString!)
 		} else { //download from the remote server
-
 			cell.imageInfoView.hidden = true
 			cell.activityIndicator.startAnimating()
 			cell.imageView.image = nil
 			cell.imageTitle.text = ""
 			cell.imageDate.text = ""
-			//title = ""
 		}
 	}
 
@@ -212,6 +211,13 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		return 10
 	}
 
+	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		let vcOne = storyboard!.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
+		vcOne.apodIndex = indexPath
+		navigationController?.pushViewController(vcOne, animated: true)
+	}
+
+
 
 	//MARK: helper methods
 
@@ -222,6 +228,15 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		let existingDate = formatter.dateFromString(date)
 		let newFormatter = NSDateFormatter()
 		newFormatter.dateFormat = "dd MMMM yyyy"
+		return newFormatter.stringFromDate(existingDate!)
+	}
+
+	func formatDateStringForTitle(date: String) -> String?  {
+		let formatter = NSDateFormatter()
+		formatter.dateFormat = "yyyy-MM-dd"
+		let existingDate = formatter.dateFromString(date)
+		let newFormatter = NSDateFormatter()
+		newFormatter.dateFormat = "MMMM yyyy"
 		return newFormatter.stringFromDate(existingDate!)
 	}
 
