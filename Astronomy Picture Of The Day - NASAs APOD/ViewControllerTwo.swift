@@ -272,6 +272,5 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			noAPODsDownloaded = dictionary["noAPODsDownloaded"] as! Int
 			currentAPOD = dictionary["currentAPOD"] as! Int
 		}
-	}
-	
+	}	
 }

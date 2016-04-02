@@ -22,6 +22,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	weak var delegate: ViewControllerOneDelegate?
 	var apodIndex: NSIndexPath?
+	@IBOutlet weak var barButton: UIBarButtonItem!
 	
 	//MARK: core data
 	
@@ -61,6 +62,8 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 
 		if let index = apodIndex {
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
+			barButton.image = UIImage(named: "leftArrow")
+
 		}
 
 	}
@@ -162,7 +165,11 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: menu button delegate methods
 	
 	@IBAction func menuButtonTapped(sender: AnyObject) {
+		if let _ = apodIndex {
+			navigationController?.popToRootViewControllerAnimated(true)
+		} else {
 		delegate?.viewControllerOneDidTapMenuButton(self)
+		}
 	}
 	
 	

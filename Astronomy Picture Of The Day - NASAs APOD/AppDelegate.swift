@@ -63,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: ViewControllerOneDelegate {
 	func viewControllerOneDidTapMenuButton(controller: ViewControllerOne) {
+		print("app delegate called")
 		sideBarVC.toggleLeftMenuAnimated(true)
 	}
 }
