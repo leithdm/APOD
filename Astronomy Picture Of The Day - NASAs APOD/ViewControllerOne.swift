@@ -52,13 +52,17 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			createBlankAPODCells()
 			getPhotoProperties([ViewControllerOne.dates.first!])
 		}
+
 	}
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
 
-//		if !scrollViewDidEnd
+		if let index = apodIndex {
+			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
+		}
+
 	}
 	
 	//MARK: core data

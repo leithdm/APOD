@@ -138,7 +138,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Image..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Th5-QN-JBb">
                                                             <rect key="frame" x="118" y="78" width="129" height="23"/>
                                                             <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="j2y-vP-yFu">
@@ -289,7 +289,7 @@
         <!--Navigation Controller-->
         <scene sceneID="rK0-yb-j9D">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnTap="YES" id="V1d-cC-928" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavViewControllerOne" automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnTap="YES" id="V1d-cC-928" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fog-wp-SU6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
