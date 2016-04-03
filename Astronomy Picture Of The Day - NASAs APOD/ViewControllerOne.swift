@@ -25,6 +25,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	@IBOutlet weak var barButton: UIBarButtonItem!
 	@IBOutlet weak var moreOptionsView: UIView!
 	@IBOutlet weak var moreOptionsContainerView: UIView!
+	@IBOutlet weak var moreOptionsBarButtonItem: UIBarButtonItem!
 	
 	
 	//MARK: core data
@@ -306,10 +307,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				index = i.item
 			}
 			
-			let c = APODarray[index]
-			print("\(c.dateString) \(c.title)")
+			let apod = APODarray[index]
 			
-			print("add to my favorites")
+			if apod.favorite == false {
+			apod.favorite = true
+			CoreDataStackManager.sharedInstance.saveContext()
+			} else {
+				print("already added to favorites")
+			}
 		case 1:
 			
 			//share the image
@@ -338,11 +343,13 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			}, completion: { _ in
 				self.moreOptionsContainerView.center.y -= self.view.bounds.height
 				self.moreOptionsContainerView.hidden = true
+				self.moreOptionsBarButtonItem.enabled = true
 		})
 	}
 	
 	func showMoreOptionsDetailView() {
-		
+	
+		moreOptionsBarButtonItem.enabled = false
 		//Animate the detail view to appear on screen
 		moreOptionsContainerView.center.y += view.bounds.height
 		UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { () -> Void in

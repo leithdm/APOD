@@ -3,10 +3,11 @@
     <entity name="APOD" representedClassName=".APOD" syncable="YES">
         <attribute name="dateString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="explanation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="APOD" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="APOD" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

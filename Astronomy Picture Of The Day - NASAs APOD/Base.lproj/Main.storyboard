@@ -309,6 +309,7 @@
                     <connections>
                         <outlet property="barButton" destination="aIP-Ea-zHG" id="par-8Y-QMV"/>
                         <outlet property="collectionView" destination="bCB-R1-Itr" id="VmT-2G-eAu"/>
+                        <outlet property="moreOptionsBarButtonItem" destination="2LC-Wo-tT5" id="NGQ-in-JVC"/>
                         <outlet property="moreOptionsContainerView" destination="6zf-Lf-8Xr" id="P7p-90-zSA"/>
                         <outlet property="moreOptionsView" destination="ulV-Yl-iu2" id="VIv-5N-2Rd"/>
                     </connections>
@@ -567,12 +568,145 @@
             </objects>
             <point key="canvasLocation" x="571" y="2499"/>
         </scene>
+        <!--My Favorites View Controller-->
+        <scene sceneID="aDM-Do-EjV">
+            <objects>
+                <viewController storyboardIdentifier="MyFavoritesViewController" id="eIV-MA-Vhu" customClass="MyFavoritesViewController" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Yo6-av-smZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qvf-iz-TWR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1AP-25-jMI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="C0a-bK-H40">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="gXP-Yb-NuC">
+                                    <size key="itemSize" width="364" height="347"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesCollectionViewCell" id="IPT-LX-rkv" customClass="MyFavoritesCollectionViewCell" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target">
+                                        <rect key="frame" x="118" y="64" width="364" height="347"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HhV-zB-egS">
+                                                    <rect key="frame" x="0.0" y="297" width="364" height="50"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDl-P5-V9w">
+                                                            <rect key="frame" x="8" y="8" width="348" height="17"/>
+                                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="10"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWh-9a-Q6R">
+                                                            <rect key="frame" x="8" y="24" width="348" height="18"/>
+                                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="dWh-9a-Q6R" firstAttribute="bottom" secondItem="HhV-zB-egS" secondAttribute="bottomMargin" id="0G9-R3-1gr"/>
+                                                        <constraint firstAttribute="height" constant="50" id="4Ir-rm-zSX"/>
+                                                        <constraint firstAttribute="bottom" secondItem="RDl-P5-V9w" secondAttribute="bottom" constant="25" id="DHm-OG-jjV"/>
+                                                        <constraint firstItem="RDl-P5-V9w" firstAttribute="leading" secondItem="HhV-zB-egS" secondAttribute="leadingMargin" id="Rjh-gf-ERc"/>
+                                                        <constraint firstItem="RDl-P5-V9w" firstAttribute="trailing" secondItem="dWh-9a-Q6R" secondAttribute="trailing" id="Wiz-eS-Out"/>
+                                                        <constraint firstItem="RDl-P5-V9w" firstAttribute="trailing" secondItem="HhV-zB-egS" secondAttribute="trailingMargin" id="pyf-WK-qlb"/>
+                                                        <constraint firstItem="RDl-P5-V9w" firstAttribute="top" secondItem="HhV-zB-egS" secondAttribute="topMargin" id="rkx-i0-2q7"/>
+                                                        <constraint firstItem="RDl-P5-V9w" firstAttribute="leading" secondItem="dWh-9a-Q6R" secondAttribute="leading" id="yBo-Uy-abN"/>
+                                                        <constraint firstItem="dWh-9a-Q6R" firstAttribute="top" secondItem="HhV-zB-egS" secondAttribute="top" constant="24" id="yJY-Ql-RWv"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kk1-Do-Ka8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="kk1-Do-Ka8" secondAttribute="trailing" id="1Ix-Wi-TLp"/>
+                                            <constraint firstItem="kk1-Do-Ka8" firstAttribute="leading" secondItem="IPT-LX-rkv" secondAttribute="leading" id="C8Q-vu-joz"/>
+                                            <constraint firstAttribute="bottom" secondItem="kk1-Do-Ka8" secondAttribute="bottom" id="DVv-qi-mTt"/>
+                                            <constraint firstItem="HhV-zB-egS" firstAttribute="leading" secondItem="IPT-LX-rkv" secondAttribute="leading" id="FuH-q0-U0g"/>
+                                            <constraint firstItem="kk1-Do-Ka8" firstAttribute="top" secondItem="IPT-LX-rkv" secondAttribute="top" id="HFu-l7-ILo"/>
+                                            <constraint firstAttribute="bottom" secondItem="HhV-zB-egS" secondAttribute="bottom" id="MnR-pW-cCR"/>
+                                            <constraint firstAttribute="trailing" secondItem="HhV-zB-egS" secondAttribute="trailing" id="TVE-rZ-t5i"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageDate" destination="RDl-P5-V9w" id="rB2-aa-eNE"/>
+                                            <outlet property="imageInfoView" destination="HhV-zB-egS" id="BBW-BJ-KCG"/>
+                                            <outlet property="imageTitle" destination="dWh-9a-Q6R" id="n3U-aN-tCe"/>
+                                            <outlet property="imageView" destination="kk1-Do-Ka8" id="BV2-as-91Q"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="eIV-MA-Vhu" id="N3T-3K-eJV"/>
+                                    <outlet property="delegate" destination="eIV-MA-Vhu" id="xJL-mL-NkF"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KdT-MB-3qD">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="x14-ju-Fnz">
+                            <connections>
+                                <action selector="menuButtonTapped:" destination="eIV-MA-Vhu" id="9qR-eG-TpT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="C0a-bK-H40" id="yud-6S-zR7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Fh-r6-kBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Lj3-5J-DXG">
+                    <rect key="frame" x="0.0" y="0.0" width="364" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <items>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="DHQ-U6-feF"/>
+                        <barButtonItem systemItem="add" id="k66-M1-eSb"/>
+                    </items>
+                </toolbar>
+            </objects>
+            <point key="canvasLocation" x="1246" y="3275"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mf1-JE-Yrk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnTap="YES" id="TQj-9q-pE3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3av-k4-ZNT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eIV-MA-Vhu" kind="relationship" relationship="rootViewController" id="rKZ-9D-sxp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOu-pb-QL5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="578" y="3275"/>
+        </scene>
     </scenes>
     <resources>
         <image name="gallery" width="24" height="24"/>
         <image name="info" width="24" height="24"/>
         <image name="menu" width="24" height="24"/>
-        <image name="more" width="24" height="24"/>
+        <image name="more" width="36" height="36"/>
         <image name="myFavorites" width="24" height="24"/>
         <image name="share" width="24" height="24"/>
         <image name="todaysAPOD" width="24" height="24"/>

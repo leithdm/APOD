@@ -40,9 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let vc2 = storyboard.instantiateViewControllerWithIdentifier("ViewControllerTwo") as! ViewControllerTwo
 		vc2.delegate = self
 		
+		let vc3 = storyboard.instantiateViewControllerWithIdentifier("MyFavoritesViewController") as! MyFavoritesViewController
+		vc3.delegate = self
+		
 		//add the static view controllers to array
 		childViewControllers.append(vc1)
 		childViewControllers.append(vc2)
+		childViewControllers.append(vc3)
 		
 		//get the child navigational controller
 		childNav = UINavigationController(rootViewController: childViewControllers[0])
@@ -77,6 +81,12 @@ extension AppDelegate: ViewControllerOneDelegate {
 
 extension AppDelegate: ViewControllerTwoDelegate {
 	func viewControllerTwoDidTapMenuButton(controller: ViewControllerTwo) {
+		sideBarVC.toggleLeftMenuAnimated(true)
+	}
+}
+
+extension AppDelegate: MyFavoritesViewControllerDelegate {
+	func myFavoritesViewControllerDidTapMenuButton(controller: MyFavoritesViewController) {
 		sideBarVC.toggleLeftMenuAnimated(true)
 	}
 }
