@@ -28,6 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
 		
+		//app wide color scheme
+		UINavigationBar.appearance().barTintColor = UIColor.blackColor()
+		UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
+		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+		
 		//instantiate child view controllers
 		let vc1 = storyboard.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
 		vc1.delegate = self
@@ -44,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		//instantiate menu view controller
 		let menuVC = storyboard.instantiateViewControllerWithIdentifier("MenuTableViewController") as! MenuTableViewController
+		menuVC.tableView.backgroundView = UIImageView(image: UIImage(named: "background"))
+		menuVC.tableView.tableFooterView = UIView()  //removes additional lines underneath menu items
 		menuVC.delegate = self
 		menuNav = UINavigationController(rootViewController: menuVC)
 		

@@ -10,6 +10,7 @@ protocol MenuTableViewControllerDelegate: class {
 
 class MenuTableViewController: UITableViewController {
   weak var delegate: MenuTableViewControllerDelegate?
+  
 
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 	tableView.deselectRowAtIndexPath(indexPath, animated: true)
