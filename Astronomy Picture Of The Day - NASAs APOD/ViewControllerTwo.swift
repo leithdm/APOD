@@ -71,7 +71,11 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	//MARK: downloading new photo properties when scrolling
 
-	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+//	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+//		getImages()
+//	}
+	
+	func scrollViewDidScroll(scrollView: UIScrollView) {
 		getImages()
 	}
 	
