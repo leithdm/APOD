@@ -184,6 +184,8 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		let APOD = APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 
+
+
 		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
 			cell.imageInfoView.hidden = false
@@ -191,12 +193,18 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			cell.imageView.image = image
 			cell.imageDate.text = formatDateString(APOD.dateString!)
 			cell.imageTitle.text = APOD.title
+			if APOD.favorite == true {
+				cell.favoriteImage.hidden = false
+			} else {
+				cell.favoriteImage.hidden = true
+			}
 		} else { //download from the remote server
 			cell.imageInfoView.hidden = true
 			cell.activityIndicator.startAnimating()
 			cell.imageView.image = nil
 			cell.imageTitle.text = ""
 			cell.imageDate.text = ""
+			cell.favoriteImage.hidden = true
 		}
 	}
 

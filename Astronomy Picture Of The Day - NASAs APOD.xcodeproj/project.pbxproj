@@ -180,9 +180,9 @@
 				018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */,
 				0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */,
 				015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */,
+				015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */,
 				018B63841CA2DF3900152514 /* ViewControllerOne.swift */,
 				018B63831CA2DF3900152514 /* ViewControllerTwo.swift */,
-				015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

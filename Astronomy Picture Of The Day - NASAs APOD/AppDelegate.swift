@@ -32,7 +32,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UINavigationBar.appearance().barTintColor = UIColor.blackColor()
 		UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
 		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-		
+		// Sets background to a blank/empty image
+		UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
+		// Sets shadow (line below the bar) to a blank image
+		UINavigationBar.appearance().shadowImage = UIImage()
+		// Sets the translucent background color
+		UINavigationBar.appearance().backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
+
+
 		//instantiate child view controllers
 		let vc1 = storyboard.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
 		vc1.delegate = self

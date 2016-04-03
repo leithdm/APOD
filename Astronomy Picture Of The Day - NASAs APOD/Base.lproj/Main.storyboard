@@ -493,6 +493,13 @@
                                                         <constraint firstItem="5h9-U6-rvB" firstAttribute="top" secondItem="66Y-SV-DQK" secondAttribute="top" constant="24" id="cH8-UJ-OZm"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myFavorites" translatesAutoresizingMaskIntoConstraints="NO" id="IBb-5X-Cse">
+                                                    <rect key="frame" x="323" y="0.0" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="3Gn-jm-vOp"/>
+                                                        <constraint firstAttribute="width" constant="40" id="TN7-P3-yIs"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -500,6 +507,8 @@
                                         <constraints>
                                             <constraint firstItem="wGj-Sd-o53" firstAttribute="leading" secondItem="D7f-bW-7NO" secondAttribute="leading" id="7X2-Hp-gTp"/>
                                             <constraint firstAttribute="trailing" secondItem="wGj-Sd-o53" secondAttribute="trailing" id="8n5-ot-ei4"/>
+                                            <constraint firstItem="IBb-5X-Cse" firstAttribute="top" secondItem="D7f-bW-7NO" secondAttribute="top" id="Bdc-Wa-k84"/>
+                                            <constraint firstAttribute="trailing" secondItem="IBb-5X-Cse" secondAttribute="trailing" constant="1" id="OZ1-Qp-qvW"/>
                                             <constraint firstAttribute="bottom" secondItem="66Y-SV-DQK" secondAttribute="bottom" id="OzP-3L-8GL"/>
                                             <constraint firstItem="X07-QO-CEh" firstAttribute="centerY" secondItem="D7f-bW-7NO" secondAttribute="centerY" id="RY3-s3-3hr"/>
                                             <constraint firstItem="X07-QO-CEh" firstAttribute="centerX" secondItem="D7f-bW-7NO" secondAttribute="centerX" id="YQC-Z6-AxU"/>
@@ -510,6 +519,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="activityIndicator" destination="X07-QO-CEh" id="kYW-vr-d8w"/>
+                                            <outlet property="favoriteImage" destination="IBb-5X-Cse" id="ZuB-QI-reJ"/>
                                             <outlet property="imageDate" destination="TMb-Vl-o9V" id="hel-8U-RKx"/>
                                             <outlet property="imageInfoView" destination="66Y-SV-DQK" id="eAW-pF-vuk"/>
                                             <outlet property="imageTitle" destination="5h9-U6-rvB" id="H6j-cv-fdM"/>
@@ -648,6 +658,13 @@
                                                         <constraint firstItem="U0B-KA-6xC" firstAttribute="bottom" secondItem="Cf9-0v-sWV" secondAttribute="bottomMargin" id="m9N-Ej-BoB"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myFavorites" translatesAutoresizingMaskIntoConstraints="NO" id="WLi-Yy-dTb">
+                                                    <rect key="frame" x="324" y="0.0" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="oCl-XV-WFq"/>
+                                                        <constraint firstAttribute="width" constant="40" id="vwQ-EE-77g"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -657,11 +674,14 @@
                                             <constraint firstItem="ek3-ID-8Gz" firstAttribute="top" secondItem="xuv-Uy-5oy" secondAttribute="top" id="NDh-gW-HG8"/>
                                             <constraint firstAttribute="bottom" secondItem="Cf9-0v-sWV" secondAttribute="bottom" id="Nw0-pI-dRS"/>
                                             <constraint firstAttribute="trailing" secondItem="Cf9-0v-sWV" secondAttribute="trailing" id="PxB-mq-N8k"/>
+                                            <constraint firstAttribute="trailing" secondItem="WLi-Yy-dTb" secondAttribute="trailing" id="QBe-aO-hyM"/>
                                             <constraint firstAttribute="trailing" secondItem="ek3-ID-8Gz" secondAttribute="trailing" id="SIn-VH-rUV"/>
+                                            <constraint firstItem="WLi-Yy-dTb" firstAttribute="top" secondItem="xuv-Uy-5oy" secondAttribute="top" id="c4A-ui-KSE"/>
                                             <constraint firstAttribute="bottom" secondItem="ek3-ID-8Gz" secondAttribute="bottom" id="kSg-f8-84Y"/>
                                             <constraint firstItem="ek3-ID-8Gz" firstAttribute="leading" secondItem="xuv-Uy-5oy" secondAttribute="leading" id="qE8-tY-bpu"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="favoriteImage" destination="WLi-Yy-dTb" id="EWf-Eh-cN9"/>
                                             <outlet property="imageDate" destination="9KN-EI-cVQ" id="Rtj-lQ-OhN"/>
                                             <outlet property="imageInfoView" destination="ek3-ID-8Gz" id="7qV-GL-AVI"/>
                                             <outlet property="imageTitle" destination="U0B-KA-6xC" id="2iw-uy-bp5"/>

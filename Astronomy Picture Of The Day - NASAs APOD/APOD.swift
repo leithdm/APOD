@@ -17,7 +17,8 @@ class APOD: NSManagedObject {
 	@NSManaged var title: String?
 	@NSManaged var url: String?
 	@NSManaged var favorite: Bool
-	
+
+
 	override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
 		super.init(entity: entity, insertIntoManagedObjectContext: context)
 	}
@@ -27,7 +28,7 @@ class APOD: NSManagedObject {
 		super.init(entity: entity, insertIntoManagedObjectContext: context)
 		
 		self.dateString = dateString
-		favorite = false 
+		favorite = false
 	}
 	
 	//images are retrieved/set via the Documents directory

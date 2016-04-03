@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-class MyFavoritesCollectionViewCell: UICollectionViewCell {
-	
+class MyFavoritesCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecognizerDelegate {
+
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var imageDate: UILabel!
 	@IBOutlet weak var imageTitle: UILabel!
 	@IBOutlet weak var imageInfoView: UIView!
-	
+	@IBOutlet weak var favoriteImage: UIImageView!
 
 }

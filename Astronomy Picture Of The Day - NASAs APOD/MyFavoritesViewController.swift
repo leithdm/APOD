@@ -89,6 +89,11 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 			cell.imageDate.text = formatDateString(APOD.dateString!)
 			cell.imageTitle.text = APOD.title
 			cell.imageView.image = image
+			if APOD.favorite == true {
+				cell.favoriteImage.hidden = false
+			} else {
+				cell.favoriteImage.hidden = true
+			}
 		}
 	}
 	
