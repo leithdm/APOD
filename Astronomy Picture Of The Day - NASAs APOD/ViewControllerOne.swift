@@ -9,7 +9,7 @@ protocol ViewControllerOneDelegate: class {
 	func viewControllerOneDidTapMenuButton(controller: ViewControllerOne)
 }
 
-class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
+class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MoreOptionsTableViewControllerDelegate {
 	
 	//MARK: properties
 	
@@ -23,13 +23,16 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	weak var delegate: ViewControllerOneDelegate?
 	var apodIndex: NSIndexPath?
 	@IBOutlet weak var barButton: UIBarButtonItem!
+	@IBOutlet weak var moreOptionsView: UIView!
+	@IBOutlet weak var moreOptionsContainerView: UIView!
+	
 	
 	//MARK: core data
 	
 	lazy var sharedContext: NSManagedObjectContext = {
 		return CoreDataStackManager.sharedInstance.managedObjectContext
 	}()
-
+	
 	//file path for saving the number of downloaded images
 	var noOfDownloadsFilePath : String {
 		let manager = NSFileManager.defaultManager()
@@ -41,31 +44,34 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+	
+		moreOptionsView.hidden = true
+		moreOptionsContainerView.hidden = true
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		restoreNoOfDownloads()
 		APODarray = fetchAllAPODS()
-
+		
 		//if the APOD array is empty we want to fill it with blank cells and download the APOD for today's date
 		if APODarray.isEmpty {
 			createBlankAPODCells()
 			getPhotoProperties([ViewControllerOne.dates.first!])
 		}
-
+		
 	}
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
-
+		
 		if let index = apodIndex {
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 			barButton.image = UIImage(named: "leftArrow")
-
+			
 		}
-
+		
 	}
 	
 	//MARK: core data
@@ -77,7 +83,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			return [APOD]()
 		}
 	}
-
+	
 	
 	//MARK: downloading new photo properties when scrolling
 	
@@ -87,7 +93,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	
 	func getImages() {
-
+		
 		var index: Int = 0
 		for cell in collectionView.visibleCells() {
 			let i = collectionView.indexPathForCell(cell)!
@@ -168,7 +174,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		if let _ = apodIndex {
 			navigationController?.popToRootViewControllerAnimated(true)
 		} else {
-		delegate?.viewControllerOneDidTapMenuButton(self)
+			delegate?.viewControllerOneDidTapMenuButton(self)
 		}
 	}
 	
@@ -188,11 +194,11 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		configureCell(cell, atIndexPath: indexPath)
 		return cell
 	}
-
+	
 	
 	func configureCell(cell: APODCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
 		cell.setup()
-
+		
 		let APOD = APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 		
@@ -261,15 +267,15 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 	
-
+	
 	func performUIUpdatesOnMain(updates: () -> Void) {
 		dispatch_async(dispatch_get_main_queue()) {
 			updates()
 		}
 	}
-
+	
 	//MARK: save and restore number of downloads
-
+	
 	func saveNoOfDownloads() {
 		let dictionary = [
 			"noAPODsDownloaded" : noAPODsDownloaded,
@@ -277,7 +283,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		]
 		NSKeyedArchiver.archiveRootObject(dictionary, toFile: noOfDownloadsFilePath)
 	}
-
+	
 	func restoreNoOfDownloads() {
 		if let dictionary = NSKeyedUnarchiver.unarchiveObjectWithFile(noOfDownloadsFilePath) as? [String : AnyObject] {
 			noAPODsDownloaded = dictionary["noAPODsDownloaded"] as! Int
@@ -285,4 +291,46 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 	
+	@IBAction func moreOptionsButtonClicked(sender: UIBarButtonItem) {
+
+		
+		moreOptionsView.hidden = false
+		moreOptionsContainerView.hidden = false
+	}
+	
+	func moreOptionsTableViewController(controller: MoreOptionsTableViewController, didSelectRow row: Int) {
+		switch row {
+		case 0:
+
+			//add to my favorites
+			var index: Int = 0
+			for cell in collectionView.visibleCells() {
+				let i = collectionView.indexPathForCell(cell)!
+				index = i.item
+			}
+			
+			let c = APODarray[index]
+			print("\(c.dateString) \(c.title)")
+			
+			print("add to my favorites")
+		case 1:
+			
+			//share the image
+			print("share")
+		case 2:
+			//close view
+			print("close")
+			moreOptionsView.hidden = true
+			moreOptionsContainerView.hidden = true
+		default:
+			return 
+		}
+	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "MoreOptionsTableViewController" {
+			let vc = segue.destinationViewController as! MoreOptionsTableViewController
+			vc.delegate = self
+		}
+	}
 }

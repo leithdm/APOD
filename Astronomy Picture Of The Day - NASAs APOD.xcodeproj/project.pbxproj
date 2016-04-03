@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */; };
+		015EE8A81CB12FD7009B1217 /* MoreOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8A71CB12FD7009B1217 /* MoreOptionsTableViewController.swift */; };
 		018B63851CA2DF3900152514 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63811CA2DF3900152514 /* SidebarViewController.swift */; };
 		018B63861CA2DF3900152514 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63821CA2DF3900152514 /* MenuTableViewController.swift */; };
 		018B63871CA2DF3900152514 /* ViewControllerTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63831CA2DF3900152514 /* ViewControllerTwo.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryAPODCollectionViewCell.swift; sourceTree = "<group>"; };
+		015EE8A71CB12FD7009B1217 /* MoreOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreOptionsTableViewController.swift; path = ../MoreOptionsTableViewController.swift; sourceTree = "<group>"; };
 		018B63811CA2DF3900152514 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		018B63821CA2DF3900152514 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		018B63831CA2DF3900152514 /* ViewControllerTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTwo.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		01C1B29F1CA00BE000D96DF6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				015EE8A71CB12FD7009B1217 /* MoreOptionsTableViewController.swift */,
 				018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */,
 				0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */,
 				018B63841CA2DF3900152514 /* ViewControllerOne.swift */,
@@ -332,6 +335,7 @@
 			files = (
 				01C1B2A31CA00C0E00D96DF6 /* APODClient.swift in Sources */,
 				019EBF471CA3E36100AE2B85 /* APOD.swift in Sources */,
+				015EE8A81CB12FD7009B1217 /* MoreOptionsTableViewController.swift in Sources */,
 				018B63941CA2E9B000152514 /* APODCollectionViewCell.swift in Sources */,
 				01F475A71CABFDC500AC35EF /* CoreDataStackManager.swift in Sources */,
 				01F475A51CABF6B100AC35EF /* ImageCache.swift in Sources */,

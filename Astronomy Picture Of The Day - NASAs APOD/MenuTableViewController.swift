@@ -4,9 +4,9 @@
 
 import UIKit
 
-protocol MenuTableViewControllerDelegate: class {
-  func menuTableViewController(controller: MenuTableViewController, didSelectRow row: Int)
-}
+	protocol MenuTableViewControllerDelegate: class {
+	  func menuTableViewController(controller: MenuTableViewController, didSelectRow row: Int)
+	}
 
 class MenuTableViewController: UITableViewController {
   weak var delegate: MenuTableViewControllerDelegate?
