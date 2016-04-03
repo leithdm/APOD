@@ -18,6 +18,9 @@
 		018B63941CA2E9B000152514 /* APODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */; };
 		019EBF471CA3E36100AE2B85 /* APOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019EBF461CA3E36100AE2B85 /* APOD.swift */; };
 		019EBF491CA3FD4200AE2B85 /* noPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 019EBF481CA3FD4200AE2B85 /* noPhoto.png */; };
+		01B9DD661CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */; };
+		01B9DD681CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */; };
+		01B9DD6A1CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */; };
 		01C1B2721CA0024500D96DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C1B2711CA0024500D96DF6 /* AppDelegate.swift */; };
 		01C1B2771CA0024500D96DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C1B2751CA0024500D96DF6 /* Main.storyboard */; };
 		01C1B2791CA0024500D96DF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C1B2781CA0024500D96DF6 /* Assets.xcassets */; };
@@ -59,6 +62,9 @@
 		018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APODCollectionViewCell.swift; sourceTree = "<group>"; };
 		019EBF461CA3E36100AE2B85 /* APOD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APOD.swift; sourceTree = "<group>"; };
 		019EBF481CA3FD4200AE2B85 /* noPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noPhoto.png; sourceTree = "<group>"; };
+		01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesAPODViewController.swift; sourceTree = "<group>"; };
+		01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesAPODCollectionViewCell.swift; sourceTree = "<group>"; };
+		01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesMoreOptionsViewController.swift; sourceTree = "<group>"; };
 		01C1B26E1CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APOD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Astronomy Picture Of The Day - NASAs APOD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C1B2711CA0024500D96DF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01C1B2761CA0024500D96DF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -181,6 +187,9 @@
 				0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */,
 				015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */,
 				015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */,
+				01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */,
+				01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */,
+				01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */,
 				018B63841CA2DF3900152514 /* ViewControllerOne.swift */,
 				018B63831CA2DF3900152514 /* ViewControllerTwo.swift */,
 			);
@@ -349,6 +358,9 @@
 				01C1B2721CA0024500D96DF6 /* AppDelegate.swift in Sources */,
 				018B63881CA2DF3900152514 /* ViewControllerOne.swift in Sources */,
 				018B63851CA2DF3900152514 /* SidebarViewController.swift in Sources */,
+				01B9DD661CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift in Sources */,
+				01B9DD681CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift in Sources */,
+				01B9DD6A1CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift in Sources */,
 				015EE8AC1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift in Sources */,
 				015EE8AA1CB159E4009B1217 /* MyFavoritesViewController.swift in Sources */,
 				0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */,

@@ -48,7 +48,7 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 	//MARK: core data
 	func fetchFavoriteAPODs() -> [APOD] {
 		let fetchRequest = NSFetchRequest(entityName: "APOD")
-		fetchRequest.predicate = NSPredicate(format: "favorite == %@", true);
+		fetchRequest.predicate = NSPredicate(format: "favorite == %@", true)
 		
 		do {
 		 return try sharedContext.executeFetchRequest(fetchRequest) as! [APOD]
@@ -113,12 +113,12 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 	}
 	
 	//TODO: create new view controller
-//	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//		let vcOne = storyboard!.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
-//		vcOne.apodIndex = indexPath
-//		navigationController?.pushViewController(vcOne, animated: true)
-//	}
-	
+	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		let vcOne = storyboard!.instantiateViewControllerWithIdentifier("MyFavoritesAPODViewController") as! MyFavoritesAPODViewController
+		vcOne.apodIndex = indexPath
+		navigationController?.pushViewController(vcOne, animated: true)
+	}
+
 	
 	//MARK: helper methods
 	
