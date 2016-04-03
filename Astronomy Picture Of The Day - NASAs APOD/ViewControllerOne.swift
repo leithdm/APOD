@@ -45,7 +45,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	
-		moreOptionsView.hidden = true
+		moreOptionsView.alpha = 0.0
 		moreOptionsContainerView.hidden = true
 	}
 	
@@ -292,10 +292,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	@IBAction func moreOptionsButtonClicked(sender: UIBarButtonItem) {
-
-		
-		moreOptionsView.hidden = false
-		moreOptionsContainerView.hidden = false
+		showMoreOptionsDetailView()
 	}
 	
 	func moreOptionsTableViewController(controller: MoreOptionsTableViewController, didSelectRow row: Int) {
@@ -320,8 +317,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		case 2:
 			//close view
 			print("close")
-			moreOptionsView.hidden = true
-			moreOptionsContainerView.hidden = true
+			hideMoreOptionsView()
 		default:
 			return 
 		}
@@ -332,5 +328,29 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			let vc = segue.destinationViewController as! MoreOptionsTableViewController
 			vc.delegate = self
 		}
+	}
+	
+	
+	func hideMoreOptionsView() {
+		UIView.animateWithDuration(0.5, delay: 0.0, options: [], animations: { () -> Void in
+			self.moreOptionsContainerView.center.y += self.view.bounds.height
+			self.moreOptionsView.alpha = 0.0
+			}, completion: { _ in
+				self.moreOptionsContainerView.center.y -= self.view.bounds.height
+				self.moreOptionsContainerView.hidden = true
+		})
+	}
+	
+	func showMoreOptionsDetailView() {
+		
+		//Animate the detail view to appear on screen
+		moreOptionsContainerView.center.y += view.bounds.height
+		UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { () -> Void in
+			self.moreOptionsContainerView.center.y -= self.view.bounds.height
+			self.moreOptionsView.alpha = 1.0
+			}, completion: nil)
+		
+
+		moreOptionsContainerView.hidden = false
 	}
 }
