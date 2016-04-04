@@ -320,6 +320,11 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func moreOptionsViewControllerSelectShare(controller: MoreOptionsViewController) {
 		print("share time")
+		let apod = APODarray[currentIndexPath!.row]
+		let link = apod.url
+		let activityVC = UIActivityViewController(activityItems: [link!, apod.image!], applicationActivities: .None)
+		presentViewController(activityVC, animated: true, completion: nil)
+		
 	}
 	
 	func moreOptionsViewControllerSelectCancel(controller: MoreOptionsViewController) {

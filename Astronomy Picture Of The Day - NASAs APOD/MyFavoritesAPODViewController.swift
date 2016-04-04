@@ -186,7 +186,10 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 	
 	
 	func myFavoritesMoreOptionsViewControllerSelectShare(controller: MyFavoritesMoreOptionsViewController) {
-		print("share time")
+		let apod = APODarray[currentIndexPath!.row]
+		let link = apod.url
+		let activityVC = UIActivityViewController(activityItems: [link!, apod.image!], applicationActivities: .None)
+		presentViewController(activityVC, animated: true, completion: nil)
 	}
 	
 	func myFavoritesMoreOptionsViewControllerSelectCancel(controller: MyFavoritesMoreOptionsViewController) {
