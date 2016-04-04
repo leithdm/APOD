@@ -30,7 +30,7 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		title = "Favorites"
+		title = "My Favorites"
 	}
 	
 	override func viewWillAppear(animated: Bool) {

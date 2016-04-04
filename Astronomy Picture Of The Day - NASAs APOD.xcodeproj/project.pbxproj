@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */; };
+		014DF3421CB2AE3E00E5DAF2 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DF3411CB2AE3E00E5DAF2 /* AboutViewController.swift */; };
 		01525C691CB278C6007E4783 /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */; };
 		015EE8AA1CB159E4009B1217 /* MyFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */; };
 		015EE8AC1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryAPODCollectionViewCell.swift; sourceTree = "<group>"; };
+		014DF3411CB2AE3E00E5DAF2 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewController.swift; sourceTree = "<group>"; };
 		015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesViewController.swift; sourceTree = "<group>"; };
 		015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		018B63801CA2DED300152514 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01C1B2711CA0024500D96DF6 /* AppDelegate.swift */,
 				019EBF481CA3FD4200AE2B85 /* noPhoto.png */,
 				01C1B27D1CA0024500D96DF6 /* Info.plist */,
 				01C1B27A1CA0024500D96DF6 /* LaunchScreen.storyboard */,
@@ -133,7 +136,6 @@
 		019EBF4A1CA40D1200AE2B85 /* SideBar */ = {
 			isa = PBXGroup;
 			children = (
-				01C1B2711CA0024500D96DF6 /* AppDelegate.swift */,
 				018B63821CA2DF3900152514 /* MenuTableViewController.swift */,
 				018B63811CA2DF3900152514 /* SidebarViewController.swift */,
 			);
@@ -200,6 +202,7 @@
 				015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */,
 				01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */,
 				01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */,
+				014DF3411CB2AE3E00E5DAF2 /* AboutViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				01C1B2721CA0024500D96DF6 /* AppDelegate.swift in Sources */,
 				018B63881CA2DF3900152514 /* ViewControllerOne.swift in Sources */,
 				018B63851CA2DF3900152514 /* SidebarViewController.swift in Sources */,
+				014DF3421CB2AE3E00E5DAF2 /* AboutViewController.swift in Sources */,
 				01B9DD661CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift in Sources */,
 				01B9DD681CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift in Sources */,
 				01B9DD6A1CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift in Sources */,

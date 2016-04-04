@@ -32,13 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UINavigationBar.appearance().barTintColor = UIColor.blackColor()
 		UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
 		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+		
+		/*
 		// Sets background to a blank/empty image
 		UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
 		// Sets shadow (line below the bar) to a blank image
 		UINavigationBar.appearance().shadowImage = UIImage()
 		// Sets the translucent background color
 		UINavigationBar.appearance().backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
-
+		*/
 
 		//instantiate child view controllers
 		let vc1 = storyboard.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
@@ -50,10 +52,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let vc3 = storyboard.instantiateViewControllerWithIdentifier("MyFavoritesViewController") as! MyFavoritesViewController
 		vc3.delegate = self
 		
+		let vc4 = storyboard.instantiateViewControllerWithIdentifier("AboutViewController") as! AboutViewController
+		vc4.delegate = self
+		
 		//add the static view controllers to array
 		childViewControllers.append(vc1)
 		childViewControllers.append(vc2)
 		childViewControllers.append(vc3)
+		childViewControllers.append(vc4)
 		
 		//get the child navigational controller
 		childNav = UINavigationController(rootViewController: childViewControllers[0])
@@ -94,6 +100,12 @@ extension AppDelegate: ViewControllerTwoDelegate {
 
 extension AppDelegate: MyFavoritesViewControllerDelegate {
 	func myFavoritesViewControllerDidTapMenuButton(controller: MyFavoritesViewController) {
+		sideBarVC.toggleLeftMenuAnimated(true)
+	}
+}
+
+extension AppDelegate: AboutViewControllerDelegate {
+	func aboutViewControllerDelegateDidTapMenuButton(controller: AboutViewController) {
 		sideBarVC.toggleLeftMenuAnimated(true)
 	}
 }
