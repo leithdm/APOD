@@ -194,12 +194,12 @@
 		01C1B29F1CA00BE000D96DF6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */,
-				01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */,
-				015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */,
-				01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */,
 				018B63841CA2DF3900152514 /* ViewControllerOne.swift */,
 				018B63831CA2DF3900152514 /* ViewControllerTwo.swift */,
+				01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */,
+				015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */,
+				01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */,
+				01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

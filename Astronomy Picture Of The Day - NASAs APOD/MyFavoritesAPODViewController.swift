@@ -22,6 +22,7 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	weak var delegate: MyFavoritesAPODViewControllerDelegate?
 	var apodIndex: NSIndexPath?
+	var currentIndexPath: NSIndexPath?
 	@IBOutlet weak var barButton: UIBarButtonItem!
 	@IBOutlet weak var moreOptionsView: UIView!
 	@IBOutlet weak var moreOptionsContainerView: UIView!
@@ -96,6 +97,7 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MyFavoritesAPODCollectionViewCell", forIndexPath: indexPath) as! MyFavoritesAPODCollectionViewCell
+		currentIndexPath = indexPath
 		configureCell(cell, atIndexPath: indexPath)
 		return cell
 	}
@@ -120,6 +122,10 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 			cell.imageTitle.text = APOD.title
 			cell.explanation = APOD.explanation
 			title = formatDateString(APOD.dateString!)
+			
+			//additional logic for displaying favorites option
+			NSNotificationCenter.defaultCenter().postNotificationName("favoriteStatus", object: nil, userInfo: ["isAlreadyFavorite" : APOD.favorite])
+
 		}
 	}
 
@@ -162,37 +168,29 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 	@IBAction func moreOptionsButtonClicked(sender: UIBarButtonItem) {
 		showMoreOptionsDetailView()
 	}
-
-	func myFavoritesMoreOptionsViewController(controller: MyFavoritesMoreOptionsViewController, didSelectRow row: Int) {
-		switch row {
-		case 0:
-
-			//add to my favorites
-			var index: Int = 0
-			for cell in collectionView.visibleCells() {
-				let i = collectionView.indexPathForCell(cell)!
-				index = i.item
-			}
-
-			let apod = APODarray[index]
-
-			if apod.favorite == false {
-				apod.favorite = true
-				CoreDataStackManager.sharedInstance.saveContext()
-			} else {
-				print("already added to favorites")
-			}
-		case 1:
-
-			//share the image
-			print("share")
-		case 2:
-			//close view
-			print("close")
-			hideMoreOptionsView()
-		default:
-			return
+	
+	func myFavoritesMoreOptionsViewControllerSelectFavorite(controller: MyFavoritesMoreOptionsViewController, removeFromFavorites: Bool) {
+		let apod = APODarray[currentIndexPath!.item]
+		
+		if removeFromFavorites == true {
+			apod.favorite = false
+		} else {
+			apod.favorite = true
 		}
+		
+		performUIUpdatesOnMain {
+			CoreDataStackManager.sharedInstance.saveContext()
+			self.collectionView.reloadData()
+		}
+	}
+	
+	
+	func myFavoritesMoreOptionsViewControllerSelectShare(controller: MyFavoritesMoreOptionsViewController) {
+		print("share time")
+	}
+	
+	func myFavoritesMoreOptionsViewControllerSelectCancel(controller: MyFavoritesMoreOptionsViewController) {
+		hideMoreOptionsView()
 	}
 
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
