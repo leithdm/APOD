@@ -222,7 +222,7 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 		moreOptionsContainerView.center.y += view.bounds.height
 		UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { () -> Void in
 			self.moreOptionsContainerView.center.y -= self.view.bounds.height
-			self.moreOptionsView.alpha = 1.0
+			self.moreOptionsView.alpha = 0.7
 			}, completion: nil)
 
 

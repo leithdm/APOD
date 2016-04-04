@@ -346,9 +346,9 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myFavorites" translatesAutoresizingMaskIntoConstraints="NO" id="PF2-fx-3DL">
-                                        <rect key="frame" x="8" y="9" width="32" height="32"/>
+                                        <rect key="frame" x="8" y="13" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="DIe-OQ-EIK"/>
+                                            <constraint firstAttribute="width" constant="24" id="DIe-OQ-EIK"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -356,9 +356,9 @@
                                 <constraints>
                                     <constraint firstItem="eRr-ep-HT5" firstAttribute="trailing" secondItem="jHd-mc-pm4" secondAttribute="trailingMargin" id="9NU-rL-Ks6"/>
                                     <constraint firstItem="eRr-ep-HT5" firstAttribute="leading" secondItem="PF2-fx-3DL" secondAttribute="leading" id="NUb-kx-ieh"/>
-                                    <constraint firstItem="PF2-fx-3DL" firstAttribute="bottom" secondItem="eRr-ep-HT5" secondAttribute="bottom" id="QAd-XY-idq"/>
+                                    <constraint firstItem="PF2-fx-3DL" firstAttribute="bottom" secondItem="eRr-ep-HT5" secondAttribute="bottom" constant="-4" id="QAd-XY-idq"/>
                                     <constraint firstItem="eRr-ep-HT5" firstAttribute="leading" secondItem="jHd-mc-pm4" secondAttribute="leadingMargin" id="RkP-U5-X1R"/>
-                                    <constraint firstItem="PF2-fx-3DL" firstAttribute="top" secondItem="eRr-ep-HT5" secondAttribute="top" id="kI8-Us-6Oc"/>
+                                    <constraint firstItem="PF2-fx-3DL" firstAttribute="top" secondItem="eRr-ep-HT5" secondAttribute="top" constant="4" id="kI8-Us-6Oc"/>
                                     <constraint firstItem="eRr-ep-HT5" firstAttribute="bottom" secondItem="jHd-mc-pm4" secondAttribute="bottomMargin" id="vz3-zW-peM"/>
                                     <constraint firstItem="PF2-fx-3DL" firstAttribute="centerY" secondItem="jHd-mc-pm4" secondAttribute="centerY" id="y56-7C-JTh"/>
                                 </constraints>
@@ -379,21 +379,24 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="FLr-BH-Zdr">
-                                        <rect key="frame" x="8" y="9" width="32" height="32"/>
+                                        <rect key="frame" x="8" y="13" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="lwC-F6-SD2"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="TnP-na-Msr"/>
+                                            <constraint firstAttribute="height" constant="24" id="kHz-WE-WUI"/>
+                                            <constraint firstAttribute="width" constant="24" id="lwC-F6-SD2"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Cv1-iA-CED" firstAttribute="trailing" secondItem="K2y-Zw-Fks" secondAttribute="trailingMargin" id="5aD-B0-OoR"/>
+                                    <constraint firstItem="FLr-BH-Zdr" firstAttribute="centerY" secondItem="K2y-Zw-Fks" secondAttribute="centerY" id="6Zr-Qt-Pdk"/>
                                     <constraint firstItem="Cv1-iA-CED" firstAttribute="centerY" secondItem="K2y-Zw-Fks" secondAttribute="centerY" id="QWF-rf-pis"/>
-                                    <constraint firstItem="Cv1-iA-CED" firstAttribute="top" secondItem="FLr-BH-Zdr" secondAttribute="top" id="Rvk-sc-S1D"/>
-                                    <constraint firstItem="Cv1-iA-CED" firstAttribute="bottom" secondItem="FLr-BH-Zdr" secondAttribute="bottom" id="XCK-He-nGm"/>
+                                    <constraint firstItem="Cv1-iA-CED" firstAttribute="top" secondItem="FLr-BH-Zdr" secondAttribute="top" constant="-4" id="Rvk-sc-S1D"/>
+                                    <constraint firstItem="Cv1-iA-CED" firstAttribute="bottom" secondItem="FLr-BH-Zdr" secondAttribute="bottom" constant="4" id="XCK-He-nGm"/>
                                     <constraint firstItem="Cv1-iA-CED" firstAttribute="leading" secondItem="K2y-Zw-Fks" secondAttribute="leadingMargin" id="kbD-0i-ydO"/>
                                     <constraint firstItem="FLr-BH-Zdr" firstAttribute="leading" secondItem="Cv1-iA-CED" secondAttribute="leading" id="kfS-QT-UyV"/>
-                                    <constraint firstItem="FLr-BH-Zdr" firstAttribute="bottom" secondItem="K2y-Zw-Fks" secondAttribute="bottomMargin" id="syN-V6-aq2"/>
+                                    <constraint firstItem="FLr-BH-Zdr" firstAttribute="bottom" secondItem="K2y-Zw-Fks" secondAttribute="bottomMargin" constant="-4" id="syN-V6-aq2"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wT6-bD-Le5">
@@ -996,18 +999,18 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myFavorites" translatesAutoresizingMaskIntoConstraints="NO" id="9Lp-Wl-wbk">
-                                        <rect key="frame" x="8" y="9" width="32" height="32"/>
+                                        <rect key="frame" x="8" y="13" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="cwI-X1-oxY"/>
+                                            <constraint firstAttribute="width" constant="24" id="cwI-X1-oxY"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="9Lp-Wl-wbk" firstAttribute="top" secondItem="MKc-NM-qXR" secondAttribute="top" id="QEO-Ai-nRo"/>
+                                    <constraint firstItem="9Lp-Wl-wbk" firstAttribute="top" secondItem="MKc-NM-qXR" secondAttribute="top" constant="4" id="QEO-Ai-nRo"/>
                                     <constraint firstItem="MKc-NM-qXR" firstAttribute="trailing" secondItem="uUe-Tw-CjP" secondAttribute="trailingMargin" id="Yq0-JZ-p2q"/>
                                     <constraint firstItem="MKc-NM-qXR" firstAttribute="leading" secondItem="9Lp-Wl-wbk" secondAttribute="leading" id="YtJ-ib-dwD"/>
-                                    <constraint firstItem="9Lp-Wl-wbk" firstAttribute="bottom" secondItem="MKc-NM-qXR" secondAttribute="bottom" id="ktk-OS-NuS"/>
+                                    <constraint firstItem="9Lp-Wl-wbk" firstAttribute="bottom" secondItem="MKc-NM-qXR" secondAttribute="bottom" constant="-4" id="ktk-OS-NuS"/>
                                     <constraint firstItem="9Lp-Wl-wbk" firstAttribute="centerY" secondItem="uUe-Tw-CjP" secondAttribute="centerY" id="wS0-Hc-vKq"/>
                                     <constraint firstItem="MKc-NM-qXR" firstAttribute="leading" secondItem="uUe-Tw-CjP" secondAttribute="leadingMargin" id="wbI-TQ-b8L"/>
                                     <constraint firstItem="MKc-NM-qXR" firstAttribute="bottom" secondItem="uUe-Tw-CjP" secondAttribute="bottomMargin" id="yOi-iA-RlW"/>
@@ -1029,21 +1032,21 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share" translatesAutoresizingMaskIntoConstraints="NO" id="uIf-Gc-GXH">
-                                        <rect key="frame" x="8" y="9" width="32" height="30"/>
+                                        <rect key="frame" x="8" y="12" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="yqC-UR-Os2"/>
+                                            <constraint firstAttribute="width" constant="24" id="yqC-UR-Os2"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="uIf-Gc-GXH" firstAttribute="bottom" secondItem="pFy-x7-H50" secondAttribute="bottomMargin" id="1hE-Ro-fZT"/>
+                                    <constraint firstItem="uIf-Gc-GXH" firstAttribute="bottom" secondItem="pFy-x7-H50" secondAttribute="bottomMargin" constant="-3" id="1hE-Ro-fZT"/>
                                     <constraint firstItem="4Rh-E3-XuP" firstAttribute="leading" secondItem="pFy-x7-H50" secondAttribute="leadingMargin" id="3ll-o1-j6z"/>
                                     <constraint firstItem="4Rh-E3-XuP" firstAttribute="centerY" secondItem="pFy-x7-H50" secondAttribute="centerY" id="Ikg-b3-vNy"/>
                                     <constraint firstItem="4Rh-E3-XuP" firstAttribute="trailing" secondItem="pFy-x7-H50" secondAttribute="trailingMargin" id="NGU-FV-PIH"/>
-                                    <constraint firstItem="4Rh-E3-XuP" firstAttribute="bottom" secondItem="uIf-Gc-GXH" secondAttribute="bottom" id="X6V-qv-y9K"/>
+                                    <constraint firstItem="4Rh-E3-XuP" firstAttribute="bottom" secondItem="uIf-Gc-GXH" secondAttribute="bottom" constant="3" id="X6V-qv-y9K"/>
                                     <constraint firstItem="uIf-Gc-GXH" firstAttribute="leading" secondItem="4Rh-E3-XuP" secondAttribute="leading" id="dTA-FX-zD7"/>
-                                    <constraint firstItem="4Rh-E3-XuP" firstAttribute="top" secondItem="uIf-Gc-GXH" secondAttribute="top" id="rOE-vh-zGE"/>
+                                    <constraint firstItem="4Rh-E3-XuP" firstAttribute="top" secondItem="uIf-Gc-GXH" secondAttribute="top" constant="-3" id="rOE-vh-zGE"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTS-WZ-jtb">
