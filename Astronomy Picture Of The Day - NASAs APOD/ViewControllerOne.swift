@@ -9,7 +9,7 @@ protocol ViewControllerOneDelegate: class {
 	func viewControllerOneDidTapMenuButton(controller: ViewControllerOne)
 }
 
-class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MoreOptionsTableViewControllerDelegate {
+class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MoreOptionsViewControllerDelegate {
 	
 	//MARK: properties
 	
@@ -22,6 +22,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	weak var delegate: ViewControllerOneDelegate?
 	var apodIndex: NSIndexPath?
+	var currentIndexPath: NSIndexPath?
 	@IBOutlet weak var barButton: UIBarButtonItem!
 	@IBOutlet weak var moreOptionsView: UIView!
 	@IBOutlet weak var moreOptionsContainerView: UIView!
@@ -45,7 +46,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-	
+		
 		moreOptionsView.alpha = 0.0
 		moreOptionsContainerView.hidden = true
 	}
@@ -192,6 +193,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("APODCollectionViewCell", forIndexPath: indexPath) as! APODCollectionViewCell
+		currentIndexPath = indexPath
 		configureCell(cell, atIndexPath: indexPath)
 		return cell
 	}
@@ -216,7 +218,11 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			cell.imageTitle.text = APOD.title
 			cell.explanation = APOD.explanation
 			title = formatDateString(APOD.dateString!)
-		} else { //download from the remote server
+			
+			//additional logic for displaying favorites option
+			NSNotificationCenter.defaultCenter().postNotificationName("favoriteStatus", object: nil, userInfo: ["isAlreadyFavorite" : APOD.favorite])
+			
+		} else { //download from the remote serve
 			//hide the toolbar
 			cell.titleBottomToolbar.hidden = true
 			
@@ -296,43 +302,40 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		showMoreOptionsDetailView()
 	}
 	
-	func moreOptionsTableViewController(controller: MoreOptionsTableViewController, didSelectRow row: Int) {
-		switch row {
-		case 0:
-
-			//add to my favorites
-			var index: Int = 0
-			for cell in collectionView.visibleCells() {
-				let i = collectionView.indexPathForCell(cell)!
-				index = i.item
-			}
-			
-			let apod = APODarray[index]
-			
-			if apod.favorite == false {
+	func moreOptionsViewControllerSelectFavorite(controller: MoreOptionsViewController, removeFromFavorites: Bool) {
+		let apod = APODarray[currentIndexPath!.item]
+		
+		if removeFromFavorites == true {
+			apod.favorite = false
+		} else {
 			apod.favorite = true
+		}
+		
+		performUIUpdatesOnMain {
 			CoreDataStackManager.sharedInstance.saveContext()
-			} else {
-				print("already added to favorites")
-			}
-		case 1:
-			
-			//share the image
-			print("share")
-		case 2:
-			//close view
-			print("close")
-			hideMoreOptionsView()
-		default:
-			return 
+			self.collectionView.reloadData()
+		}
+	}
+
+	
+	func moreOptionsViewControllerSelectShare(controller: MoreOptionsViewController) {
+		print("share time")
+	}
+	
+	func moreOptionsViewControllerSelectCancel(controller: MoreOptionsViewController) {
+		hideMoreOptionsView()
+	}
+	
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "MoreOptionsViewController" {
+			let vc = segue.destinationViewController as! MoreOptionsViewController
+			vc.delegate = self
 		}
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if segue.identifier == "MoreOptionsTableViewController" {
-			let vc = segue.destinationViewController as! MoreOptionsTableViewController
-			vc.delegate = self
-		}
+	func shareImage() {
+		//		let activityVC = UIActivityViewController(activityItems: <#T##[AnyObject]#>, applicationActivities: <#T##[UIActivity]?#>)
 	}
 	
 	
@@ -348,16 +351,16 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	func showMoreOptionsDetailView() {
-	
+		
 		moreOptionsBarButtonItem.enabled = false
 		//Animate the detail view to appear on screen
 		moreOptionsContainerView.center.y += view.bounds.height
 		UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { () -> Void in
 			self.moreOptionsContainerView.center.y -= self.view.bounds.height
-			self.moreOptionsView.alpha = 1.0
+			self.moreOptionsView.alpha = 0.7
 			}, completion: nil)
 		
-
+		
 		moreOptionsContainerView.hidden = false
 	}
 }

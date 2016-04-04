@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */; };
-		015EE8A81CB12FD7009B1217 /* MoreOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8A71CB12FD7009B1217 /* MoreOptionsTableViewController.swift */; };
+		01525C691CB278C6007E4783 /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */; };
 		015EE8AA1CB159E4009B1217 /* MyFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */; };
 		015EE8AC1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */; };
 		018B63851CA2DF3900152514 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63811CA2DF3900152514 /* SidebarViewController.swift */; };
@@ -52,7 +52,7 @@
 
 /* Begin PBXFileReference section */
 		0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryAPODCollectionViewCell.swift; sourceTree = "<group>"; };
-		015EE8A71CB12FD7009B1217 /* MoreOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreOptionsTableViewController.swift; path = ../MoreOptionsTableViewController.swift; sourceTree = "<group>"; };
+		01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewController.swift; sourceTree = "<group>"; };
 		015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesViewController.swift; sourceTree = "<group>"; };
 		015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
 		018B63811CA2DF3900152514 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +108,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01525C671CB2680A007E4783 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */,
+				0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */,
+				015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */,
+				01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */,
+				019EBF4A1CA40D1200AE2B85 /* SideBar */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		018B63801CA2DED300152514 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				01C1B2A01CA00BE800D96DF6 /* Model */,
-				019EBF4A1CA40D1200AE2B85 /* SideBar */,
+				01525C671CB2680A007E4783 /* View */,
 				01C1B29F1CA00BE000D96DF6 /* Controller */,
 				01C1B2751CA0024500D96DF6 /* Main.storyboard */,
 				01C1B2781CA0024500D96DF6 /* Assets.xcassets */,
@@ -182,14 +194,10 @@
 		01C1B29F1CA00BE000D96DF6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				015EE8A71CB12FD7009B1217 /* MoreOptionsTableViewController.swift */,
-				018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */,
-				0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */,
-				015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */,
+				01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */,
+				01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */,
 				015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */,
 				01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */,
-				01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */,
-				01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */,
 				018B63841CA2DF3900152514 /* ViewControllerOne.swift */,
 				018B63831CA2DF3900152514 /* ViewControllerTwo.swift */,
 			);
@@ -350,7 +358,6 @@
 			files = (
 				01C1B2A31CA00C0E00D96DF6 /* APODClient.swift in Sources */,
 				019EBF471CA3E36100AE2B85 /* APOD.swift in Sources */,
-				015EE8A81CB12FD7009B1217 /* MoreOptionsTableViewController.swift in Sources */,
 				018B63941CA2E9B000152514 /* APODCollectionViewCell.swift in Sources */,
 				01F475A71CABFDC500AC35EF /* CoreDataStackManager.swift in Sources */,
 				01F475A51CABF6B100AC35EF /* ImageCache.swift in Sources */,
@@ -361,6 +368,7 @@
 				01B9DD661CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift in Sources */,
 				01B9DD681CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift in Sources */,
 				01B9DD6A1CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift in Sources */,
+				01525C691CB278C6007E4783 /* MoreOptionsViewController.swift in Sources */,
 				015EE8AC1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift in Sources */,
 				015EE8AA1CB159E4009B1217 /* MyFavoritesViewController.swift in Sources */,
 				0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */,

@@ -4,6 +4,7 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
 protocol ViewControllerTwoDelegate: class {
 	func viewControllerTwoDidTapMenuButton(controller: ViewControllerTwo)
@@ -286,3 +287,8 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}	
 }
+
+
+
+
+
