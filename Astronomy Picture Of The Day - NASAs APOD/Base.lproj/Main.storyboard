@@ -170,12 +170,12 @@
                                                                 <constraint firstAttribute="width" constant="250" id="bMq-hf-3Pg"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.89126098155975342" green="0.3545563817024231" blue="0.39968371391296387" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivB-E6-pgz">
                                                             <rect key="frame" x="107" y="210" width="150" height="30"/>
-                                                            <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" red="0.19376453757286072" green="0.50850099325180054" blue="0.85232251882553101" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="Uhz-YY-eGH"/>
                                                                 <constraint firstAttribute="width" constant="150" id="qMu-EL-nGZ"/>
@@ -991,24 +991,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="EuC-8q-yUt">
-                                <rect key="frame" x="20" y="72" width="560" height="439"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Zhh-Dc-kL8">
+                                <rect key="frame" x="20" y="72" width="560" height="455"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fua-aT-MSj">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="146.5"/>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="19"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="152"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTQ-ts-CwZ">
-                                        <rect key="frame" x="0.0" y="146.5" width="560" height="146"/>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="19"/>
+                                        <rect key="frame" x="0.0" y="152" width="560" height="152"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BqR-14-jjj">
-                                        <rect key="frame" x="0.0" y="292.5" width="560" height="146.5"/>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="19"/>
+                                        <rect key="frame" x="0.0" y="304" width="560" height="152"/>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1024,12 +1024,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="v2b-nn-1vj" firstAttribute="top" secondItem="EuC-8q-yUt" secondAttribute="bottom" constant="24" id="EkB-Ne-3Bw"/>
-                            <constraint firstItem="EuC-8q-yUt" firstAttribute="top" secondItem="B9a-8j-6mf" secondAttribute="bottom" constant="8" id="IKy-hF-7fx"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="EuC-8q-yUt" secondAttribute="trailing" id="gD6-yQ-3a8"/>
+                            <constraint firstItem="v2b-nn-1vj" firstAttribute="top" secondItem="Zhh-Dc-kL8" secondAttribute="bottom" constant="8" id="W6H-Tb-lTW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zhh-Dc-kL8" secondAttribute="trailing" id="e5K-KT-FP9"/>
                             <constraint firstItem="yXQ-L6-B8g" firstAttribute="top" secondItem="v2b-nn-1vj" secondAttribute="bottom" constant="20" id="rCz-69-f4v"/>
-                            <constraint firstItem="EuC-8q-yUt" firstAttribute="leading" secondItem="1OP-9c-rgV" secondAttribute="leadingMargin" id="tOY-Gv-2z9"/>
+                            <constraint firstItem="Zhh-Dc-kL8" firstAttribute="leading" secondItem="1OP-9c-rgV" secondAttribute="leadingMargin" id="rvn-ae-Krt"/>
                             <constraint firstItem="v2b-nn-1vj" firstAttribute="centerX" secondItem="1OP-9c-rgV" secondAttribute="centerX" id="ufn-0j-ip8"/>
+                            <constraint firstItem="Zhh-Dc-kL8" firstAttribute="top" secondItem="B9a-8j-6mf" secondAttribute="bottom" constant="8" id="yNS-Ad-W4e"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About APOD" id="Jwz-Ut-WFP">

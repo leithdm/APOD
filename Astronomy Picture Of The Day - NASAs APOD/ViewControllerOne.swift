@@ -210,6 +210,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		if let image = APOD.image {
 			
 			if !APOD.url!.containsString("http://apod.nasa.gov/")  {
+				cell.imageView.alpha = 0.3
 				cell.isAVideoText.hidden = false 
 				cell.goToWebSite.hidden = false
 			}
