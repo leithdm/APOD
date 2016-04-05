@@ -137,7 +137,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 					if !APOD.url!.containsString("http://apod.nasa.gov/") {
 						//typically a video cannot be displayed as an image
 						self.performUIUpdatesOnMain({
-							APOD.image = UIImage(named: "noPhoto.png")
+							APOD.image = UIImage(named: "noPhoto")
 							self.collectionView.reloadData()
 							CoreDataStackManager.sharedInstance.saveContext()
 						})

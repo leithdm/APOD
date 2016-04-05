@@ -491,16 +491,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wh7-vI-Zeu">
+                                                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wGj-Sd-o53">
                                                     <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
-                                                    <subviews>
-                                                        <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wGj-Sd-o53">
-                                                            <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
-                                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </view>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </imageView>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="X07-QO-CEh">
                                                     <rect key="frame" x="157" y="149" width="50" height="50"/>
                                                     <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -551,12 +545,16 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="IBb-5X-Cse" firstAttribute="top" secondItem="D7f-bW-7NO" secondAttribute="top" constant="8" id="Bdc-Wa-k84"/>
+                                            <constraint firstAttribute="bottom" secondItem="wGj-Sd-o53" secondAttribute="bottom" id="CUJ-Ai-VDk"/>
+                                            <constraint firstItem="wGj-Sd-o53" firstAttribute="top" secondItem="D7f-bW-7NO" secondAttribute="top" id="LFD-hO-BIO"/>
                                             <constraint firstAttribute="trailing" secondItem="IBb-5X-Cse" secondAttribute="trailing" constant="8" id="OZ1-Qp-qvW"/>
                                             <constraint firstAttribute="bottom" secondItem="66Y-SV-DQK" secondAttribute="bottom" id="OzP-3L-8GL"/>
                                             <constraint firstItem="X07-QO-CEh" firstAttribute="centerY" secondItem="D7f-bW-7NO" secondAttribute="centerY" id="RY3-s3-3hr"/>
                                             <constraint firstItem="X07-QO-CEh" firstAttribute="centerX" secondItem="D7f-bW-7NO" secondAttribute="centerX" id="YQC-Z6-AxU"/>
                                             <constraint firstItem="66Y-SV-DQK" firstAttribute="leading" secondItem="D7f-bW-7NO" secondAttribute="leading" id="ZOK-Vt-fXi"/>
+                                            <constraint firstAttribute="trailing" secondItem="wGj-Sd-o53" secondAttribute="trailing" id="hG7-gQ-0ky"/>
                                             <constraint firstAttribute="trailing" secondItem="66Y-SV-DQK" secondAttribute="trailing" id="hnT-J2-o0n"/>
+                                            <constraint firstItem="wGj-Sd-o53" firstAttribute="leading" secondItem="D7f-bW-7NO" secondAttribute="leading" id="j5V-kk-LF4"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="activityIndicator" destination="X07-QO-CEh" id="kYW-vr-d8w"/>

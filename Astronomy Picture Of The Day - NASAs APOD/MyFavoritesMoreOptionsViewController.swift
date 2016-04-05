@@ -29,10 +29,6 @@ class MyFavoritesMoreOptionsViewController: UIViewController {
 	}
 	
 	func handler(notification: NSNotification) {
-		print("MyNotification was handled");
-		print("userInfo: \(notification.userInfo)");
-		print("SelectedCellIndex \(notification.userInfo!["isAlreadyFavorite"])"); //Validate userInfo here. it could be nil
-		
 		if let notification = notification.userInfo!["isAlreadyFavorite"] as? Bool {
 			if notification == true {
 				favoriteStatus = true
@@ -42,7 +38,6 @@ class MyFavoritesMoreOptionsViewController: UIViewController {
 				favoriteButton.setTitle("Add to My Favorites", forState: .Normal)
 			}
 		}
-		
 	}
 	
 	@IBAction func didSelectFavorite(sender: UIButton) {
