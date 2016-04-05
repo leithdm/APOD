@@ -9,7 +9,7 @@ protocol ViewControllerOneDelegate: class {
 	func viewControllerOneDidTapMenuButton(controller: ViewControllerOne)
 }
 
-class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MoreOptionsViewControllerDelegate {
+class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MoreOptionsViewControllerDelegate, APODCollectionViewCellDelegate {
 	
 	//MARK: properties
 	
@@ -201,12 +201,19 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func configureCell(cell: APODCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
 		cell.setup()
+		cell.delegate = self
 		
 		let APOD = APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 		
 		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
+			
+			if !APOD.url!.containsString("http://apod.nasa.gov/")  {
+				cell.isAVideoText.hidden = false 
+				cell.goToWebSite.hidden = false
+			}
+			
 			//show the toolbar
 			cell.titleBottomToolbar.hidden = false
 			
@@ -339,11 +346,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 	
-	func shareImage() {
-		//		let activityVC = UIActivityViewController(activityItems: <#T##[AnyObject]#>, applicationActivities: <#T##[UIActivity]?#>)
-	}
-	
-	
 	func hideMoreOptionsView() {
 		UIView.animateWithDuration(0.5, delay: 0.0, options: [], animations: { () -> Void in
 			self.moreOptionsContainerView.center.y += self.view.bounds.height
@@ -367,5 +369,22 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		
 		
 		moreOptionsContainerView.hidden = false
+	}
+	
+	func APODCollectionViewCellDelegateGoToWebsite(controller: APODCollectionViewCell) {
+		print("called")
+		let apod = APODarray[currentIndexPath!.row]
+		let URL = "http://apod.nasa.gov/apod/ap" + convertDateForWebsite(apod.dateString!) + ".html"
+		let app = UIApplication.sharedApplication()
+		if let url = NSURL(string: URL) {
+			if app.canOpenURL(url) {
+				app.openURL(url)
+			}
+		}
+	}
+	
+	func convertDateForWebsite(date: String) -> String {
+		let newDate: NSString = date.stringByReplacingOccurrencesOfString("-", withString: "")
+		return newDate.substringWithRange(NSRange(location: 2, length: newDate.length-2)) as String
 	}
 }

@@ -26,10 +26,10 @@ class AboutViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		
         labelOne.text = "Astronomy Picture of the Day (APOD) is originated, written, coordinated, and edited since 1995 by Robert Nemiroff and Jerry Bonnell. The APOD Archive contains the largest collection of annotated astronomical images on the Internet."
 		
-		labelTwo.text = "APOD is a service of: ASD at NASA/GSFC and Michigan Technological University"
+		labelTwo.text = "APOD is a service of: ASD at NASA/GSFC and Michigan Technological University."
 		
 		labelThree.text = "APOD for iOS is an open source project with all source code freely available on Github. Why not contribute and make the app even better."
     }

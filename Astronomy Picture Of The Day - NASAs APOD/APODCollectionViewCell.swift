@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+protocol APODCollectionViewCellDelegate: class {
+	func APODCollectionViewCellDelegateGoToWebsite(controller: APODCollectionViewCell)
+}
+
+
 class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 	
 	@IBOutlet weak var imageView: UIImageView!
@@ -20,15 +25,19 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	@IBOutlet weak var detailTextView: UITextView! //explanation textView
 	@IBOutlet var detailToolbarButton: UIBarButtonItem!
 	@IBOutlet weak var loadingImageText: UILabel!
-	
+	@IBOutlet weak var isAVideoText: UILabel!
+	@IBOutlet weak var goToWebSite: UIButton!
 	var detailViewVisible: Bool = false //explanation text visibility
 	var explanation: String?
+	weak var delegate: APODCollectionViewCellDelegate?
 
 	func setup() {
 		
+		isAVideoText.hidden = true
+		goToWebSite.hidden = true
+		
 		scrollView.delegate = self
 		setZoomParametersForSize(scrollView.bounds.size)
-		
 		detailTextView.scrollRangeToVisible(NSMakeRange(0, 0))
 		
 		//tap getsture recognizer to zoom image
@@ -38,7 +47,6 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 
 		//initial detail view setup
 		initialDetailViewSetup()
-		
 	}
 	
 
@@ -111,11 +119,23 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	//MARK: zoom image
 	
 	func tapImage(gesture: UITapGestureRecognizer!) {
+		//prevents image from being zoomed in on
+		if !goToWebSite.hidden {
+			return
+		}
+		
 		if scrollView.zoomScale > scrollView.minimumZoomScale {
 			scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
 		} else {
 			scrollView.setZoomScale(self.scrollView.maximumZoomScale , animated: true)
 		}
+	}
+	
+	
+	@IBAction func goToWebSite(sender: UIButton) {
+		print("button clicked")
+		delegate?.APODCollectionViewCellDelegateGoToWebsite(self)
+
 	}
 	
 	func setZoomParametersForSize(scrollViewSize: CGSize) {

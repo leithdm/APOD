@@ -163,12 +163,12 @@ class APODClient {
 	
 	//MARK: helper methods
 	
-	func dateToString(date: NSDate) -> String {
-		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "YYYY-MM-DD"
-		return dateFormatter.stringFromDate(date)
-	}
-	
+//	func dateToString(date: NSDate) -> String {
+//		let dateFormatter = NSDateFormatter()
+//		dateFormatter.dateFormat = "YYYY-MM-DD"
+//		return dateFormatter.stringFromDate(date)
+//	}
+//	
 	
 	//an array of strings for every date from 15th July 1995 to present
 	
