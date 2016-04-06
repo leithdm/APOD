@@ -256,17 +256,17 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		return newFormatter.stringFromDate(existingDate!)
 	}
 
-	/*
+	
 	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
 	func createBlankAPODCells() {
-		for i in APODarray.count..<100 {
+		for i in APODarray.count..<ViewControllerOne.dates.count - 250 {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
 			APODarray.append(newAPOD)
 			collectionView.reloadData()
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}
-*/
+
 
 
 	func performUIUpdatesOnMain(updates: () -> Void) {

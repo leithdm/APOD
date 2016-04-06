@@ -17,6 +17,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	weak var delegate: ViewControllerOneDelegate?
 	var apodIndex: NSIndexPath?
 	var currentIndexPath: NSIndexPath?
+	var tempVariable = 0
 	
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var barButton: UIBarButtonItem!
@@ -89,6 +90,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
 		var max = 0
+		
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
 			if max < index.row {
@@ -102,6 +104,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
 		getImages()
+		
 	}
 	
 	//MARK: get images from server
