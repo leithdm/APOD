@@ -505,7 +505,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NtC-1F-ACv">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NtC-1F-ACv">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="QeW-pj-2nb">
@@ -824,6 +824,31 @@
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This APOD is most likely a video and best viewed on the APOD website" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iG8-Vh-rLd">
+                                                            <rect key="frame" x="57" y="125" width="250" height="65"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="250" id="ax8-6O-Obc"/>
+                                                                <constraint firstAttribute="height" constant="65" id="uVA-bG-Ra7"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.8912609816" green="0.35455638169999998" blue="0.39968371390000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxM-Xw-LeC">
+                                                            <rect key="frame" x="107" y="210" width="150" height="30"/>
+                                                            <color key="backgroundColor" red="0.19376453760000001" green="0.50850099329999998" blue="0.85232251879999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="150" id="8Uy-Ud-la5"/>
+                                                                <constraint firstAttribute="height" constant="30" id="IDk-v8-JxX"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <state key="normal" title="Go To APOD Website">
+                                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="goToWebSite:" destination="UVS-jN-z9T" eventType="touchUpInside" id="JIP-Ge-EG0"/>
+                                                            </connections>
+                                                        </button>
                                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7wW-GF-dlv">
                                                             <rect key="frame" x="157" y="108" width="50" height="50"/>
                                                             <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -859,16 +884,20 @@
                                                         <constraint firstAttribute="trailing" secondItem="AvW-FZ-H3p" secondAttribute="trailing" id="0my-mc-HxK"/>
                                                         <constraint firstItem="7wW-GF-dlv" firstAttribute="top" secondItem="JHs-xM-isT" secondAttribute="bottom" constant="7" id="2cI-rS-EhS"/>
                                                         <constraint firstItem="kcy-nu-2Aq" firstAttribute="top" secondItem="SBs-kv-EXd" secondAttribute="top" id="3ds-P7-0Jn"/>
+                                                        <constraint firstItem="iG8-Vh-rLd" firstAttribute="centerX" secondItem="SBs-kv-EXd" secondAttribute="centerX" id="5cu-XV-rFQ"/>
                                                         <constraint firstItem="7wW-GF-dlv" firstAttribute="centerY" secondItem="SBs-kv-EXd" secondAttribute="centerY" id="8eK-OE-7lA"/>
                                                         <constraint firstAttribute="bottom" secondItem="AvW-FZ-H3p" secondAttribute="bottom" id="EIZ-wi-Omp"/>
                                                         <constraint firstItem="kcy-nu-2Aq" firstAttribute="centerY" secondItem="SBs-kv-EXd" secondAttribute="centerY" id="GKU-E2-PMr"/>
                                                         <constraint firstAttribute="trailing" secondItem="kcy-nu-2Aq" secondAttribute="trailing" id="LJk-Cg-cPu"/>
+                                                        <constraint firstItem="hxM-Xw-LeC" firstAttribute="top" secondItem="kcy-nu-2Aq" secondAttribute="bottom" constant="-57" id="Thh-6b-ti9"/>
                                                         <constraint firstItem="AvW-FZ-H3p" firstAttribute="top" secondItem="SBs-kv-EXd" secondAttribute="top" id="YuR-Tp-GdH"/>
                                                         <constraint firstItem="kcy-nu-2Aq" firstAttribute="centerX" secondItem="SBs-kv-EXd" secondAttribute="centerX" id="aoh-Ej-zm4"/>
                                                         <constraint firstItem="AvW-FZ-H3p" firstAttribute="leading" secondItem="SBs-kv-EXd" secondAttribute="leading" id="bWI-uG-Wbn"/>
                                                         <constraint firstItem="7wW-GF-dlv" firstAttribute="centerX" secondItem="SBs-kv-EXd" secondAttribute="centerX" id="eHx-5D-Y8Z"/>
                                                         <constraint firstItem="kcy-nu-2Aq" firstAttribute="leading" secondItem="SBs-kv-EXd" secondAttribute="leading" id="efK-ax-vHJ"/>
+                                                        <constraint firstItem="hxM-Xw-LeC" firstAttribute="top" secondItem="iG8-Vh-rLd" secondAttribute="bottom" constant="20" id="fB6-hq-dl8"/>
                                                         <constraint firstAttribute="bottom" secondItem="kcy-nu-2Aq" secondAttribute="bottom" id="fV9-qD-18P"/>
+                                                        <constraint firstItem="hxM-Xw-LeC" firstAttribute="centerX" secondItem="SBs-kv-EXd" secondAttribute="centerX" id="vgN-66-DUP"/>
                                                         <constraint firstItem="JHs-xM-isT" firstAttribute="centerX" secondItem="SBs-kv-EXd" secondAttribute="centerX" id="yYk-Ie-3Jc"/>
                                                     </constraints>
                                                     <connections>
@@ -920,9 +949,11 @@
                                             <outlet property="detailTextView" destination="RuC-1Z-36e" id="7PQ-GM-xmp"/>
                                             <outlet property="detailToolbarButton" destination="yn7-eY-4la" id="Y4n-kd-5e2"/>
                                             <outlet property="detailView" destination="AvW-FZ-H3p" id="zOq-Cf-IGY"/>
+                                            <outlet property="goToWebSite" destination="hxM-Xw-LeC" id="kWk-83-bcB"/>
                                             <outlet property="imageTitle" destination="n7x-jc-63S" id="ZPc-NI-akJ"/>
                                             <outlet property="imageView" destination="kcy-nu-2Aq" id="7Ja-1v-m5G"/>
-                                            <outlet property="loadingImageText" destination="JHs-xM-isT" id="WXh-KJ-8Wy"/>
+                                            <outlet property="isAVideoText" destination="iG8-Vh-rLd" id="svy-4A-4eK"/>
+                                            <outlet property="loadingImageText" destination="JHs-xM-isT" id="ccq-cB-tVe"/>
                                             <outlet property="scrollView" destination="SBs-kv-EXd" id="dZT-Yw-Wch"/>
                                             <outlet property="titleBottomToolbar" destination="6jZ-1G-PX3" id="2iV-D9-YcI"/>
                                         </connections>

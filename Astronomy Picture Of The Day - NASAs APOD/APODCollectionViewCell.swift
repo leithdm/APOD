@@ -140,7 +140,7 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	
 	func setZoomParametersForSize(scrollViewSize: CGSize) {
 		scrollView.minimumZoomScale = 1.0
-		scrollView.maximumZoomScale = 5.0
+		scrollView.maximumZoomScale = 4.0
 		scrollView.zoomScale = 1.0
 	}
 }

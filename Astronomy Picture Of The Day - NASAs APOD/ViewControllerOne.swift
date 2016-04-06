@@ -12,17 +12,13 @@ protocol ViewControllerOneDelegate: class {
 class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MoreOptionsViewControllerDelegate, APODCollectionViewCellDelegate {
 	
 	//MARK: properties
-	
-	@IBOutlet weak var collectionView: UICollectionView!
-	
-	var APODarray = [APOD]()
-	var prevOffset: CGFloat = 0.0
-	var noAPODsDownloaded = 0
-	var currentAPOD = 0
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
+	var APODarray = [APOD]()
 	weak var delegate: ViewControllerOneDelegate?
 	var apodIndex: NSIndexPath?
 	var currentIndexPath: NSIndexPath?
+	
+	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var barButton: UIBarButtonItem!
 	@IBOutlet weak var moreOptionsView: UIView!
 	@IBOutlet weak var moreOptionsContainerView: UIView!
@@ -53,8 +49,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		restoreNoOfDownloads()
 		APODarray = fetchAllAPODS()
+		
+		//find the missing dates
+		let currentCount = APODarray.count
+		print("current count is  \(currentCount)")
+		let serverCount: Int = ViewControllerOne.dates.count
+		let difference = serverCount - currentCount
+		print(difference)
 		
 		//if the APOD array is empty we want to fill it with blank cells and download the APOD for today's date
 		if APODarray.isEmpty {
@@ -71,7 +73,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		if let index = apodIndex {
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 			barButton.image = UIImage(named: "leftArrow")
-			
 		}
 		
 	}
@@ -93,30 +94,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		getImages()
 	}
 	
-	
+	//MARK: get images from server
 	func getImages() {
-		
-		var index: Int = 0
 		for cell in collectionView.visibleCells() {
-			let i = collectionView.indexPathForCell(cell)!
-			index = i.item
-		}
-		
-		print("index of image is: \(index)")
-		print("noAPODsDownloaded: \(noAPODsDownloaded)")
-		
-		if noAPODsDownloaded < index {
-			var datesToDownload: [String] = []
-			for i in (noAPODsDownloaded + 1)...index {
-				datesToDownload.insert(ViewControllerOne.dates[i], atIndex: 0)
+			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
+			let apod = APODarray[index.row]
+			if apod.image == nil {
+				getPhotoProperties([ViewControllerOne.dates[index.row]])
 			}
-			
-			print("datesToDownload: \(datesToDownload)")
-			
-			getPhotoProperties(datesToDownload)
-			noAPODsDownloaded = index
-			currentAPOD = noAPODsDownloaded
-			saveNoOfDownloads()
 		}
 	}
 	
@@ -210,7 +195,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		if let image = APOD.image {
 			
 			if !APOD.url!.containsString("http://apod.nasa.gov/")  {
-				cell.imageView.alpha = 0.3
 				cell.isAVideoText.hidden = false 
 				cell.goToWebSite.hidden = false
 			}
@@ -275,7 +259,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
 	func createBlankAPODCells() {
 		//TODO: 50 is not quite right. Must ensure have enough blank cells
-		for i in 0..<50 {
+		for i in 0..<ViewControllerOne.dates.count {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
 			APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
@@ -289,26 +273,11 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 	
-	//MARK: save and restore number of downloads
-	
-	func saveNoOfDownloads() {
-		let dictionary = [
-			"noAPODsDownloaded" : noAPODsDownloaded,
-			"currentAPOD"		: currentAPOD
-		]
-		NSKeyedArchiver.archiveRootObject(dictionary, toFile: noOfDownloadsFilePath)
-	}
-	
-	func restoreNoOfDownloads() {
-		if let dictionary = NSKeyedUnarchiver.unarchiveObjectWithFile(noOfDownloadsFilePath) as? [String : AnyObject] {
-			noAPODsDownloaded = dictionary["noAPODsDownloaded"] as! Int
-			currentAPOD = dictionary["currentAPOD"] as! Int
-		}
-	}
 	
 	@IBAction func moreOptionsButtonClicked(sender: UIBarButtonItem) {
 		showMoreOptionsDetailView()
 	}
+	
 	
 	func moreOptionsViewControllerSelectFavorite(controller: MoreOptionsViewController, removeFromFavorites: Bool) {
 		let apod = APODarray[currentIndexPath!.item]

@@ -9,20 +9,18 @@ protocol MyFavoritesAPODViewControllerDelegate: class {
 	func myFavoritesAPODViewControllerDidTapMenuButton(controller: MyFavoritesAPODViewController)
 }
 
-class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MyFavoritesMoreOptionsViewControllerDelegate {
+class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MyFavoritesMoreOptionsViewControllerDelegate, MyFavoritesAPODCollectionViewCellDelegate {
 
 	//MARK: properties
 
 	@IBOutlet weak var collectionView: UICollectionView!
 
 	var APODarray = [APOD]()
-	var prevOffset: CGFloat = 0.0
-	var noAPODsDownloaded = 0
-	var currentAPOD = 0
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	weak var delegate: MyFavoritesAPODViewControllerDelegate?
 	var apodIndex: NSIndexPath?
 	var currentIndexPath: NSIndexPath?
+	
 	@IBOutlet weak var barButton: UIBarButtonItem!
 	@IBOutlet weak var moreOptionsView: UIView!
 	@IBOutlet weak var moreOptionsContainerView: UIView!
@@ -105,12 +103,19 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 
 	func configureCell(cell: MyFavoritesAPODCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
 		cell.setup()
+		cell.delegate = self
 
 		let APOD = APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 
 		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
+			
+			if !APOD.url!.containsString("http://apod.nasa.gov/")  {
+				cell.isAVideoText.hidden = false
+				cell.goToWebSite.hidden = false
+			}
+			
 			//show the toolbar
 			cell.titleBottomToolbar.hidden = false
 
@@ -227,5 +232,23 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 
 
 		moreOptionsContainerView.hidden = false
+	}
+	
+	
+	func myFavoritesAPODCollectionViewCellGoToWebsite(controller: MyFavoritesAPODCollectionViewCell) {
+		print("called")
+		let apod = APODarray[currentIndexPath!.row]
+		let URL = "http://apod.nasa.gov/apod/ap" + convertDateForWebsite(apod.dateString!) + ".html"
+		let app = UIApplication.sharedApplication()
+		if let url = NSURL(string: URL) {
+			if app.canOpenURL(url) {
+				app.openURL(url)
+			}
+		}
+	}
+	
+	func convertDateForWebsite(date: String) -> String {
+		let newDate: NSString = date.stringByReplacingOccurrencesOfString("-", withString: "")
+		return newDate.substringWithRange(NSRange(location: 2, length: newDate.length-2)) as String
 	}
 }

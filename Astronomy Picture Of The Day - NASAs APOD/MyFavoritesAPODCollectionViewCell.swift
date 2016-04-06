@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol MyFavoritesAPODCollectionViewCellDelegate: class {
+	func myFavoritesAPODCollectionViewCellGoToWebsite(controller: MyFavoritesAPODCollectionViewCell)
+}
+
 class MyFavoritesAPODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 
 	@IBOutlet weak var imageView: UIImageView!
@@ -20,15 +24,19 @@ class MyFavoritesAPODCollectionViewCell: UICollectionViewCell, UIScrollViewDeleg
 	@IBOutlet weak var detailTextView: UITextView! //explanation textView
 	@IBOutlet var detailToolbarButton: UIBarButtonItem!
 	@IBOutlet weak var loadingImageText: UILabel!
+	@IBOutlet weak var isAVideoText: UILabel!
+	@IBOutlet weak var goToWebSite: UIButton!
+	weak var delegate: MyFavoritesAPODCollectionViewCellDelegate?
 
 	var detailViewVisible: Bool = false //explanation text visibility
 	var explanation: String?
 
 	func setup() {
+		isAVideoText.hidden = true
+		goToWebSite.hidden = true
 
 		scrollView.delegate = self
 		setZoomParametersForSize(scrollView.bounds.size)
-
 		detailTextView.scrollRangeToVisible(NSMakeRange(0, 0))
 
 		//tap getsture recognizer to zoom image
@@ -38,7 +46,6 @@ class MyFavoritesAPODCollectionViewCell: UICollectionViewCell, UIScrollViewDeleg
 
 		//initial detail view setup
 		initialDetailViewSetup()
-
 	}
 
 
@@ -108,6 +115,12 @@ class MyFavoritesAPODCollectionViewCell: UICollectionViewCell, UIScrollViewDeleg
 		}
 	}
 
+	@IBAction func goToWebSite(sender: UIButton) {
+		print("button clicked")
+		delegate?.myFavoritesAPODCollectionViewCellGoToWebsite(self)
+	}
+	
+	
 	//MARK: zoom image
 
 	func tapImage(gesture: UITapGestureRecognizer!) {
@@ -120,7 +133,7 @@ class MyFavoritesAPODCollectionViewCell: UICollectionViewCell, UIScrollViewDeleg
 
 	func setZoomParametersForSize(scrollViewSize: CGSize) {
 		scrollView.minimumZoomScale = 1.0
-		scrollView.maximumZoomScale = 5.0
+		scrollView.maximumZoomScale = 4.0
 		scrollView.zoomScale = 1.0
 	}
 }

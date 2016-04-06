@@ -17,9 +17,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	@IBOutlet weak var collectionView: UICollectionView!
 
 	var APODarray = [APOD]()
-	var prevOffset: CGFloat = 0.0
-	var noAPODsDownloaded = 1
-	var currentAPOD = 1
+	var currentAPODIndex = 0
 	weak var delegate: ViewControllerTwoDelegate?
 
 
@@ -45,12 +43,10 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		
-		restoreNoOfDownloads()
+
 		APODarray = fetchAllAPODS()
 		collectionView.reloadData()
-		//TODO: remove magic number
-		getImages(8)
+		loadInitialImages()
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -72,43 +68,42 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	//MARK: downloading new photo properties when scrolling
 
-//	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-//		getImages()
-//	}
-	
-	func scrollViewDidScroll(scrollView: UIScrollView) {
+	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
 		getImages()
 	}
 	
-	func getImages(max: Int = 0) {
-		var max = max
+
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		var max = 0
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-			if index.item > max {
-				max = index.item
+			if max < index.row {
+				max = index.row
 			}
 		}
-		print("max: \(max)")
-		print("noAPODsDownloaded: \(noAPODsDownloaded)")
-
 		title = formatDateStringForTitle(ViewControllerOne.dates[max])
-
-		if noAPODsDownloaded < max {
-			var datesToDownload: [String] = []
-			for i in noAPODsDownloaded...max {
-				datesToDownload.append(ViewControllerOne.dates[i])
-			}
-			
-			print("new dates to download: \(datesToDownload)")
-			
-			getPhotoProperties(datesToDownload)
-			noAPODsDownloaded = max
-			currentAPOD = noAPODsDownloaded
-			saveNoOfDownloads()
-			title = formatDateStringForTitle(ViewControllerOne.dates[max])
-		}
 	}
 
+	
+	func loadInitialImages() {
+		for i in 0..<10 {
+			let apod = APODarray[i]
+			if apod.image == nil {
+				getPhotoProperties([ViewControllerOne.dates[i]])
+			}
+		}
+	}
+	
+	func getImages() {
+		for cell in collectionView.visibleCells() {
+			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
+			let apod = APODarray[index.row]
+			if apod.image == nil {
+				getPhotoProperties([ViewControllerOne.dates[index.row]])
+			}
+		}
+	}
+	
 	//MARK: download photo properties
 
 	func getPhotoProperties(dates: [String]) {
@@ -225,6 +220,14 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		
+		let apod = APODarray[indexPath.row]
+		
+		//prevents an image from being clicked if not downloaded yet
+		if apod.image == nil {
+			return
+		}
+		
 		let vcOne = storyboard!.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
 		vcOne.apodIndex = indexPath
 		navigationController?.pushViewController(vcOne, animated: true)
@@ -253,6 +256,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		return newFormatter.stringFromDate(existingDate!)
 	}
 
+	/*
 	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
 	func createBlankAPODCells() {
 		for i in APODarray.count..<100 {
@@ -262,6 +266,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}
+*/
 
 
 	func performUIUpdatesOnMain(updates: () -> Void) {
@@ -269,23 +274,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			updates()
 		}
 	}
-
-	//MARK: save and restore number of downloads
-
-	func saveNoOfDownloads() {
-		let dictionary = [
-			"noAPODsDownloaded" : noAPODsDownloaded,
-			"currentAPOD"		: currentAPOD
-		]
-		NSKeyedArchiver.archiveRootObject(dictionary, toFile: noOfDownloadsFilePath)
-	}
-
-	func restoreNoOfDownloads() {
-		if let dictionary = NSKeyedUnarchiver.unarchiveObjectWithFile(noOfDownloadsFilePath) as? [String : AnyObject] {
-			noAPODsDownloaded = dictionary["noAPODsDownloaded"] as! Int
-			currentAPOD = dictionary["currentAPOD"] as! Int
-		}
-	}	
 }
 
 

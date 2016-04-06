@@ -42,7 +42,8 @@ class ImageCache {
         }
 	
         // otherwise keep it in documents directory
-        let data = UIImagePNGRepresentation(image!)!
+        let data = UIImageJPEGRepresentation(image!, 0.7)!
+//        let data = UIImagePNGRepresentation(image!)!
         data.writeToFile(path, atomically: true)
     }
     
