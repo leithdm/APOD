@@ -88,6 +88,17 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		var max = 0
+		for cell in collectionView.visibleCells() {
+			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
+			if max < index.row {
+				max = index.row
+			}
+		}
+		title = formatDateString(ViewControllerOne.dates[max])
+	}
+	
 	//MARK: downloading new photo properties when scrolling
 	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -209,7 +220,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			cell.imageView.image = image
 			cell.imageTitle.text = APOD.title
 			cell.explanation = APOD.explanation
-			title = formatDateString(APOD.dateString!)
 			
 			//additional logic for displaying favorites option
 			NSNotificationCenter.defaultCenter().postNotificationName("favoriteStatus", object: nil, userInfo: ["isAlreadyFavorite" : APOD.favorite])
@@ -217,12 +227,8 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		} else { //download from the remote serve
 			//hide the toolbar
 			cell.titleBottomToolbar.hidden = true
-			
-			//show loading
 			cell.loadingImageText.hidden = false
-			
 			cell.activityIndicator.startAnimating()
-			title = ""
 			cell.imageView.image = nil
 			cell.imageTitle.text = ""
 		}
@@ -357,4 +363,5 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		let newDate: NSString = date.stringByReplacingOccurrencesOfString("-", withString: "")
 		return newDate.substringWithRange(NSRange(location: 2, length: newDate.length-2)) as String
 	}
+	
 }
