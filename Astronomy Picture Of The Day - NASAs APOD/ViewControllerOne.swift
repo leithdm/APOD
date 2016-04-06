@@ -42,7 +42,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		moreOptionsView.alpha = 0.0
 		moreOptionsContainerView.hidden = true
 	}
@@ -262,17 +261,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		return newFormatter.stringFromDate(existingDate!)
 	}
 	
-	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
-	func createBlankAPODCells() {
-		//TODO: 50 is not quite right. Must ensure have enough blank cells
-		for i in 0..<ViewControllerOne.dates.count {
-			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
-			APODarray.append(newAPOD)
-			CoreDataStackManager.sharedInstance.saveContext()
-		}
-	}
-	
-	
 	func performUIUpdatesOnMain(updates: () -> Void) {
 		dispatch_async(dispatch_get_main_queue()) {
 			updates()
@@ -302,7 +290,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 
 	
 	func moreOptionsViewControllerSelectShare(controller: MoreOptionsViewController) {
-		print("share time")
 		let apod = APODarray[currentIndexPath!.row]
 		let link = apod.url
 		let activityVC = UIActivityViewController(activityItems: [link!, apod.image!], applicationActivities: .None)
@@ -348,7 +335,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	func APODCollectionViewCellDelegateGoToWebsite(controller: APODCollectionViewCell) {
-		print("called")
 		let apod = APODarray[currentIndexPath!.row]
 		let URL = "http://apod.nasa.gov/apod/ap" + convertDateForWebsite(apod.dateString!) + ".html"
 		let app = UIApplication.sharedApplication()
@@ -364,4 +350,13 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		return newDate.substringWithRange(NSRange(location: 2, length: newDate.length-2)) as String
 	}
 	
+	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
+	func createBlankAPODCells() {
+		
+		for i in 0..<250 {
+			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
+			APODarray.append(newAPOD)
+			CoreDataStackManager.sharedInstance.saveContext()
+		}
+	}
 }

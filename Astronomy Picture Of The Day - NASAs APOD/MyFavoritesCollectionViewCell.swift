@@ -16,5 +16,4 @@ class MyFavoritesCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate,
 	@IBOutlet weak var imageTitle: UILabel!
 	@IBOutlet weak var imageInfoView: UIView!
 	@IBOutlet weak var favoriteImage: UIImageView!
-
 }

@@ -163,7 +163,7 @@
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This APOD consists of mixed media and is best viewed on the APOD website" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ceh-xC-CwQ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This APOD is most likely a video and best viewed on the APOD website" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ceh-xC-CwQ">
                                                             <rect key="frame" x="57" y="125" width="250" height="65"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="65" id="JhI-VJ-DRi"/>
@@ -203,7 +203,7 @@
                                                                     <rect key="frame" x="8" y="8" width="348" height="251"/>
                                                                     <color key="backgroundColor" red="0.12637259066104889" green="0.12639245390892029" blue="0.12636536359786987" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -664,7 +664,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOu-pb-QL5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="578" y="3275"/>
+            <point key="canvasLocation" x="571" y="3190"/>
         </scene>
         <!--My Favorites View Controller-->
         <scene sceneID="QXK-rF-V5r">
@@ -751,17 +751,17 @@
                                             <constraint firstItem="ek3-ID-8Gz" firstAttribute="leading" secondItem="xuv-Uy-5oy" secondAttribute="leading" id="qE8-tY-bpu"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="favoriteImage" destination="WLi-Yy-dTb" id="EWf-Eh-cN9"/>
-                                            <outlet property="imageDate" destination="9KN-EI-cVQ" id="Rtj-lQ-OhN"/>
-                                            <outlet property="imageInfoView" destination="ek3-ID-8Gz" id="7qV-GL-AVI"/>
-                                            <outlet property="imageTitle" destination="U0B-KA-6xC" id="2iw-uy-bp5"/>
-                                            <outlet property="imageView" destination="ek3-ID-8Gz" id="t3W-Zg-XwB"/>
+                                            <outlet property="favoriteImage" destination="WLi-Yy-dTb" id="SEh-VG-OAH"/>
+                                            <outlet property="imageDate" destination="9KN-EI-cVQ" id="e0a-Gw-Y3J"/>
+                                            <outlet property="imageInfoView" destination="Cf9-0v-sWV" id="oa1-5O-fTX"/>
+                                            <outlet property="imageTitle" destination="U0B-KA-6xC" id="Lkf-I5-mdc"/>
+                                            <outlet property="imageView" destination="ek3-ID-8Gz" id="Uaq-tj-9Ms"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="oq6-Um-yfC" id="85I-3y-gnX"/>
-                                    <outlet property="delegate" destination="oq6-Um-yfC" id="3f3-Ne-tJE"/>
+                                    <outlet property="dataSource" destination="oq6-Um-yfC" id="rjr-0Z-nG2"/>
+                                    <outlet property="delegate" destination="oq6-Um-yfC" id="hC7-Uy-LU8"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -780,7 +780,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoO-Lj-fWj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1239" y="3275"/>
+            <point key="canvasLocation" x="1239" y="3190"/>
         </scene>
         <!--My FavoritesAPOD View Controller-->
         <scene sceneID="z5D-nk-yzF">
@@ -824,7 +824,7 @@
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This APOD consists of mixed media and is best viewed on the APOD website" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iG8-Vh-rLd">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This APOD is most likely a video and best viewed on the APOD website" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iG8-Vh-rLd">
                                                             <rect key="frame" x="57" y="125" width="250" height="65"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="250" id="ax8-6O-Obc"/>
@@ -857,22 +857,18 @@
                                                                 <constraint firstAttribute="width" constant="50" id="lHZ-3M-cXY"/>
                                                             </constraints>
                                                         </activityIndicatorView>
-                                                        <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AvW-FZ-H3p">
+                                                        <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AvW-FZ-H3p">
                                                             <rect key="frame" x="0.0" y="0.0" width="364" height="267"/>
                                                             <subviews>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RuC-1Z-36e">
                                                                     <rect key="frame" x="8" y="8" width="348" height="251"/>
                                                                     <color key="backgroundColor" red="0.12637259066104889" green="0.12639245390892029" blue="0.12636536359786987" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="22"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                                 </textView>
-                                                                <view alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XTM-AN-2na">
-                                                                    <rect key="frame" x="0.0" y="-159" width="600" height="600"/>
-                                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </view>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.12637259066104889" green="0.12639245390892029" blue="0.12636536359786987" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
@@ -968,6 +964,10 @@
                                     <outlet property="delegate" destination="JjM-0l-TKO" id="r9p-WQ-GYL"/>
                                 </connections>
                             </collectionView>
+                            <view alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XTM-AN-2na">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfy-9M-C1z">
                                 <rect key="frame" x="0.0" y="452" width="600" height="148"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
