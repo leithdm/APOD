@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	//MARK: properties
+	
 	var childViewControllers = [UIViewController]()
 	var childNav: UINavigationController!
 	var menuNav: UINavigationController!
