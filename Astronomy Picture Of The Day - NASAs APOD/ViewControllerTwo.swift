@@ -84,7 +84,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		
 		var max = 0
 		
-		//TODO: refactor. this is not actually required
+		//TODO: refactor
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
 			if max < index.row {
@@ -97,20 +97,31 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		if max == APODarray.count-1 {
 			createBlankAPODCellsWithIndex()
 		}
-		
-		
+
+//		if APODarray.count != ViewControllerOne.dates.count {
+//			for _ in 0..<ViewControllerOne.dates.count - 16 {
+//				let newAPOD = APOD(dateString: ViewControllerOne.dates[APODarray.count], context: self.sharedContext)
+//				APODarray.append(newAPOD)
+//				CoreDataStackManager.sharedInstance.saveContext()
+//				performUIUpdatesOnMain({ 
+//					self.collectionView.reloadData()
+//				})
+//			}
+//		}
+
 		getImages()
 	}
 
 	
 	func loadInitialImages() {
-		for i in 0..<10 {
+		for i in 0..<16 {
 			let apod = APODarray[i]
 			if apod.image == nil {
 				getPhotoProperties([ViewControllerOne.dates[i]])
 			}
 		}
 	}
+	
 	
 	func getImages() {
 		for cell in collectionView.visibleCells() {
@@ -276,7 +287,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	//create a blank array of APOD cells to populate the collection view
 	func createBlankAPODCellsWithIndex() {
 		
-		for _ in 0..<20 {
+		for _ in 0..<64 {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[APODarray.count], context: self.sharedContext)
 			APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
