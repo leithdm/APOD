@@ -49,22 +49,12 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		APODarray = fetchAllAPODS()
-		
-		//find the missing dates
-		let currentCount = APODarray.count
-		print("current count is  \(currentCount)")
-		let serverCount: Int = ViewControllerOne.dates.count
-		let difference = serverCount - currentCount
-		print(difference)
-		
-		//if the APOD array is empty we want to fill it with blank cells and download the APOD for today's date
-		if APODarray.isEmpty {
-			createBlankAPODCells()
-			getPhotoProperties([ViewControllerOne.dates.first!])
-		}
-		
+		createBlankAPODCells()
+		getPhotoProperties([ViewControllerOne.dates.first!])
 	}
+	
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
@@ -103,6 +93,24 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: downloading new photo properties when scrolling
 	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+		
+		var max = 0
+		
+		//TODO: refactor. this is not actually required
+		for cell in collectionView.visibleCells() {
+			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
+			if max < index.row {
+				max = index.row
+			}
+		}
+		
+		print("APODArray size is \(APODarray.count)")
+		
+		if max % 25 == 0 || max == APODarray.count-1 {
+			createBlankAPODCellsWithIndex()
+		}
+		
+		
 		getImages()
 		
 	}
@@ -111,7 +119,8 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	func getImages() {
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-			let apod = APODarray[index.row]
+			let apod = APODarray[index.item]
+			print(apod.dateString)
 			if apod.image == nil {
 				getPhotoProperties([ViewControllerOne.dates[index.row]])
 			}
@@ -202,13 +211,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		cell.delegate = self
 		
 		let APOD = APODarray[indexPath.item]
+		print(APOD.explanation)
 		cell.setupActivityIndicator(cell)
 		
 		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
 			
 			if !APOD.url!.containsString("http://apod.nasa.gov/")  {
-				cell.isAVideoText.hidden = false 
+				cell.isAVideoText.hidden = false
 				cell.goToWebSite.hidden = false
 			}
 			
@@ -222,6 +232,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			cell.imageView.image = image
 			cell.imageTitle.text = APOD.title
 			cell.explanation = APOD.explanation
+			title = formatDateString(APOD.dateString!)
 			
 			//additional logic for displaying favorites option
 			NSNotificationCenter.defaultCenter().postNotificationName("favoriteStatus", object: nil, userInfo: ["isAlreadyFavorite" : APOD.favorite])
@@ -290,7 +301,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			self.collectionView.reloadData()
 		}
 	}
-
+	
 	
 	func moreOptionsViewControllerSelectShare(controller: MoreOptionsViewController) {
 		let apod = APODarray[currentIndexPath!.row]
@@ -355,11 +366,21 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
 	func createBlankAPODCells() {
-		
-		for i in 0..<250 {
+		for i in 0..<50 {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
 			APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}
+	
+	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
+	func createBlankAPODCellsWithIndex() {
+		
+		for _ in 0..<25 {
+			let newAPOD = APOD(dateString: ViewControllerOne.dates[APODarray.count], context: self.sharedContext)
+			APODarray.append(newAPOD)
+			CoreDataStackManager.sharedInstance.saveContext()
+		}
+	}
+	
 }

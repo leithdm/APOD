@@ -19,7 +19,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	var APODarray = [APOD]()
 	var currentAPODIndex = 0
 	weak var delegate: ViewControllerTwoDelegate?
-
+	var limit = 11
 
 	//MARK: core data
 
@@ -43,7 +43,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-
+				
 		APODarray = fetchAllAPODS()
 		collectionView.reloadData()
 		loadInitialImages()
@@ -68,11 +68,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	//MARK: downloading new photo properties when scrolling
 
-	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-		getImages()
-	}
-	
-
 	func scrollViewDidScroll(scrollView: UIScrollView) {
 		var max = 0
 		for cell in collectionView.visibleCells() {
@@ -82,6 +77,26 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			}
 		}
 		title = formatDateStringForTitle(ViewControllerOne.dates[max])
+	}
+	
+	
+	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+//		var max = 0
+//		
+//		//TODO: refactor. this is not actually required
+//		for cell in collectionView.visibleCells() {
+//			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
+//			if max < index.row {
+//				max = index.row
+//			}
+//		}
+//		
+//		if max >= limit || max == APODarray.count-1 && max <= ViewControllerOne.dates.count {
+//			createBlankAPODCellsWithIndex()
+//			limit += 50
+//		}
+		
+		getImages()
 	}
 
 	
@@ -180,8 +195,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		let APOD = APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 
-
-
 		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
 			cell.imageInfoView.hidden = false
@@ -257,12 +270,12 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	
-	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
-	func createBlankAPODCells() {
-		for i in APODarray.count..<ViewControllerOne.dates.count - 250 {
-			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
+	//create a blank array of APOD cells to populate the collection view
+	func createBlankAPODCellsWithIndex() {
+		
+		for _ in 0..<25 {
+			let newAPOD = APOD(dateString: ViewControllerOne.dates[APODarray.count], context: self.sharedContext)
 			APODarray.append(newAPOD)
-			collectionView.reloadData()
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}
