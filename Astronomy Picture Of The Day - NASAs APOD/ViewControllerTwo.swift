@@ -19,7 +19,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	var APODarray = [APOD]()
 	var currentAPODIndex = 0
 	weak var delegate: ViewControllerTwoDelegate?
-	var limit = 11
 
 	//MARK: core data
 
@@ -80,21 +79,25 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	
+	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-//		var max = 0
-//		
-//		//TODO: refactor. this is not actually required
-//		for cell in collectionView.visibleCells() {
-//			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-//			if max < index.row {
-//				max = index.row
-//			}
-//		}
-//		
-//		if max >= limit || max == APODarray.count-1 && max <= ViewControllerOne.dates.count {
-//			createBlankAPODCellsWithIndex()
-//			limit += 50
-//		}
+		
+		var max = 0
+		
+		//TODO: refactor. this is not actually required
+		for cell in collectionView.visibleCells() {
+			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
+			if max < index.row {
+				max = index.row
+			}
+		}
+		
+		print("APODArray size is \(APODarray.count)")
+		
+		if max == APODarray.count-1 {
+			createBlankAPODCellsWithIndex()
+		}
+		
 		
 		getImages()
 	}
@@ -273,7 +276,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	//create a blank array of APOD cells to populate the collection view
 	func createBlankAPODCellsWithIndex() {
 		
-		for _ in 0..<25 {
+		for _ in 0..<20 {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[APODarray.count], context: self.sharedContext)
 			APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()

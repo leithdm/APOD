@@ -106,7 +106,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		
 		print("APODArray size is \(APODarray.count)")
 		
-		if max % 25 == 0 || max == APODarray.count-1 {
+		if max == APODarray.count-1 {
 			createBlankAPODCellsWithIndex()
 		}
 		
@@ -366,7 +366,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
 	func createBlankAPODCells() {
-		for i in 0..<50 {
+		for i in 0..<20 {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
 			APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
@@ -376,7 +376,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
 	func createBlankAPODCellsWithIndex() {
 		
-		for _ in 0..<25 {
+		for _ in 0..<20 {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[APODarray.count], context: self.sharedContext)
 			APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
