@@ -18,14 +18,6 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 	var APODarray = [APOD]()
 	weak var delegate: MyFavoritesViewControllerDelegate?
 	
-	
-	//MARK: core data
-	
-	lazy var sharedContext: NSManagedObjectContext = {
-		return CoreDataStackManager.sharedInstance.managedObjectContext
-	}()
-	
-	
 	//MARK: lifecycle methods
 	
 	override func viewDidLoad() {
@@ -46,6 +38,11 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 	}
 	
 	//MARK: core data
+
+	lazy var sharedContext: NSManagedObjectContext = {
+		return CoreDataStackManager.sharedInstance.managedObjectContext
+	}()
+
 	func fetchFavoriteAPODs() -> [APOD] {
 		let fetchRequest = NSFetchRequest(entityName: "APOD")
 		fetchRequest.predicate = NSPredicate(format: "favorite == %@", true)
@@ -111,8 +108,7 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
 		return 10
 	}
-	
-	//TODO: create new view controller
+
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 		let vcOne = storyboard!.instantiateViewControllerWithIdentifier("MyFavoritesAPODViewController") as! MyFavoritesAPODViewController
 		vcOne.apodIndex = indexPath
@@ -130,11 +126,5 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 		let newFormatter = NSDateFormatter()
 		newFormatter.dateFormat = "dd MMMM yyyy"
 		return newFormatter.stringFromDate(existingDate!)
-	}
-	
-	func performUIUpdatesOnMain(updates: () -> Void) {
-		dispatch_async(dispatch_get_main_queue()) {
-			updates()
-		}
 	}
 }

@@ -15,17 +15,15 @@ protocol MoreOptionsViewControllerDelegate: class {
 }
 
 class MoreOptionsViewController: UIViewController {
-	
-	
+
 	weak var delegate: MoreOptionsViewControllerDelegate?
-	@IBOutlet weak var favoriteButton: UIButton!
 	var favoriteStatus: Bool = false
-	
+	@IBOutlet weak var favoriteButton: UIButton!
+
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handler), name: "favoriteStatus", object: nil)
-		
 	}
 	
 	func handler(notification: NSNotification) {
@@ -38,14 +36,12 @@ class MoreOptionsViewController: UIViewController {
 				favoriteButton.setTitle("Add to My Favorites", forState: .Normal)
 			}
 		}
-		
 	}
 	
 	@IBAction func didSelectFavorite(sender: UIButton) {
 		delegate?.moreOptionsViewControllerSelectFavorite(self, removeFromFavorites: favoriteStatus)
 	}
-	
-	
+
 	@IBAction func didSelectShare(sender: UIButton) {
 		delegate?.moreOptionsViewControllerSelectShare(self)
 	}
@@ -53,7 +49,5 @@ class MoreOptionsViewController: UIViewController {
 	@IBAction func didSelectClose(sender: UIButton) {
 		delegate?.moreOptionsViewControllerSelectCancel(self)
 	}
-	
-	
 }
 

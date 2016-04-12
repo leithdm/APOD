@@ -18,12 +18,10 @@ class AboutViewController: UIViewController {
 	@IBOutlet weak var labelOne: UILabel!
 	@IBOutlet weak var labelTwo: UILabel!
 	@IBOutlet weak var labelThree: UILabel!
-
 	@IBOutlet weak var image: UIImageView!
 	
 	weak var delegate: AboutViewControllerDelegate?
-	
-	
+
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -37,5 +35,4 @@ class AboutViewController: UIViewController {
 	@IBAction func menuButtonTapped(sender: UIBarButtonItem) {
 		delegate?.aboutViewControllerDelegateDidTapMenuButton(self)
 	}
-	
 }

@@ -27,14 +27,12 @@ class MyFavoritesAPODCollectionViewCell: UICollectionViewCell, UIScrollViewDeleg
 	@IBOutlet weak var isAVideoText: UILabel!
 	@IBOutlet weak var goToWebSite: UIButton!
 	weak var delegate: MyFavoritesAPODCollectionViewCellDelegate?
-
 	var detailViewVisible: Bool = false //explanation text visibility
 	var explanation: String?
 
 	func setup() {
 		isAVideoText.hidden = true
 		goToWebSite.hidden = true
-
 		scrollView.delegate = self
 		setZoomParametersForSize(scrollView.bounds.size)
 		detailTextView.scrollRangeToVisible(NSMakeRange(0, 0))
@@ -116,7 +114,6 @@ class MyFavoritesAPODCollectionViewCell: UICollectionViewCell, UIScrollViewDeleg
 	}
 
 	@IBAction func goToWebSite(sender: UIButton) {
-		print("button clicked")
 		delegate?.myFavoritesAPODCollectionViewCellGoToWebsite(self)
 	}
 	

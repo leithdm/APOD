@@ -54,9 +54,7 @@ class APODClient {
 		
 		let request = NSURLRequest(URL: createURLFromParameters(methodParameters))
 		let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
-			
-			print("downloading photo properties for \(date)")
-			
+
 			guard (error == nil) else {
 				completionHandler(data: nil, error: "There was an error with your request: \(error?.localizedDescription)")
 				return
@@ -66,8 +64,7 @@ class APODClient {
 				completionHandler(data: nil, error: "Your request returned a status code other than 2xx!")
 				return
 			}
-			
-			
+
 			guard let data = data else {
 				completionHandler(data: nil, error: "Error downloading data from server")
 				return
@@ -160,18 +157,8 @@ class APODClient {
 		//		print("Specified URL: \(components.URL!)")
 		return components.URL!
 	}
-	
-	//MARK: helper methods
-	
-//	func dateToString(date: NSDate) -> String {
-//		let dateFormatter = NSDateFormatter()
-//		dateFormatter.dateFormat = "YYYY-MM-DD"
-//		return dateFormatter.stringFromDate(date)
-//	}
-//	
-	
-	//an array of strings for every date from 15th July 1995 to present
-	
+
+	//creates an array of strings for every date from 15th July 1995 to present
 	func getAllAPODDates() -> [String] {
 		var returnArray = [String]()
 		

@@ -11,9 +11,20 @@ protocol ViewControllerOneDelegate: class {
 
 class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MoreOptionsViewControllerDelegate, APODCollectionViewCellDelegate {
 
+	//MARK: Constants
+
+	struct APODConstants {
+		static let EntityName = "APOD"
+		static let APIURL = "http://apod.nasa.gov/"
+		static let ReusableCellIdentifier = "APODCollectionViewCell"
+		static let BlanksAPODs = 16
+		static let APIWebsiteURL = "http://apod.nasa.gov/apod/ap"
+		static let HTML = ".html"
+	}
+
 	//MARK: properties
 
-	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
+	var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	var APODarray = [APOD]()
 	weak var delegate: ViewControllerOneDelegate?
 	var apodIndex: NSIndexPath?
@@ -29,8 +40,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		moreOptionsView.alpha = 0.0
-		moreOptionsContainerView.hidden = true
+		setupMoreOptionsView()
 	}
 
 	override func viewWillAppear(animated: Bool) {
@@ -38,13 +48,13 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 
 		APODarray = fetchAllAPODS()
 
+		//first instance of running the app
 		if APODarray.count == 0 {
 			createBlankAPODCells()
-			getPhotoProperties([ViewControllerOne.dates.first!])
+			getPhotoProperties([dates.first!])
 		} else {
-			//get new APODs from server
+			//get any APODs not downloaded from the server
 			let dates = getMissingAPODDates()
-
 			var datesToCheck: [String] = []
 			for date in dates  {
 				if date != APODarray.first?.dateString {
@@ -54,7 +64,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 
 			if datesToCheck.count != 0 {
 				insertBlankAPODCells(datesToCheck.count)
-				getPhotoProperties([ViewControllerOne.dates.first!])
+				getPhotoProperties([dates.first!])
 			}
 		}
 	}
@@ -67,7 +77,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 			barButton.image = UIImage(named: "leftArrow")
 		}
-
 	}
 
 	//MARK: core data
@@ -77,7 +86,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}()
 
 	func fetchAllAPODS() -> [APOD] {
-		let fetchRequest = NSFetchRequest(entityName: "APOD")
+		let fetchRequest = NSFetchRequest(entityName: APODConstants.EntityName)
 		do {
 		 return try sharedContext.executeFetchRequest(fetchRequest) as! [APOD]
 		} catch {
@@ -96,16 +105,11 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				max = index.row
 			}
 		}
-		title = formatDateString(ViewControllerOne.dates[max])
+		title = formatDateString(dates[max])
 	}
 
-	//MARK: downloading new photo properties when scrolling
-
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-
 		var max = 0
-
-		//TODO: refactor. this is not actually required
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
 			if max < index.row {
@@ -123,20 +127,12 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 
 	func getMissingAPODDates() -> [String] {
 		var returnArray = [String]()
-
-		//TODO: remove magic number and date format
 		let originDateString = APODarray.first?.dateString
-		print(originDateString)
-
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 
 		let dateValue1 = dateFormatter.dateFromString(originDateString!) as NSDate!
 		let dateValue2 = NSDate() //todays date
-
-		print("dateValue1: \(dateValue1)")
-		print("dateValue2: \(dateValue2)")
-
 		let calendar = NSCalendar.currentCalendar()
 		let flags: NSCalendarUnit = NSCalendarUnit.Day
 
@@ -159,7 +155,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
 			let apod = APODarray[index.item]
 			if apod.image == nil {
-				getPhotoProperties([ViewControllerOne.dates[index.row]])
+				getPhotoProperties([dates[index.row]])
 			}
 		}
 	}
@@ -187,8 +183,8 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 					APOD.title = data["title"]
 					APOD.url = data["url"]
 
-					if !APOD.url!.containsString("http://apod.nasa.gov/") {
-						//typically a video cannot be displayed as an image
+					//a video cannot be displayed as an image
+					if !APOD.url!.containsString(APODConstants.APIURL) {
 						dispatch_async(dispatch_get_main_queue()) {
 							APOD.image = UIImage(named: "noPhoto")
 							self.collectionView.reloadData()
@@ -211,14 +207,16 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		})
 	}
 
-	//MARK: menu button delegate methods
-
 	@IBAction func menuButtonTapped(sender: AnyObject) {
 		if let _ = apodIndex {
 			navigationController?.popToRootViewControllerAnimated(true)
 		} else {
 			delegate?.viewControllerOneDidTapMenuButton(self)
 		}
+	}
+
+	@IBAction func moreOptionsButtonClicked(sender: UIBarButtonItem) {
+		showMoreOptionsDetailView()
 	}
 
 
@@ -233,7 +231,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("APODCollectionViewCell", forIndexPath: indexPath) as! APODCollectionViewCell
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(APODConstants.ReusableCellIdentifier, forIndexPath: indexPath) as! APODCollectionViewCell
 		currentIndexPath = indexPath
 		configureCell(cell, atIndexPath: indexPath)
 		return cell
@@ -250,24 +248,19 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
 
-			if !APOD.url!.containsString("http://apod.nasa.gov/")  {
+			if !APOD.url!.containsString(APODConstants.APIURL)  {
 				cell.isAVideoText.hidden = false
 				cell.goToWebSite.hidden = false
 			}
 
-			//show the toolbar
 			cell.titleBottomToolbar.hidden = false
-
-			//remove loading image text
 			cell.loadingImageText.hidden = true
-
 			cell.activityIndicator.stopAnimating()
 			cell.imageView.image = image
 			cell.imageTitle.text = APOD.title
 			cell.explanation = APOD.explanation
 			title = formatDateString(APOD.dateString!)
 
-			//additional logic for displaying favorites option
 			NSNotificationCenter.defaultCenter().postNotificationName("favoriteStatus", object: nil, userInfo: ["isAlreadyFavorite" : APOD.favorite])
 
 		} else { //download from the remote serve
@@ -291,6 +284,67 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		return 10
 	}
 
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "MoreOptionsViewController" {
+			let vc = segue.destinationViewController as! MoreOptionsViewController
+			vc.delegate = self
+		}
+	}
+
+	//MARK: moreOptions methods (add to favorites, share)
+
+	func moreOptionsViewControllerSelectShare(controller: MoreOptionsViewController) {
+		let apod = APODarray[currentIndexPath!.row]
+		let link = apod.url
+		let activityVC = UIActivityViewController(activityItems: [link!, apod.image!], applicationActivities: .None)
+		presentViewController(activityVC, animated: true, completion: nil)
+	}
+
+	func moreOptionsViewControllerSelectCancel(controller: MoreOptionsViewController) {
+		hideMoreOptionsView()
+	}
+
+	func showMoreOptionsDetailView() {
+		moreOptionsBarButtonItem.enabled = false
+		//Animate the detail view to appear on screen
+		moreOptionsContainerView.center.y += view.bounds.height
+		UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { () -> Void in
+			self.moreOptionsContainerView.center.y -= self.view.bounds.height
+			self.moreOptionsView.alpha = 0.7
+			}, completion: nil)
+		moreOptionsContainerView.hidden = false
+	}
+
+	func hideMoreOptionsView() {
+		UIView.animateWithDuration(0.5, delay: 0.0, options: [], animations: { () -> Void in
+			self.moreOptionsContainerView.center.y += self.view.bounds.height
+			self.moreOptionsView.alpha = 0.0
+			}, completion: { _ in
+				self.moreOptionsContainerView.center.y -= self.view.bounds.height
+				self.moreOptionsContainerView.hidden = true
+				self.moreOptionsBarButtonItem.enabled = true
+		})
+	}
+
+	func moreOptionsViewControllerSelectFavorite(controller: MoreOptionsViewController, removeFromFavorites: Bool) {
+		let apod = APODarray[currentIndexPath!.item]
+
+		if removeFromFavorites {
+			apod.favorite = false
+		} else {
+			apod.favorite = true
+		}
+		performUIUpdatesOnMain {
+			CoreDataStackManager.sharedInstance.saveContext()
+			self.collectionView.reloadData()
+		}
+	}
+
+	func setupMoreOptionsView() {
+		moreOptionsView.alpha = 0.0
+		moreOptionsContainerView.hidden = true
+	}
+
 
 	//MARK: helper methods
 
@@ -310,73 +364,9 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 
-	@IBAction func moreOptionsButtonClicked(sender: UIBarButtonItem) {
-		showMoreOptionsDetailView()
-	}
-
-	func moreOptionsViewControllerSelectFavorite(controller: MoreOptionsViewController, removeFromFavorites: Bool) {
-		let apod = APODarray[currentIndexPath!.item]
-
-		if removeFromFavorites {
-			apod.favorite = false
-		} else {
-			apod.favorite = true
-		}
-
-		performUIUpdatesOnMain {
-			CoreDataStackManager.sharedInstance.saveContext()
-			self.collectionView.reloadData()
-		}
-	}
-
-
-	func moreOptionsViewControllerSelectShare(controller: MoreOptionsViewController) {
-		let apod = APODarray[currentIndexPath!.row]
-		let link = apod.url
-		let activityVC = UIActivityViewController(activityItems: [link!, apod.image!], applicationActivities: .None)
-		presentViewController(activityVC, animated: true, completion: nil)
-
-	}
-
-	func moreOptionsViewControllerSelectCancel(controller: MoreOptionsViewController) {
-		hideMoreOptionsView()
-	}
-
-
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if segue.identifier == "MoreOptionsViewController" {
-			let vc = segue.destinationViewController as! MoreOptionsViewController
-			vc.delegate = self
-		}
-	}
-
-	func hideMoreOptionsView() {
-		UIView.animateWithDuration(0.5, delay: 0.0, options: [], animations: { () -> Void in
-			self.moreOptionsContainerView.center.y += self.view.bounds.height
-			self.moreOptionsView.alpha = 0.0
-			}, completion: { _ in
-				self.moreOptionsContainerView.center.y -= self.view.bounds.height
-				self.moreOptionsContainerView.hidden = true
-				self.moreOptionsBarButtonItem.enabled = true
-		})
-	}
-
-	func showMoreOptionsDetailView() {
-
-		moreOptionsBarButtonItem.enabled = false
-		//Animate the detail view to appear on screen
-		moreOptionsContainerView.center.y += view.bounds.height
-		UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { () -> Void in
-			self.moreOptionsContainerView.center.y -= self.view.bounds.height
-			self.moreOptionsView.alpha = 0.7
-			}, completion: nil)
-
-		moreOptionsContainerView.hidden = false
-	}
-
 	func APODCollectionViewCellDelegateGoToWebsite(controller: APODCollectionViewCell) {
 		let apod = APODarray[currentIndexPath!.row]
-		let URL = "http://apod.nasa.gov/apod/ap" + convertDateForWebsite(apod.dateString!) + ".html"
+		let URL = APODConstants.APIWebsiteURL + convertDateForWebsite(apod.dateString!) + APODConstants.HTML
 		let app = UIApplication.sharedApplication()
 		if let url = NSURL(string: URL) {
 			if app.canOpenURL(url) {
@@ -385,7 +375,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 
-	//date must be of format e.g. 160421 in order to link to the APOD website
+	//date must be of the format YYMMDD e.g. "160421" in order to link to the APOD website
 	func convertDateForWebsite(date: String) -> String {
 		let newDate: NSString = date.stringByReplacingOccurrencesOfString("-", withString: "")
 		return newDate.substringWithRange(NSRange(location: 2, length: newDate.length-2)) as String
@@ -393,8 +383,8 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 
 	//create a blank array of APOD cells to populate the collection view
 	func createBlankAPODCells() {
-		for i in 0..<16 {
-			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
+		for i in 0..<APODConstants.BlanksAPODs {
+			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
 			APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
@@ -402,7 +392,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 
 	func insertBlankAPODCells(number: Int) {
 		for i in 0..<number {
-			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
+			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
 			APODarray.insert(newAPOD, atIndex: 0)
 			CoreDataStackManager.sharedInstance.saveContext()
 		}

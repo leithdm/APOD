@@ -18,14 +18,13 @@ class MyFavoritesMoreOptionsViewController: UIViewController {
 	
 	
 	weak var delegate: MyFavoritesMoreOptionsViewControllerDelegate?
-	@IBOutlet weak var favoriteButton: UIButton!
 	var favoriteStatus: Bool = false
-	
+	@IBOutlet weak var favoriteButton: UIButton!
+
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handler), name: "favoriteStatus", object: nil)
-		
 	}
 	
 	func handler(notification: NSNotification) {
@@ -52,7 +51,4 @@ class MyFavoritesMoreOptionsViewController: UIViewController {
 	@IBAction func didSelectClose(sender: UIButton) {
 		delegate?.myFavoritesMoreOptionsViewControllerSelectCancel(self)
 	}
-	
-	
 }
-

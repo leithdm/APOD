@@ -11,9 +11,17 @@ protocol MyFavoritesAPODViewControllerDelegate: class {
 
 class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MyFavoritesMoreOptionsViewControllerDelegate, MyFavoritesAPODCollectionViewCellDelegate {
 
-	//MARK: properties
+	//MARK: Constants
 
-	@IBOutlet weak var collectionView: UICollectionView!
+	struct APODConstants {
+		static let EntityName = "APOD"
+		static let APIURL = "http://apod.nasa.gov/"
+		static let ReusableCellIdentifier = "MyFavoritesAPODCollectionViewCell"
+		static let APIWebsiteURL = "http://apod.nasa.gov/apod/ap"
+		static let HTML = ".html"
+	}
+
+	//MARK: properties
 
 	var APODarray = [APOD]()
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
@@ -25,13 +33,7 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 	@IBOutlet weak var moreOptionsView: UIView!
 	@IBOutlet weak var moreOptionsContainerView: UIView!
 	@IBOutlet weak var moreOptionsBarButtonItem: UIBarButtonItem!
-
-
-	//MARK: core data
-
-	lazy var sharedContext: NSManagedObjectContext = {
-		return CoreDataStackManager.sharedInstance.managedObjectContext
-	}()
+	@IBOutlet weak var collectionView: UICollectionView!
 
 
 	//MARK: lifecycle methods
@@ -46,7 +48,6 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		APODarray = fetchFavoriteAPODs()
-
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -55,14 +56,18 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 
 		if let index = apodIndex {
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
-
 		}
-
 	}
 
 	//MARK: core data
+
+	lazy var sharedContext: NSManagedObjectContext = {
+		return CoreDataStackManager.sharedInstance.managedObjectContext
+	}()
+
+
 	func fetchFavoriteAPODs() -> [APOD] {
-		let fetchRequest = NSFetchRequest(entityName: "APOD")
+		let fetchRequest = NSFetchRequest(entityName: APODConstants.EntityName)
 		fetchRequest.predicate = NSPredicate(format: "favorite == %@", true)
 
 		do {
@@ -72,6 +77,60 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 		}
 	}
 
+	//MARK: more options methods
+
+	func myFavoritesMoreOptionsViewControllerSelectFavorite(controller: MyFavoritesMoreOptionsViewController, removeFromFavorites: Bool) {
+		let apod = APODarray[currentIndexPath!.item]
+
+		if removeFromFavorites {
+			apod.favorite = false
+		} else {
+			apod.favorite = true
+		}
+
+		performUIUpdatesOnMain {
+			CoreDataStackManager.sharedInstance.saveContext()
+			self.collectionView.reloadData()
+		}
+	}
+
+
+	func myFavoritesMoreOptionsViewControllerSelectShare(controller: MyFavoritesMoreOptionsViewController) {
+		let apod = APODarray[currentIndexPath!.row]
+		let link = apod.url
+		let activityVC = UIActivityViewController(activityItems: [link!, apod.image!], applicationActivities: .None)
+		presentViewController(activityVC, animated: true, completion: nil)
+	}
+
+	func myFavoritesMoreOptionsViewControllerSelectCancel(controller: MyFavoritesMoreOptionsViewController) {
+		hideMoreOptionsView()
+	}
+
+	func hideMoreOptionsView() {
+		UIView.animateWithDuration(0.5, delay: 0.0, options: [], animations: { () -> Void in
+			self.moreOptionsContainerView.center.y += self.view.bounds.height
+			self.moreOptionsView.alpha = 0.0
+			}, completion: { _ in
+				self.moreOptionsContainerView.center.y -= self.view.bounds.height
+				self.moreOptionsContainerView.hidden = true
+				self.moreOptionsBarButtonItem.enabled = true
+		})
+	}
+
+	func showMoreOptionsDetailView() {
+
+		moreOptionsBarButtonItem.enabled = false
+		//Animate the detail view to appear on screen
+		moreOptionsContainerView.center.y += view.bounds.height
+		UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { () -> Void in
+			self.moreOptionsContainerView.center.y -= self.view.bounds.height
+			self.moreOptionsView.alpha = 0.7
+			}, completion: nil)
+
+
+		moreOptionsContainerView.hidden = false
+	}
+
 	//MARK: menu button delegate methods
 
 	@IBAction func menuButtonTapped(sender: AnyObject) {
@@ -79,6 +138,17 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 			navigationController?.popToRootViewControllerAnimated(true)
 		} else {
 			delegate?.myFavoritesAPODViewControllerDidTapMenuButton(self)
+		}
+	}
+
+	@IBAction func moreOptionsButtonClicked(sender: UIBarButtonItem) {
+		showMoreOptionsDetailView()
+	}
+
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "MyFavoritesMoreOptionsViewController" {
+			let vc = segue.destinationViewController as! MyFavoritesMoreOptionsViewController
+			vc.delegate = self
 		}
 	}
 
@@ -94,7 +164,7 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 	}
 
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MyFavoritesAPODCollectionViewCell", forIndexPath: indexPath) as! MyFavoritesAPODCollectionViewCell
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(APODConstants.ReusableCellIdentifier, forIndexPath: indexPath) as! MyFavoritesAPODCollectionViewCell
 		currentIndexPath = indexPath
 		configureCell(cell, atIndexPath: indexPath)
 		return cell
@@ -111,17 +181,13 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
 			
-			if !APOD.url!.containsString("http://apod.nasa.gov/")  {
+			if !APOD.url!.containsString(APODConstants.APIURL)  {
 				cell.isAVideoText.hidden = false
 				cell.goToWebSite.hidden = false
 			}
-			
-			//show the toolbar
+
 			cell.titleBottomToolbar.hidden = false
-
-			//remove loading image text
 			cell.loadingImageText.hidden = true
-
 			cell.activityIndicator.stopAnimating()
 			cell.imageView.image = image
 			cell.imageTitle.text = APOD.title
@@ -130,18 +196,14 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 			
 			//additional logic for displaying favorites option
 			NSNotificationCenter.defaultCenter().postNotificationName("favoriteStatus", object: nil, userInfo: ["isAlreadyFavorite" : APOD.favorite])
-
 		}
 	}
 
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-
-		//TODO: remove magic numbers
 		return CGSize(width: collectionView.frame.size.width - 10, height: collectionView.frame.size.height - 80)
 	}
 
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
-	{
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
 		return UIEdgeInsetsMake(0, 5, 0, 5)
 	}
 
@@ -169,76 +231,9 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 		}
 	}
 
-
-	@IBAction func moreOptionsButtonClicked(sender: UIBarButtonItem) {
-		showMoreOptionsDetailView()
-	}
-	
-	func myFavoritesMoreOptionsViewControllerSelectFavorite(controller: MyFavoritesMoreOptionsViewController, removeFromFavorites: Bool) {
-		let apod = APODarray[currentIndexPath!.item]
-		
-		if removeFromFavorites == true {
-			apod.favorite = false
-		} else {
-			apod.favorite = true
-		}
-		
-		performUIUpdatesOnMain {
-			CoreDataStackManager.sharedInstance.saveContext()
-			self.collectionView.reloadData()
-		}
-	}
-	
-	
-	func myFavoritesMoreOptionsViewControllerSelectShare(controller: MyFavoritesMoreOptionsViewController) {
-		let apod = APODarray[currentIndexPath!.row]
-		let link = apod.url
-		let activityVC = UIActivityViewController(activityItems: [link!, apod.image!], applicationActivities: .None)
-		presentViewController(activityVC, animated: true, completion: nil)
-	}
-	
-	func myFavoritesMoreOptionsViewControllerSelectCancel(controller: MyFavoritesMoreOptionsViewController) {
-		hideMoreOptionsView()
-	}
-
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if segue.identifier == "MyFavoritesMoreOptionsViewController" {
-			let vc = segue.destinationViewController as! MyFavoritesMoreOptionsViewController
-			vc.delegate = self
-		}
-	}
-
-
-	func hideMoreOptionsView() {
-		UIView.animateWithDuration(0.5, delay: 0.0, options: [], animations: { () -> Void in
-			self.moreOptionsContainerView.center.y += self.view.bounds.height
-			self.moreOptionsView.alpha = 0.0
-			}, completion: { _ in
-				self.moreOptionsContainerView.center.y -= self.view.bounds.height
-				self.moreOptionsContainerView.hidden = true
-				self.moreOptionsBarButtonItem.enabled = true
-		})
-	}
-
-	func showMoreOptionsDetailView() {
-
-		moreOptionsBarButtonItem.enabled = false
-		//Animate the detail view to appear on screen
-		moreOptionsContainerView.center.y += view.bounds.height
-		UIView.animateWithDuration(0.7, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { () -> Void in
-			self.moreOptionsContainerView.center.y -= self.view.bounds.height
-			self.moreOptionsView.alpha = 0.7
-			}, completion: nil)
-
-
-		moreOptionsContainerView.hidden = false
-	}
-	
-	
 	func myFavoritesAPODCollectionViewCellGoToWebsite(controller: MyFavoritesAPODCollectionViewCell) {
-		print("called")
 		let apod = APODarray[currentIndexPath!.row]
-		let URL = "http://apod.nasa.gov/apod/ap" + convertDateForWebsite(apod.dateString!) + ".html"
+		let URL = APODConstants.APIWebsiteURL + convertDateForWebsite(apod.dateString!) + APODConstants.HTML
 		let app = UIApplication.sharedApplication()
 		if let url = NSURL(string: URL) {
 			if app.canOpenURL(url) {

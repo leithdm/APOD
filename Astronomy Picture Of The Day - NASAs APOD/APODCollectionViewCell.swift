@@ -32,10 +32,8 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	weak var delegate: APODCollectionViewCellDelegate?
 
 	func setup() {
-		
 		isAVideoText.hidden = true
 		goToWebSite.hidden = true
-		
 		scrollView.delegate = self
 		setZoomParametersForSize(scrollView.bounds.size)
 		detailTextView.scrollRangeToVisible(NSMakeRange(0, 0))

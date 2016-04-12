@@ -12,25 +12,27 @@ protocol ViewControllerTwoDelegate: class {
 
 class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
 
+	//MARK: Constants
+
+	struct APODConstants {
+		static let EntityName = "APOD"
+		static let APIURL = "http://apod.nasa.gov/"
+		static let ReusableCellIdentifier = "GalleryAPODCollectionViewCell"
+		static let BlanksAPODs = 64
+	}
+
 	//MARK: properties
 
 	var APODarray = [APOD]()
 	weak var delegate: ViewControllerTwoDelegate?
-
-	//file path for saving the number of downloaded images
-	var noOfDownloadsFilePath : String {
-		let manager = NSFileManager.defaultManager()
-		let url = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
-		return url.URLByAppendingPathComponent("noOfDownloads").path!
-	}
-
+	var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	@IBOutlet weak var collectionView: UICollectionView!
 
 	//MARK: lifecycle methods
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		title = formatDateStringForTitle(ViewControllerOne.dates[0])
+		title = formatDateStringForTitle(dates[0])
 	}
 
 	override func viewWillAppear(animated: Bool) {
@@ -55,7 +57,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}()
 
 	func fetchAllAPODS() -> [APOD] {
-		let fetchRequest = NSFetchRequest(entityName: "APOD")
+		let fetchRequest = NSFetchRequest(entityName: APODConstants.EntityName)
 
 		do {
 		 return try sharedContext.executeFetchRequest(fetchRequest) as! [APOD]
@@ -75,7 +77,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 				max = index.row
 			}
 		}
-		title = formatDateStringForTitle(ViewControllerOne.dates[max])
+		title = formatDateStringForTitle(dates[max])
 	}
 
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -105,7 +107,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
 			let apod = APODarray[index.row]
 			if apod.image == nil {
-				getPhotoProperties([ViewControllerOne.dates[index.row]])
+				getPhotoProperties([dates[index.row]])
 			}
 		}
 	}
@@ -133,7 +135,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 					APOD.title = data["title"]
 					APOD.url = data["url"]
 
-					if !APOD.url!.containsString("http://apod.nasa.gov/") {
+					if !APOD.url!.containsString(APODConstants.APIURL) {
 						//typically a video cannot be displayed as an image
 						self.performUIUpdatesOnMain({
 							APOD.image = UIImage(named: "noPhoto")
@@ -174,7 +176,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GalleryAPODCollectionViewCell", forIndexPath: indexPath) as! GalleryAPODCollectionViewCell
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(APODConstants.ReusableCellIdentifier, forIndexPath: indexPath) as! GalleryAPODCollectionViewCell
 		configureCell(cell, atIndexPath: indexPath)
 		return cell
 	}
@@ -260,8 +262,8 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	//create a blank array of APOD cells to populate the collection view
 	func createBlankAPODCells() {
-		for _ in 0..<64 {
-			let newAPOD = APOD(dateString: ViewControllerOne.dates[APODarray.count], context: self.sharedContext)
+		for _ in 0..<APODConstants.BlanksAPODs {
+			let newAPOD = APOD(dateString: dates[APODarray.count], context: self.sharedContext)
 			APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
