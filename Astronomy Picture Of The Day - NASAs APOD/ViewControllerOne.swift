@@ -76,6 +76,9 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		if let index = apodIndex {
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 			barButton.image = UIImage(named: "leftArrow")
+		} else { //otherwise always scroll to the most recent APOD
+			let index = NSIndexPath(forRow: 0, inSection: 0)
+			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 		}
 	}
 
