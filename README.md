@@ -4,7 +4,8 @@ Astronomy Picture Of The Day - NASAs APOD is a universal iOS app that brings the
 
 ##Installation
 
-Clone the GitHub repository and open in Xcode. 
+Clone the GitHub repository and open in Xcode
+
 `git clone https://github.com/leithdm/APOD`
 
 ##Usage
