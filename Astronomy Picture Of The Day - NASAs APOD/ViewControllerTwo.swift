@@ -14,17 +14,8 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	//MARK: properties
 
-	@IBOutlet weak var collectionView: UICollectionView!
-
 	var APODarray = [APOD]()
-	var currentAPODIndex = 0
 	weak var delegate: ViewControllerTwoDelegate?
-
-	//MARK: core data
-
-	lazy var sharedContext: NSManagedObjectContext = {
-		return CoreDataStackManager.sharedInstance.managedObjectContext
-	}()
 
 	//file path for saving the number of downloaded images
 	var noOfDownloadsFilePath : String {
@@ -32,6 +23,8 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		let url = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
 		return url.URLByAppendingPathComponent("noOfDownloads").path!
 	}
+
+	@IBOutlet weak var collectionView: UICollectionView!
 
 	//MARK: lifecycle methods
 
@@ -42,10 +35,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-				
 		APODarray = fetchAllAPODS()
-		collectionView.reloadData()
-		loadInitialImages()
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -53,7 +43,17 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
 	}
 
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		getImages()
+	}
+
 	//MARK: core data
+
+	lazy var sharedContext: NSManagedObjectContext = {
+		return CoreDataStackManager.sharedInstance.managedObjectContext
+	}()
+
 	func fetchAllAPODS() -> [APOD] {
 		let fetchRequest = NSFetchRequest(entityName: "APOD")
 
@@ -65,7 +65,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 
-	//MARK: downloading new photo properties when scrolling
+	//MARK: downloading photo properties when scrolling
 
 	func scrollViewDidScroll(scrollView: UIScrollView) {
 		var max = 0
@@ -77,52 +77,29 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		}
 		title = formatDateStringForTitle(ViewControllerOne.dates[max])
 	}
-	
-	
-	
+
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-		
+
 		var max = 0
-		
-		//TODO: refactor
+
+		//get the highest index of visible cells on screen
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
 			if max < index.row {
 				max = index.row
 			}
 		}
-		
-		print("APODArray size is \(APODarray.count)")
-		
+
+		//dynamically populate collection view with blank cells
 		if max == APODarray.count-1 {
-			createBlankAPODCellsWithIndex()
+			createBlankAPODCells()
 		}
-
-//		if APODarray.count != ViewControllerOne.dates.count {
-//			for _ in 0..<ViewControllerOne.dates.count - 16 {
-//				let newAPOD = APOD(dateString: ViewControllerOne.dates[APODarray.count], context: self.sharedContext)
-//				APODarray.append(newAPOD)
-//				CoreDataStackManager.sharedInstance.saveContext()
-//				performUIUpdatesOnMain({ 
-//					self.collectionView.reloadData()
-//				})
-//			}
-//		}
-
 		getImages()
 	}
 
-	
-	func loadInitialImages() {
-		for i in 0..<16 {
-			let apod = APODarray[i]
-			if apod.image == nil {
-				getPhotoProperties([ViewControllerOne.dates[i]])
-			}
-		}
-	}
-	
-	
+
+	//MARK: download photo properties
+
 	func getImages() {
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
@@ -132,8 +109,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			}
 		}
 	}
-	
-	//MARK: download photo properties
 
 	func getPhotoProperties(dates: [String]) {
 
@@ -169,7 +144,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 						//create an image based on url string
 						let url = NSURL(string: APOD.url!)
 						let imageData = NSData(contentsOfURL: url!)
-						self.performUIUpdatesOnMain({ 
+						self.performUIUpdatesOnMain({
 							APOD.image = UIImage(data: imageData!)
 							self.collectionView.reloadData()
 							CoreDataStackManager.sharedInstance.saveContext()
@@ -216,7 +191,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			cell.imageView.image = image
 			cell.imageDate.text = formatDateString(APOD.dateString!)
 			cell.imageTitle.text = APOD.title
-			if APOD.favorite == true {
+			if APOD.favorite {
 				cell.favoriteImage.hidden = false
 			} else {
 				cell.favoriteImage.hidden = true
@@ -247,24 +222,22 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		
+
 		let apod = APODarray[indexPath.row]
-		
+
 		//prevents an image from being clicked if not downloaded yet
 		if apod.image == nil {
 			return
 		}
-		
+
 		let vcOne = storyboard!.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
 		vcOne.apodIndex = indexPath
 		navigationController?.pushViewController(vcOne, animated: true)
 	}
 
-
-
 	//MARK: helper methods
 
-	//format the date to be in format e.g. 01 January 20xx
+	//format the date to be in format e.g. 01 January 2016
 	func formatDateString(date: String) -> String?  {
 		let formatter = NSDateFormatter()
 		formatter.dateFormat = "yyyy-MM-dd"
@@ -274,6 +247,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		return newFormatter.stringFromDate(existingDate!)
 	}
 
+	//title is of format e.g. January 2016
 	func formatDateStringForTitle(date: String) -> String?  {
 		let formatter = NSDateFormatter()
 		formatter.dateFormat = "yyyy-MM-dd"
@@ -283,10 +257,9 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		return newFormatter.stringFromDate(existingDate!)
 	}
 
-	
+
 	//create a blank array of APOD cells to populate the collection view
-	func createBlankAPODCellsWithIndex() {
-		
+	func createBlankAPODCells() {
 		for _ in 0..<64 {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[APODarray.count], context: self.sharedContext)
 			APODarray.append(newAPOD)
@@ -294,16 +267,9 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 
-
-
 	func performUIUpdatesOnMain(updates: () -> Void) {
 		dispatch_async(dispatch_get_main_queue()) {
 			updates()
 		}
 	}
 }
-
-
-
-
-

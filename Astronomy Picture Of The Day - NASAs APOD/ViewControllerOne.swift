@@ -12,6 +12,7 @@ protocol ViewControllerOneDelegate: class {
 class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MoreOptionsViewControllerDelegate, APODCollectionViewCellDelegate {
 
 	//MARK: properties
+
 	static var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	var APODarray = [APOD]()
 	weak var delegate: ViewControllerOneDelegate?
@@ -23,20 +24,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	@IBOutlet weak var moreOptionsView: UIView!
 	@IBOutlet weak var moreOptionsContainerView: UIView!
 	@IBOutlet weak var moreOptionsBarButtonItem: UIBarButtonItem!
-
-
-	//MARK: core data
-
-	lazy var sharedContext: NSManagedObjectContext = {
-		return CoreDataStackManager.sharedInstance.managedObjectContext
-	}()
-
-	//file path for saving the number of downloaded images
-	var noOfDownloadsFilePath : String {
-		let manager = NSFileManager.defaultManager()
-		let url = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
-		return url.URLByAppendingPathComponent("noOfDownloads").path!
-	}
 
 	//MARK: lifecycle methods
 
@@ -55,7 +42,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			createBlankAPODCells()
 			getPhotoProperties([ViewControllerOne.dates.first!])
 		} else {
-			//get new dates
+			//get new APODs from server
 			let dates = getMissingAPODDates()
 
 			var datesToCheck: [String] = []
@@ -65,8 +52,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				}
 			}
 
-			print("datesToCheck: \(datesToCheck)")
-
 			if datesToCheck.count != 0 {
 				insertBlankAPODCells(datesToCheck.count)
 				getPhotoProperties([ViewControllerOne.dates.first!])
@@ -74,6 +59,67 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
+
+		if let index = apodIndex {
+			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
+			barButton.image = UIImage(named: "leftArrow")
+		}
+
+	}
+
+	//MARK: core data
+
+	lazy var sharedContext: NSManagedObjectContext = {
+		return CoreDataStackManager.sharedInstance.managedObjectContext
+	}()
+
+	func fetchAllAPODS() -> [APOD] {
+		let fetchRequest = NSFetchRequest(entityName: "APOD")
+		do {
+		 return try sharedContext.executeFetchRequest(fetchRequest) as! [APOD]
+		} catch {
+			return [APOD]()
+		}
+	}
+
+	//MARK: scrolling methods
+
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		var max = 0
+
+		for cell in collectionView.visibleCells() {
+			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
+			if max < index.row {
+				max = index.row
+			}
+		}
+		title = formatDateString(ViewControllerOne.dates[max])
+	}
+
+	//MARK: downloading new photo properties when scrolling
+
+	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+
+		var max = 0
+
+		//TODO: refactor. this is not actually required
+		for cell in collectionView.visibleCells() {
+			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
+			if max < index.row {
+				max = index.row
+			}
+		}
+
+		if max == APODarray.count-1 {
+			createBlankAPODCells()
+		}
+		getImages()
+	}
+
+	//MARK: determine what APODs have not been downloaded yet
 
 	func getMissingAPODDates() -> [String] {
 		var returnArray = [String]()
@@ -105,66 +151,9 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		return returnArray
 	}
 
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
 
-		if let index = apodIndex {
-			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
-			barButton.image = UIImage(named: "leftArrow")
-		}
+	//MARK: download photo properties
 
-	}
-
-	//MARK: core data
-	func fetchAllAPODS() -> [APOD] {
-		let fetchRequest = NSFetchRequest(entityName: "APOD")
-		do {
-		 return try sharedContext.executeFetchRequest(fetchRequest) as! [APOD]
-		} catch {
-			return [APOD]()
-		}
-	}
-
-
-	func scrollViewDidScroll(scrollView: UIScrollView) {
-		var max = 0
-
-		for cell in collectionView.visibleCells() {
-			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-			if max < index.row {
-				max = index.row
-			}
-		}
-		title = formatDateString(ViewControllerOne.dates[max])
-	}
-
-	//MARK: downloading new photo properties when scrolling
-
-	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-
-		var max = 0
-
-		//TODO: refactor. this is not actually required
-		for cell in collectionView.visibleCells() {
-			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-			if max < index.row {
-				max = index.row
-			}
-		}
-
-		print("APODArray size is \(APODarray.count)")
-
-		if max == APODarray.count-1 {
-			createBlankAPODCellsWithIndex()
-		}
-
-
-		getImages()
-
-	}
-
-	//MARK: get images from server
 	func getImages() {
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
@@ -174,9 +163,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			}
 		}
 	}
-
-
-	//MARK: download photo properties
 
 	func getPhotoProperties(dates: [String]) {
 
@@ -285,7 +271,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			NSNotificationCenter.defaultCenter().postNotificationName("favoriteStatus", object: nil, userInfo: ["isAlreadyFavorite" : APOD.favorite])
 
 		} else { //download from the remote serve
-			//hide the toolbar
 			cell.titleBottomToolbar.hidden = true
 			cell.loadingImageText.hidden = false
 			cell.activityIndicator.startAnimating()
@@ -295,13 +280,10 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-
-		//TODO: remove magic numbers
 		return CGSize(width: collectionView.frame.size.width - 10, height: collectionView.frame.size.height - 80)
 	}
 
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
-	{
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
 		return UIEdgeInsetsMake(0, 5, 0, 5)
 	}
 
@@ -328,16 +310,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 
-
 	@IBAction func moreOptionsButtonClicked(sender: UIBarButtonItem) {
 		showMoreOptionsDetailView()
 	}
 
-
 	func moreOptionsViewControllerSelectFavorite(controller: MoreOptionsViewController, removeFromFavorites: Bool) {
 		let apod = APODarray[currentIndexPath!.item]
 
-		if removeFromFavorites == true {
+		if removeFromFavorites {
 			apod.favorite = false
 		} else {
 			apod.favorite = true
@@ -391,7 +371,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			self.moreOptionsView.alpha = 0.7
 			}, completion: nil)
 
-
 		moreOptionsContainerView.hidden = false
 	}
 
@@ -406,12 +385,13 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 
+	//date must be of format e.g. 160421 in order to link to the APOD website
 	func convertDateForWebsite(date: String) -> String {
 		let newDate: NSString = date.stringByReplacingOccurrencesOfString("-", withString: "")
 		return newDate.substringWithRange(NSRange(location: 2, length: newDate.length-2)) as String
 	}
 
-	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
+	//create a blank array of APOD cells to populate the collection view
 	func createBlankAPODCells() {
 		for i in 0..<16 {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
@@ -420,16 +400,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 
-	//create a blank array of APOD cells to populate the collection view. In total ~ 7500 cells created.
-	func createBlankAPODCellsWithIndex() {
-
-		for _ in 0..<10 {
-			let newAPOD = APOD(dateString: ViewControllerOne.dates[APODarray.count], context: self.sharedContext)
-			APODarray.append(newAPOD)
-			CoreDataStackManager.sharedInstance.saveContext()
-		}
-	}
-	
 	func insertBlankAPODCells(number: Int) {
 		for i in 0..<number {
 			let newAPOD = APOD(dateString: ViewControllerOne.dates[i], context: self.sharedContext)
@@ -437,6 +407,4 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}
-	
-	
 }
