@@ -121,7 +121,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		}
 
 		if max == APODarray.count-1 {
-			createBlankAPODCells()
+			createBlankAPODCellsWithIndex()
 		}
 		getImages()
 	}
@@ -384,7 +384,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		return newDate.substringWithRange(NSRange(location: 2, length: newDate.length-2)) as String
 	}
 
-	//create a blank array of APOD cells to populate the collection view
+	//create an initial array of APOD cells to populate the collection view
 	func createBlankAPODCells() {
 		for i in 0..<APODConstants.BlanksAPODs {
 			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
@@ -397,6 +397,15 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		for i in 0..<number {
 			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
 			APODarray.insert(newAPOD, atIndex: 0)
+			CoreDataStackManager.sharedInstance.saveContext()
+		}
+	}
+	
+	//create a blank array of APOD cells to populate the collection view
+	func createBlankAPODCellsWithIndex() {
+		for _ in 0..<10 {
+			let newAPOD = APOD(dateString: dates[APODarray.count], context: self.sharedContext)
+			APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}
