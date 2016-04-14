@@ -17,7 +17,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		static let EntityName = "APOD"
 		static let APIURL = "http://apod.nasa.gov/"
 		static let ReusableCellIdentifier = "APODCollectionViewCell"
-		static let BlanksAPODs = 16
+		static let BlanksAPODs = 500
 		static let APIWebsiteURL = "http://apod.nasa.gov/apod/ap"
 		static let HTML = ".html"
 	}
@@ -25,7 +25,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: properties
 
 	var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
-	var APODarray = [APOD]()
+	static var APODarray = [APOD]()
 	weak var delegate: ViewControllerOneDelegate?
 	var apodIndex: NSIndexPath?
 	var currentIndexPath: NSIndexPath?
@@ -46,23 +46,26 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 
-		APODarray = fetchAllAPODS()
+		ViewControllerOne.APODarray = fetchAllAPODS()
+		collectionView.reloadData()
 
 		//first instance of running the app
-		if APODarray.count == 0 {
+		if ViewControllerOne.APODarray.count == 0 {
 			createBlankAPODCells()
 			getPhotoProperties([dates.first!])
 		} else {
 			//get any APODs not downloaded from the server
 			let dates = getMissingAPODDates()
+			print("missing dates are: \(dates)")
 			var datesToCheck: [String] = []
 			for date in dates  {
-				if date != APODarray.first?.dateString {
+				if date != ViewControllerOne.APODarray.first?.dateString {
 					datesToCheck.append(date)
 				}
 			}
 
 			if datesToCheck.count != 0 {
+				print("datesToCheck is: \(datesToCheck)")
 				insertBlankAPODCells(datesToCheck.count)
 				getPhotoProperties([dates.first!])
 			}
@@ -76,10 +79,15 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		if let index = apodIndex {
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 			barButton.image = UIImage(named: "leftArrow")
-		} else { //otherwise always scroll to the most recent APOD
+			collectionView.reloadData()
+		}
+		
+		
+		else { //otherwise always scroll to the most recent APOD
 			let index = NSIndexPath(forRow: 0, inSection: 0)
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 		}
+
 	}
 
 	//MARK: core data
@@ -120,7 +128,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			}
 		}
 
-		if max == APODarray.count-1 {
+		if max == ViewControllerOne.APODarray.count-1 {
 			createBlankAPODCellsWithIndex()
 		}
 		getImages()
@@ -130,7 +138,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 
 	func getMissingAPODDates() -> [String] {
 		var returnArray = [String]()
-		let originDateString = APODarray.first?.dateString
+		let originDateString = ViewControllerOne.APODarray.first?.dateString
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 
@@ -156,7 +164,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	func getImages() {
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-			let apod = APODarray[index.item]
+			let apod = ViewControllerOne.APODarray[index.item]
 			if apod.image == nil {
 				getPhotoProperties([dates[index.row]])
 			}
@@ -178,7 +186,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			}
 
 			//using the date as the match criteria, compare the downloaded data with the relevant blank APOD cell
-			for APOD in self.APODarray {
+			for APOD in ViewControllerOne.APODarray {
 
 				//ensures the correct APOD is paired with correct cell
 				if APOD.dateString == data["date"] {
@@ -230,7 +238,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return APODarray.count
+		return ViewControllerOne.APODarray.count
 	}
 
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -245,7 +253,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		cell.setup()
 		cell.delegate = self
 
-		let APOD = APODarray[indexPath.item]
+		let APOD = ViewControllerOne.APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 
 		//if the image has already been downloaded and is in the Documents directory
@@ -297,7 +305,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: moreOptions methods (add to favorites, share)
 
 	func moreOptionsViewControllerSelectShare(controller: MoreOptionsViewController) {
-		let apod = APODarray[currentIndexPath!.row]
+		let apod = ViewControllerOne.APODarray[currentIndexPath!.row]
 		let link = apod.url
 		let activityVC = UIActivityViewController(activityItems: [link!, apod.image!], applicationActivities: .None)
 		presentViewController(activityVC, animated: true, completion: nil)
@@ -330,7 +338,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func moreOptionsViewControllerSelectFavorite(controller: MoreOptionsViewController, removeFromFavorites: Bool) {
-		let apod = APODarray[currentIndexPath!.item]
+		let apod = ViewControllerOne.APODarray[currentIndexPath!.item]
 
 		if removeFromFavorites {
 			apod.favorite = false
@@ -368,7 +376,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func APODCollectionViewCellDelegateGoToWebsite(controller: APODCollectionViewCell) {
-		let apod = APODarray[currentIndexPath!.row]
+		let apod = ViewControllerOne.APODarray[currentIndexPath!.row]
 		let URL = APODConstants.APIWebsiteURL + convertDateForWebsite(apod.dateString!) + APODConstants.HTML
 		let app = UIApplication.sharedApplication()
 		if let url = NSURL(string: URL) {
@@ -388,7 +396,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	func createBlankAPODCells() {
 		for i in 0..<APODConstants.BlanksAPODs {
 			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
-			APODarray.append(newAPOD)
+			ViewControllerOne.APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}
@@ -396,7 +404,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	func insertBlankAPODCells(number: Int) {
 		for i in 0..<number {
 			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
-			APODarray.insert(newAPOD, atIndex: 0)
+			ViewControllerOne.APODarray.insert(newAPOD, atIndex: 0)
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}
@@ -404,8 +412,8 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//create a blank array of APOD cells to populate the collection view
 	func createBlankAPODCellsWithIndex() {
 		for _ in 0..<10 {
-			let newAPOD = APOD(dateString: dates[APODarray.count], context: self.sharedContext)
-			APODarray.append(newAPOD)
+			let newAPOD = APOD(dateString: dates[ViewControllerOne.APODarray.count], context: self.sharedContext)
+			ViewControllerOne.APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}

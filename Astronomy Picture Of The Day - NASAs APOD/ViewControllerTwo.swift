@@ -18,12 +18,12 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		static let EntityName = "APOD"
 		static let APIURL = "http://apod.nasa.gov/"
 		static let ReusableCellIdentifier = "GalleryAPODCollectionViewCell"
-		static let BlanksAPODs = 64
+		static let BlanksAPODs = 500
 	}
 
 	//MARK: properties
 
-	var APODarray = [APOD]()
+//	var APODarray = [APOD]()
 	weak var delegate: ViewControllerTwoDelegate?
 	var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	@IBOutlet weak var collectionView: UICollectionView!
@@ -37,7 +37,8 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		APODarray = fetchAllAPODS()
+		ViewControllerOne.APODarray = fetchAllAPODS()
+		collectionView.reloadData()
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -81,7 +82,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-
+		
 		var max = 0
 
 		//get the highest index of visible cells on screen
@@ -91,12 +92,14 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 				max = index.row
 			}
 		}
-
+		
 		//dynamically populate collection view with blank cells
-		if max == APODarray.count-1 {
+		if max == ViewControllerOne.APODarray.count-1 {
 			createBlankAPODCells()
 		}
+		
 		getImages()
+
 	}
 
 
@@ -105,7 +108,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	func getImages() {
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-			let apod = APODarray[index.row]
+			let apod = ViewControllerOne.APODarray[index.row]
 			if apod.image == nil {
 				getPhotoProperties([dates[index.row]])
 			}
@@ -127,7 +130,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			}
 
 			//using the date as the match criteria, compare the downloaded data with the relevant blank APOD cell
-			for APOD in self.APODarray {
+			for APOD in ViewControllerOne.APODarray {
 
 				//ensures the correct APOD is paired with correct cell
 				if APOD.dateString == data["date"] {
@@ -172,7 +175,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return APODarray.count
+		return ViewControllerOne.APODarray.count
 	}
 
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -183,7 +186,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	func configureCell(cell: GalleryAPODCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
 
-		let APOD = APODarray[indexPath.item]
+		let APOD = ViewControllerOne.APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 
 		//if the image has already been downloaded and is in the Documents directory
@@ -209,8 +212,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-
-		//TODO: remove magic numbers
 		return CGSize(width: collectionView.frame.size.width/2 - 10, height: collectionView.frame.size.width/2 - 10)
 	}
 
@@ -225,11 +226,18 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
-		let apod = APODarray[indexPath.row]
-
-		//prevents an image from being clicked if not downloaded yet
-		if apod.image == nil {
-			return
+//		let apod = ViewControllerOne.APODarray[indexPath.row]
+//
+//		//prevents an image from being clicked if not downloaded yet
+//		if apod.image == nil {
+//			return
+//		}
+		
+		for cell in collectionView.visibleCells() {
+			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
+			if ViewControllerOne.APODarray[index.row].image == nil {
+				return
+			}
 		}
 
 		let vcOne = storyboard!.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
@@ -263,8 +271,8 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	//create a blank array of APOD cells to populate the collection view
 	func createBlankAPODCells() {
 		for _ in 0..<APODConstants.BlanksAPODs {
-			let newAPOD = APOD(dateString: dates[APODarray.count], context: self.sharedContext)
-			APODarray.append(newAPOD)
+			let newAPOD = APOD(dateString: dates[ViewControllerOne.APODarray.count], context: self.sharedContext)
+			ViewControllerOne.APODarray.append(newAPOD)
 			CoreDataStackManager.sharedInstance.saveContext()
 		}
 	}
