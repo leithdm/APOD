@@ -120,12 +120,12 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		APODClient.sharedInstance.downloadArrayPhotoProperties(dates, completionHandler: { (data, error) in
 
 			guard error == nil else {
-				print("error in downloading photo array properties")
+				print("DEBUG: error in downloading photo array properties")
 				return
 			}
 
 			guard let data: [String: String] = data else {
-				print("error retrieving data")
+				print("DEBUG: error retrieving data")
 				return
 			}
 

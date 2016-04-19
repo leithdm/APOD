@@ -14,11 +14,11 @@ class MyFavoritesAPODViewController: UIViewController, UICollectionViewDataSourc
 	//MARK: Constants
 
 	struct APODConstants {
-		static let EntityName = "APOD"
-		static let APIURL = "http://apod.nasa.gov/"
-		static let ReusableCellIdentifier = "MyFavoritesAPODCollectionViewCell"
-		static let APIWebsiteURL = "http://apod.nasa.gov/apod/ap"
-		static let HTML = ".html"
+		static let EntityName				= "APOD"
+		static let APIURL					= "http://apod.nasa.gov/"
+		static let ReusableCellIdentifier	= "MyFavoritesAPODCollectionViewCell"
+		static let APIWebsiteURL			= "http://apod.nasa.gov/apod/ap"
+		static let HTML						= ".html"
 	}
 
 	//MARK: properties

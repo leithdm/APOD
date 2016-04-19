@@ -59,7 +59,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		} else {
 			//get any APODs not downloaded from the server
 			let dates = getMissingAPODDates()
-			print("missing dates are: \(dates)")
+			print("DEBUG: missing dates are: \(dates)")
 			var datesToCheck: [String] = []
 			for date in dates  {
 				if date != ViewControllerOne.APODarray.first?.dateString {
@@ -68,7 +68,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			}
 			
 			if datesToCheck.count != 0 {
-				print("datesToCheck is: \(datesToCheck)")
+				print("DEBUG: datesToCheck is: \(datesToCheck)")
 				insertBlankAPODCells(datesToCheck.count)
 				getPhotoProperties([dates.first!])
 			}
@@ -185,13 +185,13 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		APODClient.sharedInstance.downloadArrayPhotoProperties(dates, completionHandler: { (data, error) in
 			
 			guard error == nil else {
-				print("error in downloading photo array properties")
+				print("DEBUG: error in downloading photo array properties")
 				self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
 				return
 			}
 			
 			guard let data: [String: String] = data else {
-				print("error retrieving data")
+				print("DEBUG: error retrieving data")
 				return
 			}
 			
