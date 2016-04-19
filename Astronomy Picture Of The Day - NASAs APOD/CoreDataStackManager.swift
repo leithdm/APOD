@@ -10,11 +10,10 @@ import Foundation
 import CoreData
 
 
-private let SQLITE_FILE_NAME = "APOD.sqlite"
+private let SQLITE_FILE_NAME = "TheWeatherApp.sqlite"
 
 class CoreDataStackManager {
-    
-    
+
     // MARK: shared Instance
 	
     static let sharedInstance = CoreDataStackManager()

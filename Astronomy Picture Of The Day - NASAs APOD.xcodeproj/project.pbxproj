@@ -12,6 +12,7 @@
 		01525C691CB278C6007E4783 /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */; };
 		015EE8AA1CB159E4009B1217 /* MyFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */; };
 		015EE8AC1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */; };
+		016941011CC67FFA00F45131 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016941001CC67FFA00F45131 /* Reachability.swift */; };
 		018B63851CA2DF3900152514 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63811CA2DF3900152514 /* SidebarViewController.swift */; };
 		018B63861CA2DF3900152514 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63821CA2DF3900152514 /* MenuTableViewController.swift */; };
 		018B63871CA2DF3900152514 /* ViewControllerTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63831CA2DF3900152514 /* ViewControllerTwo.swift */; };
@@ -56,6 +57,7 @@
 		01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewController.swift; sourceTree = "<group>"; };
 		015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesViewController.swift; sourceTree = "<group>"; };
 		015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
+		016941001CC67FFA00F45131 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		018B63811CA2DF3900152514 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		018B63821CA2DF3900152514 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		018B63831CA2DF3900152514 /* ViewControllerTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTwo.swift; sourceTree = "<group>"; };
@@ -120,6 +122,14 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		016941021CC6800600F45131 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				016941001CC67FFA00F45131 /* Reachability.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 		018B63801CA2DED300152514 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +172,7 @@
 		01C1B2701CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APOD */ = {
 			isa = PBXGroup;
 			children = (
+				01C1B2A11CA00BF300D96DF6 /* API */,
 				01C1B2A01CA00BE800D96DF6 /* Model */,
 				01525C671CB2680A007E4783 /* View */,
 				01C1B29F1CA00BE000D96DF6 /* Controller */,
@@ -211,7 +222,6 @@
 				019EBF461CA3E36100AE2B85 /* APOD.swift */,
 				01F475A61CABFDC500AC35EF /* CoreDataStackManager.swift */,
 				01F475A41CABF6B100AC35EF /* ImageCache.swift */,
-				01C1B2A11CA00BF300D96DF6 /* API */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -220,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				01C1B2A21CA00C0E00D96DF6 /* APODClient.swift */,
+				016941021CC6800600F45131 /* Network */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -373,6 +384,7 @@
 				015EE8AA1CB159E4009B1217 /* MyFavoritesViewController.swift in Sources */,
 				0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */,
 				01F475AA1CABFDEB00AC35EF /* Model.xcdatamodeld in Sources */,
+				016941011CC67FFA00F45131 /* Reachability.swift in Sources */,
 				018B63871CA2DF3900152514 /* ViewControllerTwo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
