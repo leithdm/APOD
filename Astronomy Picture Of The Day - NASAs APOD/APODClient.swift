@@ -30,7 +30,7 @@ class APODClient {
 	}
 	
 	struct APODParameterValues {
-		static let APIKey = "O7rxgK1W0aIobHi6EQFa1NjTNRPvTAQ73A3cwcoz"
+		static let APIKey = "IyeTTjPu0uEWXZhhXCLriSpOgoIViYvI8LXeVqF5"
 		static let HDImage = "false"
 	}
 	
@@ -43,6 +43,8 @@ class APODClient {
 	//MARK: download photo properties for array of dates
 	
 	func downloadArrayPhotoProperties(dates: [String], completionHandler: (data: [String: String]?, error: String?) -> Void) {
+		
+		print("DEBUG: downloading properties for \(dates)")
 		
 		for date in dates {
 			

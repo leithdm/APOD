@@ -434,6 +434,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			for i in 0..<self.dates.count {
 				let newAPOD = APOD(dateString: self.dates[i], context: self.sharedContext)
 				self.APODarray.append(newAPOD)
+				print("DEBUG: APOD array count is: \(self.APODarray.count)")
 				}
 			
 			dispatch_async(dispatch_get_main_queue(), { () -> Void in

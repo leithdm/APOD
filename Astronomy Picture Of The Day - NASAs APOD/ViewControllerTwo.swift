@@ -27,8 +27,11 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	
 	weak var delegate: ViewControllerTwoDelegate?
 	var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
-	@IBOutlet weak var collectionView: UICollectionView!
 	var APODarray = [APOD]()
+	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var datePicker: UIDatePicker!
+	@IBOutlet weak var datePickerView: UIView!
+	
 	
 	//MARK: lifecycle methods
 	
@@ -44,6 +47,8 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		
 		APODarray = fetchAllAPODS()
 		collectionView.reloadData()
+		datePickerView.hidden = true
+		datePicker.maximumDate = NSDate()
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -93,15 +98,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
 		
-		var max = 0
-		
-		//get the highest index of visible cells on screen
-		for cell in collectionView.visibleCells() {
-			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-			if max < index.row {
-				max = index.row
-			}
-		}
 		getImages()
 	}
 	
@@ -255,6 +251,53 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		let vcOne = storyboard!.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
 		vcOne.apodIndex = indexPath
 		navigationController?.pushViewController(vcOne, animated: true)
+	}
+	
+	//MARK: date picker
+	
+	@IBAction func datePickerClicked(sender: UIBarButtonItem) {
+
+		if datePickerView.hidden == true {
+			datePickerView.hidden = false
+		} else {
+			datePickerView.hidden = true
+		}
+
+	}
+	
+	@IBAction func cancelDatePicker(sender: UIButton) {
+		datePickerView.hidden = true
+	}
+	
+	@IBAction func datePickerGo(sender: UIButton) {
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		let datePickerDate = dateFormatter.stringFromDate(datePicker.date)
+	
+		// create a queue
+		let downloadQueue = dispatch_queue_create("download", nil)
+		
+		dispatch_async(downloadQueue) { () -> Void in
+
+			for (index, _) in self.APODarray.enumerate() {
+				let apod = self.APODarray[index]
+				if apod.dateString == datePickerDate {
+					print("DEBUG: The index of the apod in APODarray is \(index)")
+					let newIndex = NSIndexPath(forItem: index, inSection: 0)
+					let cell = self.collectionView.cellForItemAtIndexPath(newIndex)
+					let indexPath = self.collectionView.indexPathForCell(cell!)
+					self.datePickerView.hidden = true
+					self.collectionView.scrollToItemAtIndexPath(indexPath!, atScrollPosition: .None, animated: true)
+					self.title = self.formatDateStringForTitle(self.dates[index])
+					self.getImages()
+				}
+			}
+		}
+		
+		performUIUpdatesOnMain { 
+			self.collectionView.reloadData()
+		}
+
 	}
 	
 	//MARK: helper methods
