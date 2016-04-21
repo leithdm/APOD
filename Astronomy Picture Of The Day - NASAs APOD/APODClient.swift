@@ -169,9 +169,18 @@ class APODClient {
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		
 		let dateValue1 = dateFormatter.dateFromString(originDateString) as NSDate!
-		let dateValue2 = NSDate()
 		
+		//TESTING BLOCK ****
+//		let calendar = NSCalendar.currentCalendar()
+//		let dateValue2 = calendar.dateByAddingUnit(.Day, value: -10, toDate: NSDate(), options: [])
+		//TESTING BLOCK ****
+		
+		//TESTING BLOCK ****
+		let dateValue2 = NSDate()
 		let calendar = NSCalendar.currentCalendar()
+		//TESTING BLOCK ****
+		
+		
 		let flags: NSCalendarUnit = NSCalendarUnit.Day
 		
 		let components = calendar.components(flags, fromDate: dateValue1, toDate: dateValue2, options: NSCalendarOptions.MatchStrictly)

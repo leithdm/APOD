@@ -17,7 +17,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		static let EntityName				= "APOD"
 		static let APIURL					= "http://apod.nasa.gov/"
 		static let ReusableCellIdentifier	= "APODCollectionViewCell"
-		static let BlanksAPODs				= 500
 		static let APIWebsiteURL			= "http://apod.nasa.gov/apod/ap"
 		static let HTML						= ".html"
 		static let AlertTitleConnection		= "Connection offline"
@@ -28,7 +27,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: properties
 	
 	var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
-	static var APODarray = [APOD]()
+	var APODarray = [APOD]()
 	weak var delegate: ViewControllerOneDelegate?
 	var apodIndex: NSIndexPath?
 	var currentIndexPath: NSIndexPath?
@@ -41,38 +40,53 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	//MARK: lifecycle methods
 	
-	override func viewDidLoad() {
+	override func viewDidLoad() { 
 		super.viewDidLoad()
 		setupMoreOptionsView()
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		
-		ViewControllerOne.APODarray = fetchAllAPODS()
 		collectionView.reloadData()
 		
+		APODarray = fetchAllAPODS()
+		
 		//first instance of running the app
-		if ViewControllerOne.APODarray.count == 0 {
+		if APODarray.count == 0 {
 			createBlankAPODCells()
 			getPhotoProperties([dates.first!])
-		} else {
-			//get any APODs not downloaded from the server
-			let dates = getMissingAPODDates()
-			print("DEBUG: missing dates are: \(dates)")
-			var datesToCheck: [String] = []
-			for date in dates  {
-				if date != ViewControllerOne.APODarray.first?.dateString {
-					datesToCheck.append(date)
-				}
-			}
-			
-			if datesToCheck.count != 0 {
-				print("DEBUG: datesToCheck is: \(datesToCheck)")
-				insertBlankAPODCells(datesToCheck.count)
-				getPhotoProperties([dates.first!])
-			}
 		}
+		
+		else {
+			
+			// create a queue
+			let downloadQueue = dispatch_queue_create("download", nil)
+			
+			dispatch_async(downloadQueue) { () -> Void in
+				//get any APODs not downloaded from the server
+				let dates = self.getMissingAPODDates()
+				print("DEBUG: the missing dates (including today) are: \(dates)")
+				var datesToCheck: [String] = []
+				for date in dates  {
+					//modify array so it does not include todays date
+					if date != self.APODarray.first?.dateString {
+						datesToCheck.append(date)
+					}
+				}
+				
+				if datesToCheck.count != 0 {
+					print("DEBUG: new apod cells will be created for these dates: \(datesToCheck)")
+					self.insertBlankAPODCells(datesToCheck.count)
+					}
+				}
+				
+				dispatch_async(dispatch_get_main_queue(), { () -> Void in
+					self.APODarray = self.fetchAllAPODS()
+					self.getPhotoProperties([self.dates.first!])
+					self.collectionView.reloadData()
+				})
+			}
+
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -101,6 +115,9 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func fetchAllAPODS() -> [APOD] {
 		let fetchRequest = NSFetchRequest(entityName: APODConstants.EntityName)
+		let sectionSortDescriptor = NSSortDescriptor(key: "dateId", ascending: false)
+		let sortDescriptors = [sectionSortDescriptor]
+		fetchRequest.sortDescriptors = sortDescriptors
 		do {
 		 return try sharedContext.executeFetchRequest(fetchRequest) as! [APOD]
 		} catch {
@@ -131,9 +148,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			}
 		}
 		
-		if max == ViewControllerOne.APODarray.count-1 {
-			createBlankAPODCellsWithIndex()
-		}
 		getImages()
 	}
 	
@@ -141,7 +155,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func getMissingAPODDates() -> [String] {
 		var returnArray = [String]()
-		let originDateString = ViewControllerOne.APODarray.first?.dateString
+		let originDateString = APODarray.first?.dateString
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		
@@ -167,7 +181,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	func getImages() {
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-			let apod = ViewControllerOne.APODarray[index.item]
+			let apod = APODarray[index.item]
 			if apod.image == nil {
 				getPhotoProperties([dates[index.row]])
 			}
@@ -196,7 +210,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			}
 			
 			//using the date as the match criteria, compare the downloaded data with the relevant blank APOD cell
-			for APOD in ViewControllerOne.APODarray {
+			for APOD in self.APODarray {
 				
 				//ensures the correct APOD is paired with correct cell
 				if APOD.dateString == data["date"] {
@@ -213,7 +227,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 						}
 					} else {
 						//create an image based on url string
-						
 						if let stringURL = APOD.url {
 							if let url = NSURL(string: stringURL) {
 								if let imageData = NSData(contentsOfURL: url) {
@@ -259,7 +272,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return ViewControllerOne.APODarray.count
+		return APODarray.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -274,7 +287,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		cell.setup()
 		cell.delegate = self
 		
-		let APOD = ViewControllerOne.APODarray[indexPath.item]
+		let APOD = APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 		
 		//if the image has already been downloaded and is in the Documents directory
@@ -292,9 +305,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			cell.imageTitle.text = APOD.title
 			cell.explanation = APOD.explanation
 			title = formatDateString(APOD.dateString!)
-			
 			NSNotificationCenter.defaultCenter().postNotificationName("favoriteStatus", object: nil, userInfo: ["isAlreadyFavorite" : APOD.favorite])
-			
 		} else { //download from the remote serve
 			cell.titleBottomToolbar.hidden = true
 			cell.loadingImageText.hidden = false
@@ -326,7 +337,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: moreOptions methods (add to favorites, share)
 	
 	func moreOptionsViewControllerSelectShare(controller: MoreOptionsViewController) {
-		let apod = ViewControllerOne.APODarray[currentIndexPath!.row]
+		let apod = APODarray[currentIndexPath!.row]
 		let link = apod.url
 		let activityVC = UIActivityViewController(activityItems: [link!, apod.image!], applicationActivities: .None)
 		presentViewController(activityVC, animated: true, completion: nil)
@@ -359,7 +370,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	func moreOptionsViewControllerSelectFavorite(controller: MoreOptionsViewController, removeFromFavorites: Bool) {
-		let apod = ViewControllerOne.APODarray[currentIndexPath!.item]
+		let apod = APODarray[currentIndexPath!.item]
 		
 		if removeFromFavorites {
 			apod.favorite = false
@@ -397,7 +408,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	func APODCollectionViewCellDelegateGoToWebsite(controller: APODCollectionViewCell) {
-		let apod = ViewControllerOne.APODarray[currentIndexPath!.row]
+		let apod = APODarray[currentIndexPath!.row]
 		let URL = APODConstants.APIWebsiteURL + convertDateForWebsite(apod.dateString!) + APODConstants.HTML
 		let app = UIApplication.sharedApplication()
 		if let url = NSURL(string: URL) {
@@ -415,30 +426,33 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	//create an initial array of APOD cells to populate the collection view
 	func createBlankAPODCells() {
-		for i in 0..<APODConstants.BlanksAPODs {
+		
+		// create a queue
+		let downloadQueue = dispatch_queue_create("download", nil)
+		
+		dispatch_async(downloadQueue) { () -> Void in
+			for i in 0..<self.dates.count {
+				let newAPOD = APOD(dateString: self.dates[i], context: self.sharedContext)
+				self.APODarray.append(newAPOD)
+				}
+			
+			dispatch_async(dispatch_get_main_queue(), { () -> Void in
+				self.collectionView.reloadData()
+				CoreDataStackManager.sharedInstance.saveContext()
+			})
+		}
+		
+	}
+	
+	func insertBlankAPODCells(noBlankCells: Int) {
+		for i in 0..<noBlankCells {
 			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
-			ViewControllerOne.APODarray.append(newAPOD)
+			APODarray.insert(newAPOD, atIndex: 0)
 			CoreDataStackManager.sharedInstance.saveContext()
+			print("DEBUG: saving the newly inserted blank apod cells")
 		}
 	}
-	
-	func insertBlankAPODCells(number: Int) {
-		for i in 0..<number {
-			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
-			ViewControllerOne.APODarray.insert(newAPOD, atIndex: 0)
-			CoreDataStackManager.sharedInstance.saveContext()
-		}
-	}
-	
-	//create a blank array of APOD cells to populate the collection view
-	func createBlankAPODCellsWithIndex() {
-		for _ in 0..<10 {
-			let newAPOD = APOD(dateString: dates[ViewControllerOne.APODarray.count], context: self.sharedContext)
-			ViewControllerOne.APODarray.append(newAPOD)
-			CoreDataStackManager.sharedInstance.saveContext()
-		}
-	}
-	
+		
 	func showAlertViewController(title: String? , message: String?) {
 		performUIUpdatesOnMain {
 			let errorAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)

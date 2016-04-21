@@ -35,9 +35,7 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
 		
         labelOne.text = Constants.LabelOneText
-		
 		labelTwo.text = Constants.LabelTwoText
-		
 		labelThree.text = Constants.LabelThreeText
     }
 	

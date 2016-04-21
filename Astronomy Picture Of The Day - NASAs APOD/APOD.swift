@@ -12,6 +12,7 @@ import CoreData
 
 class APOD: NSManagedObject {
 	
+	@NSManaged var dateId: NSDate?
 	@NSManaged var dateString: String?
 	@NSManaged var explanation: String?
 	@NSManaged var title: String?
@@ -29,6 +30,13 @@ class APOD: NSManagedObject {
 		
 		self.dateString = dateString
 		favorite = false
+		self.dateId = createDateFromString()
+	}
+	
+	func createDateFromString() -> NSDate {
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		return dateFormatter.dateFromString(dateString!)!
 	}
 	
 	//images are retrieved/set via the Documents directory
