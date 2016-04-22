@@ -37,8 +37,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		APODarray = fetchAllAPODS()
+
 		title = formatDateStringForTitle(dates[0])
 	}
 	
@@ -106,12 +105,11 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func getImages() {
 		print("DEBUG: getImages is called")
-		print("DEBUG: visible cells are: \(collectionView.visibleCells())")
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-			let apod = APODarray[index.row]
+			let apod = APODarray[index.item]
 			if apod.image == nil {
-				getPhotoProperties([dates[index.row]])
+				getPhotoProperties([dates[index.item]])
 			}
 		}
 	}
@@ -261,15 +259,17 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	@IBAction func datePickerClicked(sender: UIBarButtonItem) {
 
 		if datePickerView.hidden == true {
-			datePickerView.hidden = false
+			showDatePickerView()
+			//datePickerView.hidden = false
 		} else {
-			datePickerView.hidden = true
+//			datePickerView.hidden = true
+			hideDatePickerView()
 		}
 
 	}
 	
 	@IBAction func cancelDatePicker(sender: UIButton) {
-		datePickerView.hidden = true
+		hideDatePickerView()
 	}
 	
 	@IBAction func datePickerGo(sender: UIButton) {
@@ -291,11 +291,15 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		}
 	}
 	
+	//MARK: scroll to date
+	
 	func scrollToDate(date: String, completionHandler handler: (indexPath: NSIndexPath) -> Void){
 			dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in
 				for (index, _) in self.APODarray.enumerate() {
 					let apod = self.APODarray[index]
 					if apod.dateString == date {
+						print("DEBUG: apod.dateString is: \(apod.dateString)")
+						print("DEBUG: requested date is: \(date)")
 						print("DEBUG: The index of the apod in APODarray is \(index)")
 						let newIndex = NSIndexPath(forRow: index, inSection: 0)
 						self.collectionView.scrollToItemAtIndexPath(newIndex, atScrollPosition: .None, animated: true)
@@ -303,6 +307,27 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 				}
 			}
 		}
+	}
+	
+	//MARK: animate date picker
+	
+	func hideDatePickerView() {
+		UIView.animateWithDuration(0.5, delay: 0.0, options: [], animations: { () -> Void in
+			self.datePickerView.center.y += self.datePickerView.bounds.height
+			}, completion: { _ in
+				self.datePickerView.hidden = true
+				self.datePickerView.center.y -= self.datePickerView.bounds.height
+		})
+	}
+	
+	func showDatePickerView() {
+		//Animate the detail view to appear on screen
+		datePickerView.hidden = false
+		datePickerView.center.y += view.bounds.height
+		UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [], animations: { () -> Void in
+			self.datePickerView.center.y -= self.view.bounds.height
+			}, completion: nil)
+		datePickerView.hidden = false
 	}
 	
 	

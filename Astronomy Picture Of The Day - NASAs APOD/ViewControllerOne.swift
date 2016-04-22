@@ -40,7 +40,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	//MARK: lifecycle methods
 	
-	override func viewDidLoad() { 
+	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupMoreOptionsView()
 	}
@@ -56,7 +56,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			createBlankAPODCells()
 			getPhotoProperties([dates.first!])
 		}
-		
+			
 		else {
 			
 			// create a queue
@@ -77,16 +77,16 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				if datesToCheck.count != 0 {
 					print("DEBUG: new apod cells will be created for these dates: \(datesToCheck)")
 					self.insertBlankAPODCells(datesToCheck.count)
-					}
 				}
-				
-				dispatch_async(dispatch_get_main_queue(), { () -> Void in
-					self.APODarray = self.fetchAllAPODS()
-					self.getPhotoProperties([self.dates.first!])
-					self.collectionView.reloadData()
-				})
 			}
-
+			
+			dispatch_async(dispatch_get_main_queue(), { () -> Void in
+				self.APODarray = self.fetchAllAPODS()
+				self.getPhotoProperties([self.dates.first!])
+				self.collectionView.reloadData()
+			})
+		}
+		
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -111,6 +111,10 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	lazy var sharedContext: NSManagedObjectContext = {
 		return CoreDataStackManager.sharedInstance.managedObjectContext
+	}()
+	
+	lazy var backgroundSharedContext: NSManagedObjectContext = {
+		return CoreDataStackManager.sharedInstance.backgroundManagedObjectContext
 	}()
 	
 	func fetchAllAPODS() -> [APOD] {
@@ -432,17 +436,19 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		
 		dispatch_async(downloadQueue) { () -> Void in
 			for i in 0..<self.dates.count {
-				let newAPOD = APOD(dateString: self.dates[i], context: self.sharedContext)
+				//do this work using the background shared context rather than block the main UI
+				let newAPOD = APOD(dateString: self.dates[i], context: self.backgroundSharedContext)
 				self.APODarray.append(newAPOD)
 				print("DEBUG: APOD array count is: \(self.APODarray.count)")
-				}
+				print("Blank APOD for date created: \(newAPOD.dateString)")
+			}
+			
+			CoreDataStackManager.sharedInstance.saveBackgroundContext()
 			
 			dispatch_async(dispatch_get_main_queue(), { () -> Void in
 				self.collectionView.reloadData()
-				CoreDataStackManager.sharedInstance.saveContext()
 			})
 		}
-		
 	}
 	
 	func insertBlankAPODCells(noBlankCells: Int) {
@@ -453,7 +459,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			print("DEBUG: saving the newly inserted blank apod cells")
 		}
 	}
-		
+	
 	func showAlertViewController(title: String? , message: String?) {
 		performUIUpdatesOnMain {
 			let errorAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)

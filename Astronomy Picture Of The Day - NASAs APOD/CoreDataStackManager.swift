@@ -57,16 +57,25 @@ class CoreDataStackManager {
         return coordinator
     }()
     
-    
+    //for main thread work
     lazy var managedObjectContext: NSManagedObjectContext = {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
         }()
-    
+	
+	//instead of blocking the main UI when creating initial array of APODs, we use a background thread managed object context.
+	lazy var backgroundManagedObjectContext: NSManagedObjectContext = {
+		let coordinator = self.persistentStoreCoordinator
+		var managedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+		managedObjectContext.persistentStoreCoordinator = coordinator
+		return managedObjectContext
+	}()
+	
     // MARK: - core data saving support
-    
+	
+	//for main thread saving
     func saveContext () {
         if managedObjectContext.hasChanges {
             do {
@@ -78,4 +87,18 @@ class CoreDataStackManager {
             }
         }
     }
+	
+
+	//this is for saving to database using the background managed object context.
+	func saveBackgroundContext () {
+		if backgroundManagedObjectContext.hasChanges {
+			do {
+				try backgroundManagedObjectContext.save()
+			} catch {
+				let nserror = error as NSError
+				NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+				abort()
+			}
+		}
+	}
 }

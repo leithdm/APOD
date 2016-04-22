@@ -165,26 +165,15 @@ class APODClient {
 		var returnArray = [String]()
 		
 		//TODO: remove magic number and date format
-		let originDateString = "1995-07-15"
+		let originDateString = "1995-09-22"
 		
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		
 		let dateValue1 = dateFormatter.dateFromString(originDateString) as NSDate!
-		
-		//TESTING BLOCK ****
-//		let calendar = NSCalendar.currentCalendar()
-//		let dateValue2 = calendar.dateByAddingUnit(.Day, value: -10, toDate: NSDate(), options: [])
-		//TESTING BLOCK ****
-		
-		//TESTING BLOCK ****
 		let dateValue2 = NSDate()
 		let calendar = NSCalendar.currentCalendar()
-		//TESTING BLOCK ****
-		
-		
 		let flags: NSCalendarUnit = NSCalendarUnit.Day
-		
 		let components = calendar.components(flags, fromDate: dateValue1, toDate: dateValue2, options: NSCalendarOptions.MatchStrictly)
 		
 		for index in 0...components.day {
