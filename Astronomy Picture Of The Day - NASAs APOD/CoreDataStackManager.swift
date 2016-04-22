@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-private let SQLITE_FILE_NAME = "TheWeatherApp.sqlite"
+private let SQLITE_FILE_NAME = "AstronomyPictureOfTheDay.sqlite"
 
 class CoreDataStackManager {
 

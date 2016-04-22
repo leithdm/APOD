@@ -94,10 +94,10 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			}
 		}
 		title = formatDateStringForTitle(dates[max])
+		
 	}
 	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-		
 		getImages()
 	}
 	
@@ -105,6 +105,8 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: download photo properties
 	
 	func getImages() {
+		print("DEBUG: getImages is called")
+		print("DEBUG: visible cells are: \(collectionView.visibleCells())")
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
 			let apod = APODarray[index.row]
@@ -113,6 +115,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			}
 		}
 	}
+	
 	
 	func getPhotoProperties(dates: [String]) {
 		
@@ -273,32 +276,35 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		let datePickerDate = dateFormatter.stringFromDate(datePicker.date)
-	
-		// create a queue
-		let downloadQueue = dispatch_queue_create("download", nil)
 		
-		dispatch_async(downloadQueue) { () -> Void in
-
-			for (index, _) in self.APODarray.enumerate() {
-				let apod = self.APODarray[index]
-				if apod.dateString == datePickerDate {
-					print("DEBUG: The index of the apod in APODarray is \(index)")
-					let newIndex = NSIndexPath(forItem: index, inSection: 0)
-					let cell = self.collectionView.cellForItemAtIndexPath(newIndex)
-					let indexPath = self.collectionView.indexPathForCell(cell!)
-					self.datePickerView.hidden = true
-					self.collectionView.scrollToItemAtIndexPath(indexPath!, atScrollPosition: .None, animated: true)
-					self.title = self.formatDateStringForTitle(self.dates[index])
+		scrollToDate(datePickerDate) { (indexPath) in
+			self.performUIUpdatesOnMain({
+				self.datePickerView.hidden = true
+				
+				//leave a delay of 1 second in order for scroll to new indexPath, load the cells, and then get visible cells
+				let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+				dispatch_after(delayTime, dispatch_get_main_queue()) {
 					self.getImages()
+				}
+			})
+			
+		}
+	}
+	
+	func scrollToDate(date: String, completionHandler handler: (indexPath: NSIndexPath) -> Void){
+			dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { () -> Void in
+				for (index, _) in self.APODarray.enumerate() {
+					let apod = self.APODarray[index]
+					if apod.dateString == date {
+						print("DEBUG: The index of the apod in APODarray is \(index)")
+						let newIndex = NSIndexPath(forRow: index, inSection: 0)
+						self.collectionView.scrollToItemAtIndexPath(newIndex, atScrollPosition: .None, animated: true)
+						handler(indexPath: newIndex)
 				}
 			}
 		}
-		
-		performUIUpdatesOnMain { 
-			self.collectionView.reloadData()
-		}
-
 	}
+	
 	
 	//MARK: helper methods
 	
