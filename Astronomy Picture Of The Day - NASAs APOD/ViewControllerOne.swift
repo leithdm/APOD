@@ -310,14 +310,23 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			cell.explanation = APOD.explanation
 			title = formatDateString(APOD.dateString!)
 			NSNotificationCenter.defaultCenter().postNotificationName("favoriteStatus", object: nil, userInfo: ["isAlreadyFavorite" : APOD.favorite])
-		} else { //download from the remote serve
+		} else {
+			//download from the remote serve
+			
+			if !Reachability.isConnectedToNetwork() {
+				cell.activityIndicator.stopAnimating()
+				cell.loadingImageText.hidden = true
+				cell.imageTitle.text = "Connection error..."
+				return
+			}
+			
 			cell.titleBottomToolbar.hidden = true
 			cell.loadingImageText.hidden = false
-			cell.activityIndicator.startAnimating()
 			cell.imageView.image = nil
 			cell.imageTitle.text = ""
 		}
 	}
+	
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
 		return CGSize(width: collectionView.frame.size.width - 10, height: collectionView.frame.size.height - 80)

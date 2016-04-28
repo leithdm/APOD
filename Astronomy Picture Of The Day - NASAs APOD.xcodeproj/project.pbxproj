@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */; };
 		014DF3421CB2AE3E00E5DAF2 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DF3411CB2AE3E00E5DAF2 /* AboutViewController.swift */; };
+		014E9EAF1CCF617500F85A2A /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014E9EAE1CCF617500F85A2A /* SnapshotHelper.swift */; };
 		01525C691CB278C6007E4783 /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */; };
 		015EE8AA1CB159E4009B1217 /* MyFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */; };
 		015EE8AC1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryAPODCollectionViewCell.swift; sourceTree = "<group>"; };
 		014DF3411CB2AE3E00E5DAF2 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		014E9EAE1CCF617500F85A2A /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = ../../../../.Trash/SnapshotHelper.swift; sourceTree = "<group>"; };
 		01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewController.swift; sourceTree = "<group>"; };
 		015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesViewController.swift; sourceTree = "<group>"; };
 		015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		01C1B2901CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APODUITests */ = {
 			isa = PBXGroup;
 			children = (
+				014E9EAE1CCF617500F85A2A /* SnapshotHelper.swift */,
 				01C1B2911CA0024500D96DF6 /* Astronomy_Picture_Of_The_Day___NASAs_APODUITests.swift */,
 				01C1B2931CA0024500D96DF6 /* Info.plist */,
 			);
@@ -303,6 +306,7 @@
 				TargetAttributes = {
 					01C1B26D1CA0024500D96DF6 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = GUREEK3429;
 					};
 					01C1B2811CA0024500D96DF6 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -402,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C1B2921CA0024500D96DF6 /* Astronomy_Picture_Of_The_Day___NASAs_APODUITests.swift in Sources */,
+				014E9EAF1CCF617500F85A2A /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +532,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Astronomy Picture Of The Day - NASAs APOD/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.Astronomy-Picture-Of-The-Day---NASAs-APOD";
@@ -538,6 +544,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Astronomy Picture Of The Day - NASAs APOD/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.Astronomy-Picture-Of-The-Day---NASAs-APOD";

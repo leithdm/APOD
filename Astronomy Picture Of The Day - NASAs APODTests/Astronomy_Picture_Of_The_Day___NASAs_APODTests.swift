@@ -21,7 +21,7 @@ class Astronomy_Picture_Of_The_Day___NASAs_APODTests: XCTestCase {
         super.tearDown()
     }
 
-	
+	/*
     func testCreateURLFromParameters() {
 		
 		let client = APODClient.sharedInstance
@@ -48,5 +48,6 @@ class Astronomy_Picture_Of_The_Day___NASAs_APODTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+*/
     
 }

@@ -1,0 +1,40 @@
+{
+  "default": {
+    "keyword": {
+      "font": "./fonts/MyFont-Rg.otf"
+    },
+    "title": {
+      "font": "./fonts/MyFont-Th.otf",
+      "color": "#545454"
+    },
+    "background": "./background.jpg",
+    "padding": 50
+  },
+
+  "data": [
+    {
+      "filter": "APOD",
+      "keyword": {
+        "color": "#d21559"
+      }
+    },
+    {
+      "filter": "Awesome",
+      "keyword": {
+        "color": "#feb909"
+      }
+    },
+    {
+      "filter": "Cool",
+      "keyword": {
+        "color": "#aa4dbc"
+      }
+    },
+    {
+      "filter": "Wicked",
+      "keyword": {
+        "color": "#31bb48"
+      }
+    }
+  ]
+}

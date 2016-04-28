@@ -2,6 +2,8 @@
 
 Astronomy Picture Of The Day - NASAs APOD is a universal iOS app that brings the vastness of space right into your hand. Browse through decades of high resolution NASA space photos hand selected by NASA astronomers. Scroll to any APOD, save them to your photo roll, or share them friends. Want that latest Hubble photo as a background? Then APOD is for you. New pictures every day.
 
+[![APOD](https://j.gifs.com/jRJ5Rl.gif)](https://youtu.be/bVeNXoMjtXY)
+
 ##Installation
 
 Clone the GitHub repository and open in Xcode
@@ -28,8 +30,6 @@ Astronomy Picture Of The Day - NASAs APOD is released under the MIT License.
 - Hamburger button and side navigation.
 - Collection view image parsing.
 - CoreData persistence
-
-[![APOD](https://j.gifs.com/jRJ5Rl.gif)](https://youtu.be/bVeNXoMjtXY)
 
 ##Future Work
 
