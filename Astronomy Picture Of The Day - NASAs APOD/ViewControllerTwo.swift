@@ -28,6 +28,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	weak var delegate: ViewControllerTwoDelegate?
 	var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
 	var APODarray = [APOD]()
+	var isConnectedToNetwork: Bool =  true
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var datePicker: UIDatePicker!
 	@IBOutlet weak var datePickerView: UIView!
@@ -45,7 +46,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		super.viewWillAppear(animated)
 		
 		APODarray = fetchAllAPODS()
-		collectionView.reloadData()
 		datePickerView.hidden = true
 		datePicker.maximumDate = NSDate()
 	}
@@ -117,16 +117,15 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func getPhotoProperties(dates: [String]) {
 		
-		if !Reachability.isConnectedToNetwork() {
-			print("DEBUG: Not connected to the internet")
-			self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
-			return
-		}
-		
 		APODClient.sharedInstance.downloadArrayPhotoProperties(dates, completionHandler: { (data, error) in
 			
 			guard error == nil else {
 				print("DEBUG: error in downloading photo array properties")
+				self.isConnectedToNetwork = false
+				self.performUIUpdatesOnMain({ 
+					self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
+					self.collectionView.reloadData()
+				})
 				return
 			}
 			
@@ -134,6 +133,9 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 				print("DEBUG: error retrieving data")
 				return
 			}
+			
+			
+			self.isConnectedToNetwork = true
 			
 			//using the date as the match criteria, compare the downloaded data with the relevant blank APOD cell
 			for APOD in self.APODarray {
@@ -162,12 +164,15 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 										CoreDataStackManager.sharedInstance.saveContext()
 									}
 								} else {
+									self.isConnectedToNetwork = false
 									self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
 								}
 							} else {
+								self.isConnectedToNetwork = false
 								self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
 							}
 						} else {
+							self.isConnectedToNetwork = false
 							self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
 						}
 					}
@@ -218,6 +223,15 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 				cell.favoriteImage.hidden = true
 			}
 		} else { //download from the remote server
+			
+			if !isConnectedToNetwork {
+				cell.activityIndicator.stopAnimating()
+				cell.imageView.image = nil
+				cell.imageTitle.text = ""
+				cell.imageDate.text = ""
+				return
+			}
+			
 			cell.imageInfoView.hidden = true
 			cell.activityIndicator.startAnimating()
 			cell.imageView.image = nil
@@ -260,9 +274,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 
 		if datePickerView.hidden == true {
 			showDatePickerView()
-			//datePickerView.hidden = false
 		} else {
-//			datePickerView.hidden = true
 			hideDatePickerView()
 		}
 
@@ -332,7 +344,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	
 	
 	//MARK: helper methods
-	
+
 	//format the date to be in format e.g. 01 January 2016
 	func formatDateString(date: String) -> String?  {
 		let formatter = NSDateFormatter()

@@ -31,6 +31,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	weak var delegate: ViewControllerOneDelegate?
 	var apodIndex: NSIndexPath?
 	var currentIndexPath: NSIndexPath?
+	var isConnectedToNetwork: Bool =  true
 	
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var barButton: UIBarButtonItem!
@@ -54,11 +55,11 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		//first instance of running the app
 		if APODarray.count == 0 {
 			createBlankAPODCells()
-			getPhotoProperties([dates.first!])
+			delay(6, closure: {
+				self.getPhotoProperties([self.dates.first!])
+			})
 		}
-			
 		else {
-			
 			// create a queue
 			let downloadQueue = dispatch_queue_create("download", nil)
 			
@@ -144,14 +145,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-		var max = 0
-		for cell in collectionView.visibleCells() {
-			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
-			if max < index.row {
-				max = index.row
-			}
-		}
-		
 		getImages()
 	}
 	
@@ -194,17 +187,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func getPhotoProperties(dates: [String]) {
 		
-		if !Reachability.isConnectedToNetwork() {
-			print("DEBUG: Not connected to the internet")
-			self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
-			return
-		}
-		
 		APODClient.sharedInstance.downloadArrayPhotoProperties(dates, completionHandler: { (data, error) in
 			
 			guard error == nil else {
 				print("DEBUG: error in downloading photo array properties")
-				self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
+				self.isConnectedToNetwork = false
+				self.performUIUpdatesOnMain({
+					self.collectionView.reloadData()
+				})
 				return
 			}
 			
@@ -213,9 +203,10 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				return
 			}
 			
+			self.isConnectedToNetwork = true
+			
 			//using the date as the match criteria, compare the downloaded data with the relevant blank APOD cell
 			for APOD in self.APODarray {
-				
 				//ensures the correct APOD is paired with correct cell
 				if APOD.dateString == data["date"] {
 					APOD.explanation = data["explanation"]
@@ -241,12 +232,15 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 										CoreDataStackManager.sharedInstance.saveContext()
 									}
 								} else {
+									self.isConnectedToNetwork = false
 									self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
 								}
 							} else {
+								self.isConnectedToNetwork = false
 								self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
 							}
 						} else {
+							self.isConnectedToNetwork = false
 							self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
 						}
 					}
@@ -291,6 +285,9 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		cell.setup()
 		cell.delegate = self
 		
+		//set up sharing of images button
+		moreOptionsBarButtonItem.enabled = true
+		
 		let APOD = APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
 		
@@ -301,7 +298,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				cell.isAVideoText.hidden = false
 				cell.goToWebSite.hidden = false
 			}
-			
 			cell.titleBottomToolbar.hidden = false
 			cell.loadingImageText.hidden = true
 			cell.activityIndicator.stopAnimating()
@@ -313,10 +309,13 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		} else {
 			//download from the remote serve
 			
-			if !Reachability.isConnectedToNetwork() {
+			if !isConnectedToNetwork {
+				moreOptionsBarButtonItem.enabled = false
 				cell.activityIndicator.stopAnimating()
-				cell.loadingImageText.hidden = true
-				cell.imageTitle.text = "Connection error..."
+				cell.imageView.image = UIImage(named: "noPhoto")
+				cell.titleBottomToolbar.hidden = true
+				cell.loadingImageText.hidden = true 
+				cell.imageTitle.text = APODConstants.AlertTitleConnection
 				return
 			}
 			
@@ -403,6 +402,16 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	
 	//MARK: helper methods
+	
+	//delay function
+	func delay(delay:Double, closure:()->()) {
+		dispatch_after(
+			dispatch_time(
+				DISPATCH_TIME_NOW,
+				Int64(delay * Double(NSEC_PER_SEC))
+			),
+			dispatch_get_main_queue(), closure)
+	}
 	
 	//format the date to be in format e.g. 01 January 20xx
 	func formatDateString(date: String) -> String?  {
