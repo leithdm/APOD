@@ -122,8 +122,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			guard error == nil else {
 				print("DEBUG: error in downloading photo array properties")
 				self.isConnectedToNetwork = false
-				self.performUIUpdatesOnMain({ 
-					self.showAlertViewController(APODConstants.AlertTitleConnection, message: APODConstants.AlertMessageConnection)
+				self.performUIUpdatesOnMain({
 					self.collectionView.reloadData()
 				})
 				return
