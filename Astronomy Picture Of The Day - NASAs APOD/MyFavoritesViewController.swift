@@ -22,7 +22,6 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		title = "My Favorites"
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -30,6 +29,12 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 		
 		APODarray = fetchFavoriteAPODs()
 		collectionView.reloadData()
+		
+		if APODarray.count == 0 {
+			title = "No Favorites"
+		} else {
+			title = "My Favorites"
+		}
 	}
 	
 	override func viewDidLayoutSubviews() {

@@ -38,7 +38,8 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+		
+		APODarray = fetchAllAPODS()
 		title = formatDateStringForTitle(dates[0])
 	}
 	
@@ -46,6 +47,7 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		super.viewWillAppear(animated)
 		
 		APODarray = fetchAllAPODS()
+		collectionView.reloadData()
 		datePickerView.hidden = true
 		datePicker.maximumDate = NSDate()
 	}
@@ -57,7 +59,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
-		
 		getImages()
 		collectionView.reloadData()
 	}
@@ -377,5 +378,15 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			errorAlert.addAction(UIAlertAction(title: APODConstants.AlertActionTitle, style: UIAlertActionStyle.Default, handler: nil))
 			self.presentViewController(errorAlert, animated: true, completion: nil)
 		}
+	}
+	
+	//delay function
+	func delay(delay:Double, closure:()->()) {
+		dispatch_after(
+			dispatch_time(
+				DISPATCH_TIME_NOW,
+				Int64(delay * Double(NSEC_PER_SEC))
+			),
+			dispatch_get_main_queue(), closure)
 	}
 }

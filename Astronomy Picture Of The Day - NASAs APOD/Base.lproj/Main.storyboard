@@ -1089,29 +1089,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Zhh-Dc-kL8">
-                                <rect key="frame" x="20" y="72" width="560" height="455"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fua-aT-MSj">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="152"/>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                                        <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTQ-ts-CwZ">
-                                        <rect key="frame" x="0.0" y="152" width="560" height="152"/>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                                        <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BqR-14-jjj">
-                                        <rect key="frame" x="0.0" y="304" width="560" height="152"/>
-                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                                        <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fua-aT-MSj">
+                                <rect key="frame" x="20" y="72" width="560" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="P8K-g2-kCw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                                <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LethalApps_logo_landscape" translatesAutoresizingMaskIntoConstraints="NO" id="v2b-nn-1vj">
                                 <rect key="frame" x="250" y="535" width="100" height="45"/>
                                 <constraints>
@@ -1119,15 +1105,26 @@
                                     <constraint firstAttribute="height" constant="45" id="lqa-0F-Lz8"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTQ-ts-CwZ">
+                                <rect key="frame" x="20" y="180" width="560" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="4bH-J7-aq4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                                <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="v2b-nn-1vj" firstAttribute="top" secondItem="Zhh-Dc-kL8" secondAttribute="bottom" constant="8" id="W6H-Tb-lTW"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Zhh-Dc-kL8" secondAttribute="trailing" id="e5K-KT-FP9"/>
+                            <constraint firstItem="fua-aT-MSj" firstAttribute="top" secondItem="B9a-8j-6mf" secondAttribute="bottom" constant="8" symbolic="YES" id="3Qp-W1-K9j"/>
+                            <constraint firstItem="fua-aT-MSj" firstAttribute="leading" secondItem="1OP-9c-rgV" secondAttribute="leadingMargin" id="4Jr-WG-cEt"/>
+                            <constraint firstItem="lTQ-ts-CwZ" firstAttribute="top" secondItem="fua-aT-MSj" secondAttribute="bottom" constant="8" symbolic="YES" id="BG9-TJ-vfm"/>
+                            <constraint firstItem="fua-aT-MSj" firstAttribute="leading" secondItem="lTQ-ts-CwZ" secondAttribute="leading" id="JgZ-q4-QUI"/>
+                            <constraint firstItem="fua-aT-MSj" firstAttribute="trailing" secondItem="lTQ-ts-CwZ" secondAttribute="trailing" id="YWJ-4c-ASN"/>
+                            <constraint firstItem="lTQ-ts-CwZ" firstAttribute="centerX" secondItem="v2b-nn-1vj" secondAttribute="centerX" id="il8-JF-vtw"/>
                             <constraint firstItem="yXQ-L6-B8g" firstAttribute="top" secondItem="v2b-nn-1vj" secondAttribute="bottom" constant="20" id="rCz-69-f4v"/>
-                            <constraint firstItem="Zhh-Dc-kL8" firstAttribute="leading" secondItem="1OP-9c-rgV" secondAttribute="leadingMargin" id="rvn-ae-Krt"/>
                             <constraint firstItem="v2b-nn-1vj" firstAttribute="centerX" secondItem="1OP-9c-rgV" secondAttribute="centerX" id="ufn-0j-ip8"/>
-                            <constraint firstItem="Zhh-Dc-kL8" firstAttribute="top" secondItem="B9a-8j-6mf" secondAttribute="bottom" constant="8" id="yNS-Ad-W4e"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About APOD" id="Jwz-Ut-WFP">
@@ -1138,10 +1135,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="image" destination="v2b-nn-1vj" id="YSn-wy-3b4"/>
                         <outlet property="labelOne" destination="fua-aT-MSj" id="d0p-ah-Saq"/>
-                        <outlet property="labelThree" destination="BqR-14-jjj" id="m4h-zQ-6xI"/>
                         <outlet property="labelTwo" destination="lTQ-ts-CwZ" id="8Jl-ys-Ou3"/>
+                        <outlet property="logo" destination="v2b-nn-1vj" id="gUu-qJ-1zf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wIN-ee-cTZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

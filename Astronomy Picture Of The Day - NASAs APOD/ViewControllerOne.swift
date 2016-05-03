@@ -22,6 +22,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		static let AlertTitleConnection		= "Connection offline"
 		static let AlertMessageConnection	= "Please check your internet connection"
 		static let AlertActionTitle			= "Ok"
+		static let InitialDelay				= 6.0
 	}
 	
 	//MARK: properties
@@ -55,7 +56,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		//first instance of running the app
 		if APODarray.count == 0 {
 			createBlankAPODCells()
-			delay(6, closure: {
+			delay(APODConstants.InitialDelay, closure: {
 				self.getPhotoProperties([self.dates.first!])
 			})
 		}
@@ -252,8 +253,16 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	@IBAction func menuButtonTapped(sender: AnyObject) {
 		if let _ = apodIndex {
+			if APODarray.count < dates.count {
+				return
+			}
+			
 			navigationController?.popToRootViewControllerAnimated(true)
 		} else {
+			if APODarray.count < dates.count {
+				return
+			}
+			
 			delegate?.viewControllerOneDidTapMenuButton(self)
 		}
 	}
@@ -293,11 +302,13 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		
 		//if the image has already been downloaded and is in the Documents directory
 		if let image = APOD.image {
-			
-			if !APOD.url!.containsString(APODConstants.APIURL)  {
-				cell.isAVideoText.hidden = false
-				cell.goToWebSite.hidden = false
+			if let url = APOD.url {
+				if !url.containsString(APODConstants.APIURL) {
+					cell.isAVideoText.hidden = false
+					cell.goToWebSite.hidden = false
+				}
 			}
+			
 			cell.titleBottomToolbar.hidden = false
 			cell.loadingImageText.hidden = true
 			cell.activityIndicator.stopAnimating()
