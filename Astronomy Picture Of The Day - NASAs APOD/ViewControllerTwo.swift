@@ -105,7 +105,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: download photo properties
 	
 	func getImages() {
-		print("DEBUG: getImages is called")
 		for cell in collectionView.visibleCells() {
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
 			let apod = APODarray[index.item]
@@ -121,7 +120,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 		APODClient.sharedInstance.downloadArrayPhotoProperties(dates, completionHandler: { (data, error) in
 			
 			guard error == nil else {
-				print("DEBUG: error in downloading photo array properties")
 				self.isConnectedToNetwork = false
 				self.performUIUpdatesOnMain({
 					self.collectionView.reloadData()
@@ -130,7 +128,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 			}
 			
 			guard let data: [String: String] = data else {
-				print("DEBUG: error retrieving data")
 				return
 			}
 			
@@ -310,9 +307,6 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 				for (index, _) in self.APODarray.enumerate() {
 					let apod = self.APODarray[index]
 					if apod.dateString == date {
-						print("DEBUG: apod.dateString is: \(apod.dateString)")
-						print("DEBUG: requested date is: \(date)")
-						print("DEBUG: The index of the apod in APODarray is \(index)")
 						let newIndex = NSIndexPath(forRow: index, inSection: 0)
 						self.collectionView.scrollToItemAtIndexPath(newIndex, atScrollPosition: .None, animated: true)
 						handler(indexPath: newIndex)

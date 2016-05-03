@@ -67,7 +67,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			dispatch_async(downloadQueue) { () -> Void in
 				//get any APODs not downloaded from the server
 				let dates = self.getMissingAPODDates()
-				print("DEBUG: the missing dates (including today) are: \(dates)")
 				var datesToCheck: [String] = []
 				for date in dates  {
 					//modify array so it does not include todays date
@@ -77,7 +76,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				}
 				
 				if datesToCheck.count != 0 {
-					print("DEBUG: new apod cells will be created for these dates: \(datesToCheck)")
 					self.insertBlankAPODCells(datesToCheck.count)
 				}
 			}
@@ -191,7 +189,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		APODClient.sharedInstance.downloadArrayPhotoProperties(dates, completionHandler: { (data, error) in
 			
 			guard error == nil else {
-				print("DEBUG: error in downloading photo array properties")
 				self.isConnectedToNetwork = false
 				self.performUIUpdatesOnMain({
 					self.collectionView.reloadData()
@@ -200,7 +197,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			}
 			
 			guard let data: [String: String] = data else {
-				print("DEBUG: error retrieving data")
 				return
 			}
 			
@@ -468,8 +464,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				//do this work using the background shared context rather than block the main UI
 				let newAPOD = APOD(dateString: self.dates[i], context: self.backgroundSharedContext)
 				self.APODarray.append(newAPOD)
-				print("DEBUG: APOD array count is: \(self.APODarray.count)")
-				print("Blank APOD for date created: \(newAPOD.dateString)")
 			}
 			
 			CoreDataStackManager.sharedInstance.saveBackgroundContext()
@@ -485,7 +479,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
 			APODarray.insert(newAPOD, atIndex: 0)
 			CoreDataStackManager.sharedInstance.saveContext()
-			print("DEBUG: saving the newly inserted blank apod cells")
 		}
 	}
 	

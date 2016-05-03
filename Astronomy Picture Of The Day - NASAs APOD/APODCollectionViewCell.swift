@@ -131,7 +131,6 @@ class APODCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate, UIGest
 	
 	
 	@IBAction func goToWebSite(sender: UIButton) {
-		print("button clicked")
 		delegate?.APODCollectionViewCellDelegateGoToWebsite(self)
 
 	}

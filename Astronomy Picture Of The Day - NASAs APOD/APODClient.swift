@@ -44,8 +44,6 @@ class APODClient {
 	
 	func downloadArrayPhotoProperties(dates: [String], completionHandler: (data: [String: String]?, error: String?) -> Void) {
 		
-		print("DEBUG: downloading properties for \(dates)")
-		
 		for date in dates {
 			
 		let methodParameters: [String: AnyObject] = [
@@ -156,7 +154,7 @@ class APODClient {
 			let queryItem = NSURLQueryItem(name: key, value: "\(value)")
 			components.queryItems!.append(queryItem)
 		}
-		//		print("Specified URL: \(components.URL!)")
+
 		return components.URL!
 	}
 
