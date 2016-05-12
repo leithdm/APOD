@@ -54,6 +54,8 @@ class APODClient {
 		
 		let request = NSURLRequest(URL: createURLFromParameters(methodParameters))
 		let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
+			
+			print("downloading photo properties for \(date)")
 
 			guard (error == nil) else {
 				completionHandler(data: nil, error: "There was an error with your request: \(error?.localizedDescription)")

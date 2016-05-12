@@ -252,14 +252,11 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		
 		let apod = APODarray[indexPath.row]
-		
 		//prevents an image from being clicked if not downloaded yet
 		if apod.image == nil {
 			return
 		}
-		
 		let vcOne = storyboard!.instantiateViewControllerWithIdentifier("ViewControllerOne") as! ViewControllerOne
 		vcOne.apodIndex = indexPath
 		navigationController?.pushViewController(vcOne, animated: true)

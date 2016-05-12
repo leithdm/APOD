@@ -39,7 +39,7 @@ class AboutViewController: UIViewController {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		labelOne.center.y += view.bounds.height
+		labelOne.center.y -= view.bounds.width
 		labelTwo.center.x += view.bounds.width
 		labelTwo.alpha = 0.0
 		logo.center.x -= view.bounds.width
@@ -54,7 +54,7 @@ class AboutViewController: UIViewController {
 	func animateViews() {
 		//Label one
 		UIView.animateWithDuration(1.1, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: [.CurveEaseOut], animations: { () -> Void in
-			self.labelOne.center.y -= self.view.bounds.height
+			self.labelOne.center.x -= self.view.bounds.width
 			}, completion: nil)
 		
 		//Label two

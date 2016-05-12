@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V1d-cC-928">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V1d-cC-928">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -133,7 +133,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bCB-R1-Itr">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bCB-R1-Itr">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="QLb-lz-MB2">
@@ -142,6 +142,11 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <view key="backgroundView" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" id="ulV-Yl-iu2">
+                                    <rect key="frame" x="0.0" y="-64" width="600" height="600"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="APODCollectionViewCell" id="9sO-GH-xCR" customClass="APODCollectionViewCell" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="158.5" width="364" height="347"/>
@@ -303,10 +308,17 @@
                                     <outlet property="delegate" destination="khL-fS-72U" id="6Kp-QB-TF5"/>
                                 </connections>
                             </collectionView>
-                            <view alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ulV-Yl-iu2">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Performing Initial Setup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJs-ed-yu1">
+                                <rect key="frame" x="20" y="124" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1FI-d2-QWb"/>
+                                    <constraint firstAttribute="width" constant="560" id="VFG-XA-fi6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="25"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6zf-Lf-8Xr">
                                 <rect key="frame" x="0.0" y="452" width="600" height="150"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -321,7 +333,14 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6zf-Lf-8Xr" secondAttribute="trailing" id="52T-2S-4Wt"/>
+                            <constraint firstItem="bCB-R1-Itr" firstAttribute="trailing" secondItem="6zf-Lf-8Xr" secondAttribute="trailing" id="FhG-VK-GTa"/>
+                            <constraint firstItem="tJs-ed-yu1" firstAttribute="leading" secondItem="hb8-aP-BaC" secondAttribute="leadingMargin" id="Il4-5i-Ufe"/>
+                            <constraint firstItem="bCB-R1-Itr" firstAttribute="top" secondItem="hb8-aP-BaC" secondAttribute="top" id="Ljd-Im-P5r"/>
                             <constraint firstItem="6zf-Lf-8Xr" firstAttribute="leading" secondItem="hb8-aP-BaC" secondAttribute="leading" id="MuO-mh-Xjc"/>
+                            <constraint firstItem="tJs-ed-yu1" firstAttribute="top" secondItem="mFt-QP-gFy" secondAttribute="bottom" constant="60" id="QX2-Rg-TOt"/>
+                            <constraint firstItem="bCB-R1-Itr" firstAttribute="leading" secondItem="6zf-Lf-8Xr" secondAttribute="leading" id="VC4-Fw-3hV"/>
+                            <constraint firstItem="bCB-R1-Itr" firstAttribute="bottom" secondItem="7D0-uG-dZw" secondAttribute="top" id="mdT-gX-zAr"/>
+                            <constraint firstItem="tJs-ed-yu1" firstAttribute="trailing" secondItem="hb8-aP-BaC" secondAttribute="trailingMargin" id="tyn-8X-2t5"/>
                             <constraint firstAttribute="bottom" secondItem="6zf-Lf-8Xr" secondAttribute="bottom" constant="-2" id="w0I-TZ-fC1"/>
                         </constraints>
                     </view>
@@ -340,6 +359,7 @@
                     <connections>
                         <outlet property="barButton" destination="aIP-Ea-zHG" id="par-8Y-QMV"/>
                         <outlet property="collectionView" destination="bCB-R1-Itr" id="VmT-2G-eAu"/>
+                        <outlet property="loadingNotification" destination="tJs-ed-yu1" id="wkz-IA-SZc"/>
                         <outlet property="moreOptionsBarButtonItem" destination="2LC-Wo-tT5" id="NGQ-in-JVC"/>
                         <outlet property="moreOptionsContainerView" destination="6zf-Lf-8Xr" id="P7p-90-zSA"/>
                         <outlet property="moreOptionsView" destination="ulV-Yl-iu2" id="VIv-5N-2Rd"/>
@@ -1089,15 +1109,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fua-aT-MSj">
-                                <rect key="frame" x="20" y="72" width="560" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="P8K-g2-kCw"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                                <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LethalApps_logo_landscape" translatesAutoresizingMaskIntoConstraints="NO" id="v2b-nn-1vj">
                                 <rect key="frame" x="250" y="535" width="100" height="45"/>
                                 <constraints>
@@ -1105,21 +1116,33 @@
                                     <constraint firstAttribute="height" constant="45" id="lqa-0F-Lz8"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTQ-ts-CwZ">
-                                <rect key="frame" x="20" y="180" width="560" height="100"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTQ-ts-CwZ">
+                                <rect key="frame" x="20" y="246" width="560" height="165"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="4bH-J7-aq4"/>
+                                    <constraint firstAttribute="height" constant="165" id="4bH-J7-aq4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                                <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Each day a different image or photograph of our universe is featured, along with a brief explanation by a professional astronomer.</string>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="24"/>
+                                <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Astronomy Picture of the Day (APOD) is a website provided by NASA and Michigan Technological University (MTU)." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fua-aT-MSj">
+                                <rect key="frame" x="20" y="72" width="560" height="138"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="138" id="P8K-g2-kCw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="24"/>
+                                <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="fua-aT-MSj" firstAttribute="top" secondItem="B9a-8j-6mf" secondAttribute="bottom" constant="8" symbolic="YES" id="3Qp-W1-K9j"/>
                             <constraint firstItem="fua-aT-MSj" firstAttribute="leading" secondItem="1OP-9c-rgV" secondAttribute="leadingMargin" id="4Jr-WG-cEt"/>
-                            <constraint firstItem="lTQ-ts-CwZ" firstAttribute="top" secondItem="fua-aT-MSj" secondAttribute="bottom" constant="8" symbolic="YES" id="BG9-TJ-vfm"/>
+                            <constraint firstItem="lTQ-ts-CwZ" firstAttribute="top" secondItem="fua-aT-MSj" secondAttribute="bottom" constant="36" id="BG9-TJ-vfm"/>
                             <constraint firstItem="fua-aT-MSj" firstAttribute="leading" secondItem="lTQ-ts-CwZ" secondAttribute="leading" id="JgZ-q4-QUI"/>
                             <constraint firstItem="fua-aT-MSj" firstAttribute="trailing" secondItem="lTQ-ts-CwZ" secondAttribute="trailing" id="YWJ-4c-ASN"/>
                             <constraint firstItem="lTQ-ts-CwZ" firstAttribute="centerX" secondItem="v2b-nn-1vj" secondAttribute="centerX" id="il8-JF-vtw"/>

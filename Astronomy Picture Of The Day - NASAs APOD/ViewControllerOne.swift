@@ -22,7 +22,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		static let AlertTitleConnection		= "Connection offline"
 		static let AlertMessageConnection	= "Please check your internet connection"
 		static let AlertActionTitle			= "Ok"
-		static let InitialDelay				= 6.0
+		static let InitialDelay				= 8.0
 	}
 	
 	//MARK: properties
@@ -39,34 +39,47 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	@IBOutlet weak var moreOptionsView: UIView!
 	@IBOutlet weak var moreOptionsContainerView: UIView!
 	@IBOutlet weak var moreOptionsBarButtonItem: UIBarButtonItem!
+	@IBOutlet weak var loadingNotification: UILabel!
+
+
 	
 	//MARK: lifecycle methods
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupMoreOptionsView()
+		loadingNotification.alpha = 0.0
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		collectionView.reloadData()
-		
+
 		APODarray = fetchAllAPODS()
-		
+
 		//first instance of running the app
 		if APODarray.count == 0 {
+			view.userInteractionEnabled = false 
+			barButton.enabled = false
+			moreOptionsBarButtonItem.enabled = false
+			animateLoadingNotification()
 			createBlankAPODCells()
+			
 			delay(APODConstants.InitialDelay, closure: {
+				self.view.userInteractionEnabled = true
 				self.getPhotoProperties([self.dates.first!])
+				self.barButton.enabled = true
+				self.moreOptionsBarButtonItem.enabled = true
+				self.loadingNotification.alpha = 0.0
 			})
+			
 		}
 		else {
-			// create a queue
+			//get any new APODS not downloaded from the server
 			let downloadQueue = dispatch_queue_create("download", nil)
-			
 			dispatch_async(downloadQueue) { () -> Void in
-				//get any APODs not downloaded from the server
 				let dates = self.getMissingAPODDates()
+				print("DEBUG: the missing dates (including today) are: \(dates)")
 				var datesToCheck: [String] = []
 				for date in dates  {
 					//modify array so it does not include todays date
@@ -76,14 +89,15 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				}
 				
 				if datesToCheck.count != 0 {
+				print("DEBUG: new apod cells will be created for these dates: \(datesToCheck)")
 					self.insertBlankAPODCells(datesToCheck.count)
 				}
 			}
 			
 			dispatch_async(dispatch_get_main_queue(), { () -> Void in
 				self.APODarray = self.fetchAllAPODS()
-				self.getPhotoProperties([self.dates.first!])
-				self.collectionView.reloadData()
+//				self.getImages()
+//				self.collectionView.reloadData()
 			})
 		}
 		
@@ -94,13 +108,11 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
 		
 		if let index = apodIndex {
+			APODarray = fetchAllAPODS()
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 			barButton.image = UIImage(named: "leftArrow")
 			collectionView.reloadData()
-		}
-			
-			
-		else { //otherwise always scroll to the most recent APOD
+		} else { //otherwise always scroll to the most recent APOD
 			let index = NSIndexPath(forRow: 0, inSection: 0)
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 		}
@@ -130,6 +142,12 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	}
 	
 	//MARK: scrolling methods
+	
+	func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+		if APODarray.count < 0 {
+			return 
+		}
+	}
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
 		var max = 0
@@ -249,16 +267,8 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	@IBAction func menuButtonTapped(sender: AnyObject) {
 		if let _ = apodIndex {
-			if APODarray.count < dates.count {
-				return
-			}
-			
 			navigationController?.popToRootViewControllerAnimated(true)
 		} else {
-			if APODarray.count < dates.count {
-				return
-			}
-			
 			delegate?.viewControllerOneDidTapMenuButton(self)
 		}
 	}
@@ -289,9 +299,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	func configureCell(cell: APODCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
 		cell.setup()
 		cell.delegate = self
-		
-		//set up sharing of images button
-		moreOptionsBarButtonItem.enabled = true
 		
 		let APOD = APODarray[indexPath.item]
 		cell.setupActivityIndicator(cell)
@@ -420,6 +427,14 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			dispatch_get_main_queue(), closure)
 	}
 	
+	//"Setting Up Content notification"
+	func animateLoadingNotification() {
+		UIView.animateWithDuration(4.0, delay: 1.0, options: [], animations: { () -> Void in
+			self.loadingNotification.alpha = 1.0
+			}, completion: nil)
+	}
+	
+	
 	//format the date to be in format e.g. 01 January 20xx
 	func formatDateString(date: String) -> String?  {
 		let formatter = NSDateFormatter()
@@ -455,7 +470,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	//create an initial array of APOD cells to populate the collection view
 	func createBlankAPODCells() {
-		
 		// create a queue
 		let downloadQueue = dispatch_queue_create("download", nil)
 		
@@ -464,11 +478,13 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				//do this work using the background shared context rather than block the main UI
 				let newAPOD = APOD(dateString: self.dates[i], context: self.backgroundSharedContext)
 				self.APODarray.append(newAPOD)
+				print("DEBUG: APOD array count is: \(self.APODarray.count)")
+				print("Blank APOD for date created: \(newAPOD.dateString)")
 			}
 			
-			CoreDataStackManager.sharedInstance.saveBackgroundContext()
-			
 			dispatch_async(dispatch_get_main_queue(), { () -> Void in
+				CoreDataStackManager.sharedInstance.saveBackgroundContext()
+				self.APODarray = self.fetchAllAPODS()
 				self.collectionView.reloadData()
 			})
 		}
@@ -479,6 +495,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
 			APODarray.insert(newAPOD, atIndex: 0)
 			CoreDataStackManager.sharedInstance.saveContext()
+			print("DEBUG: saving the newly inserted blank apod cells")
 		}
 	}
 	
