@@ -4,6 +4,7 @@
 
 import UIKit
 import CoreData
+import QuartzCore
 
 protocol ViewControllerOneDelegate: class {
 	func viewControllerOneDidTapMenuButton(controller: ViewControllerOne)
@@ -11,7 +12,7 @@ protocol ViewControllerOneDelegate: class {
 
 class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, MoreOptionsViewControllerDelegate, APODCollectionViewCellDelegate {
 	
-	//MARK: Constants
+	//MARK: constants
 	
 	struct APODConstants {
 		static let EntityName				= "APOD"
@@ -33,6 +34,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	var apodIndex: NSIndexPath?
 	var currentIndexPath: NSIndexPath?
 	var isConnectedToNetwork: Bool =  true
+	let messages = ["Initializing", "Configuring Database", "Caching Image"]
 	
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var barButton: UIBarButtonItem!
@@ -40,73 +42,37 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	@IBOutlet weak var moreOptionsContainerView: UIView!
 	@IBOutlet weak var moreOptionsBarButtonItem: UIBarButtonItem!
 	@IBOutlet weak var loadingNotification: UILabel!
-
-
 	
+
 	//MARK: lifecycle methods
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupMoreOptionsView()
 		loadingNotification.alpha = 0.0
+		//self.loadingNotification.center.x -= self.view.frame.size.width
 	}
+	
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		collectionView.reloadData()
-
 		APODarray = fetchAllAPODS()
 
-		//first instance of running the app
 		if APODarray.count == 0 {
-			view.userInteractionEnabled = false 
-			barButton.enabled = false
-			moreOptionsBarButtonItem.enabled = false
-			animateLoadingNotification()
-			createBlankAPODCells()
-			
-			delay(APODConstants.InitialDelay, closure: {
-				self.view.userInteractionEnabled = true
-				self.getPhotoProperties([self.dates.first!])
-				self.barButton.enabled = true
-				self.moreOptionsBarButtonItem.enabled = true
-				self.loadingNotification.alpha = 0.0
-			})
-			
+			setupFirstInitialization()
 		}
 		else {
-			//get any new APODS not downloaded from the server
-			let downloadQueue = dispatch_queue_create("download", nil)
-			dispatch_async(downloadQueue) { () -> Void in
-				let dates = self.getMissingAPODDates()
-				print("DEBUG: the missing dates (including today) are: \(dates)")
-				var datesToCheck: [String] = []
-				for date in dates  {
-					//modify array so it does not include todays date
-					if date != self.APODarray.first?.dateString {
-						datesToCheck.append(date)
-					}
-				}
-				
-				if datesToCheck.count != 0 {
-				print("DEBUG: new apod cells will be created for these dates: \(datesToCheck)")
-					self.insertBlankAPODCells(datesToCheck.count)
-				}
-			}
-			
-			dispatch_async(dispatch_get_main_queue(), { () -> Void in
-				self.APODarray = self.fetchAllAPODS()
-//				self.getImages()
-//				self.collectionView.reloadData()
-			})
+			getNewAPODS()
 		}
-		
 	}
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
 		
+		//if we are navigating to this view from the galleryImage view
 		if let index = apodIndex {
 			APODarray = fetchAllAPODS()
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
@@ -116,7 +82,52 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			let index = NSIndexPath(forRow: 0, inSection: 0)
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 		}
+	}
+	
+	//MARK: initialization methods when app starts
+	
+	//first instance of app being used
+	func setupFirstInitialization() {
+		view.userInteractionEnabled = false
+		barButton.enabled = false
+		moreOptionsBarButtonItem.enabled = false
+		animateLoadingNotification(0)
+		createBlankAPODCells()
 		
+		//delay the downloading of first APOD so user doesnt decide to try interact with app
+		delay(APODConstants.InitialDelay, closure: {
+			self.getPhotoProperties([self.dates.first!])
+			self.view.userInteractionEnabled = true
+			self.barButton.enabled = true
+			self.moreOptionsBarButtonItem.enabled = true
+			//self.loadingNotification.alpha = 0.0
+		})
+	}
+	
+	//get any new APODS not downloaded from the server
+	func getNewAPODS() {
+		let downloadQueue = dispatch_queue_create("download", nil)
+		dispatch_async(downloadQueue) { () -> Void in
+			let dates = self.getMissingAPODDates()
+			print("DEBUG: the missing dates (including today) are: \(dates)")
+			var datesToCheck: [String] = []
+			for date in dates  {
+				//modify array so it does not include todays date
+				if date != self.APODarray.first?.dateString {
+					datesToCheck.append(date)
+				}
+			}
+			
+			if datesToCheck.count != 0 {
+				print("DEBUG: new apod cells will be created for these dates: \(datesToCheck)")
+				self.insertBlankAPODCells(datesToCheck.count)
+			}
+		}
+		
+		dispatch_async(dispatch_get_main_queue(), { () -> Void in
+			self.APODarray = self.fetchAllAPODS()
+			self.getPhotoProperties([self.dates.first!])
+		})
 	}
 	
 	//MARK: core data
@@ -145,7 +156,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func scrollViewWillBeginDragging(scrollView: UIScrollView) {
 		if APODarray.count < 0 {
-			return 
+			return
 		}
 	}
 	
@@ -172,12 +183,10 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		let originDateString = APODarray.first?.dateString
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
-		
 		let dateValue1 = dateFormatter.dateFromString(originDateString!) as NSDate!
 		let dateValue2 = NSDate() //todays date
 		let calendar = NSCalendar.currentCalendar()
 		let flags: NSCalendarUnit = NSCalendarUnit.Day
-		
 		let components = calendar.components(flags, fromDate: dateValue1, toDate: dateValue2, options: NSCalendarOptions.MatchStrictly)
 		
 		for index in 0...components.day {
@@ -328,7 +337,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				cell.activityIndicator.stopAnimating()
 				cell.imageView.image = UIImage(named: "noPhoto")
 				cell.titleBottomToolbar.hidden = true
-				cell.loadingImageText.hidden = true 
+				cell.loadingImageText.hidden = true
 				cell.imageTitle.text = APODConstants.AlertTitleConnection
 				return
 			}
@@ -427,11 +436,23 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			dispatch_get_main_queue(), closure)
 	}
 	
-	//"Setting Up Content notification"
-	func animateLoadingNotification() {
-		UIView.animateWithDuration(4.0, delay: 1.0, options: [], animations: { () -> Void in
+	//animated loading notifications when initialize the app for first time
+	func animateLoadingNotification(index: Int) {
+		self.loadingNotification.text = self.messages[index]
+		
+		UIView.animateWithDuration(0.7, delay: 0.0, options: [], animations: { () -> Void in
 			self.loadingNotification.alpha = 1.0
-			}, completion: nil)
+			}, completion: { _ in
+				UIView.animateWithDuration(1.0, delay: 0.0, options: [], animations: {
+					self.loadingNotification.alpha = 0.0
+					}, completion: {_ in
+						self.delay(1.0, closure: {
+							if index < self.messages.count-1 {
+								self.animateLoadingNotification(index+1)
+							}
+						})
+				})
+		})
 	}
 	
 	
@@ -506,4 +527,5 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			self.presentViewController(errorAlert, animated: true, completion: nil)
 		}
 	}
+	
 }
