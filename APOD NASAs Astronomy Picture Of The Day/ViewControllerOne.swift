@@ -34,7 +34,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	var apodIndex: NSIndexPath?
 	var currentIndexPath: NSIndexPath?
 	var isConnectedToNetwork: Bool =  true
-	let messages = ["Initializing", "Configuring Database", "Caching Image"]
+	let messages = ["Initializing..", "Configuring Database..", "Caching Image.."]
 	
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var barButton: UIBarButtonItem!
@@ -50,7 +50,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		super.viewDidLoad()
 		setupMoreOptionsView()
 		loadingNotification.alpha = 0.0
-		//self.loadingNotification.center.x -= self.view.frame.size.width
 	}
 	
 	
@@ -100,7 +99,6 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			self.view.userInteractionEnabled = true
 			self.barButton.enabled = true
 			self.moreOptionsBarButtonItem.enabled = true
-			//self.loadingNotification.alpha = 0.0
 		})
 	}
 	
@@ -121,13 +119,12 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			if datesToCheck.count != 0 {
 				print("DEBUG: new apod cells will be created for these dates: \(datesToCheck)")
 				self.insertBlankAPODCells(datesToCheck.count)
+				self.performUIUpdatesOnMain({ 
+					self.APODarray = self.fetchAllAPODS()
+					self.getPhotoProperties([self.dates.first!])
+				})
 			}
 		}
-		
-		dispatch_async(dispatch_get_main_queue(), { () -> Void in
-			self.APODarray = self.fetchAllAPODS()
-			self.getPhotoProperties([self.dates.first!])
-		})
 	}
 	
 	//MARK: core data
@@ -443,7 +440,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		UIView.animateWithDuration(0.7, delay: 0.0, options: [], animations: { () -> Void in
 			self.loadingNotification.alpha = 1.0
 			}, completion: { _ in
-				UIView.animateWithDuration(1.0, delay: 0.0, options: [], animations: {
+				UIView.animateWithDuration(1.0, delay: 0.3, options: [], animations: {
 					self.loadingNotification.alpha = 0.0
 					}, completion: {_ in
 						self.delay(1.0, closure: {

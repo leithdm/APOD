@@ -171,8 +171,20 @@ class APODClient {
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		
 		let dateValue1 = dateFormatter.dateFromString(originDateString) as NSDate!
+		
+		//TESTING BLOCK ****
+		//1.Uncomment these 2 lines to create array of dates from 1995 up until 10 days ago
+//		let calendar = NSCalendar.currentCalendar()
+//		let dateValue2 = calendar.dateByAddingUnit(.Day, value: -10, toDate: NSDate(), options: [])
+		//TESTING BLOCK ****
+		
+		//TESTING BLOCK ****
+		//1. Then uncomment these 2 lines to get the missing dates
 		let dateValue2 = NSDate()
 		let calendar = NSCalendar.currentCalendar()
+		//TESTING BLOCK ****
+		
+		//remove ! when using TESTING BLOCK
 		let flags: NSCalendarUnit = NSCalendarUnit.Day
 		let components = calendar.components(flags, fromDate: dateValue1, toDate: dateValue2, options: NSCalendarOptions.MatchStrictly)
 		

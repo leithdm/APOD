@@ -9,7 +9,7 @@
         <!--Main Menu-->
         <scene sceneID="TwD-Tg-1q1">
             <objects>
-                <tableViewController storyboardIdentifier="MenuTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="4NU-5c-oWf" customClass="MenuTableViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MenuTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="4NU-5c-oWf" customClass="MenuTableViewController" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5fn-Pd-V1t">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,7 +124,7 @@
         <!--View Controller One-->
         <scene sceneID="CFi-a6-8Aj">
             <objects>
-                <viewController storyboardIdentifier="ViewControllerOne" id="khL-fS-72U" customClass="ViewControllerOne" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerOne" id="khL-fS-72U" customClass="ViewControllerOne" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mFt-QP-gFy"/>
                         <viewControllerLayoutGuide type="bottom" id="7D0-uG-dZw"/>
@@ -148,7 +148,7 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="APODCollectionViewCell" id="9sO-GH-xCR" customClass="APODCollectionViewCell" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="APODCollectionViewCell" id="9sO-GH-xCR" customClass="APODCollectionViewCell" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="159" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -318,13 +318,13 @@
                                     <segue destination="vM8-QH-99o" kind="embed" identifier="MoreOptionsViewController" id="xue-u4-m7u"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2z-Gj-bnT">
-                                <rect key="frame" x="20" y="164" width="560" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2z-Gj-bnT">
+                                <rect key="frame" x="20" y="144" width="560" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Css-ps-uY2"/>
                                     <constraint firstAttribute="width" constant="560" id="IpC-V2-1oW"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="25"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -336,7 +336,7 @@
                             <constraint firstItem="bCB-R1-Itr" firstAttribute="trailing" secondItem="6zf-Lf-8Xr" secondAttribute="trailing" id="FhG-VK-GTa"/>
                             <constraint firstItem="bCB-R1-Itr" firstAttribute="top" secondItem="hb8-aP-BaC" secondAttribute="top" id="Ljd-Im-P5r"/>
                             <constraint firstItem="6zf-Lf-8Xr" firstAttribute="leading" secondItem="hb8-aP-BaC" secondAttribute="leading" id="MuO-mh-Xjc"/>
-                            <constraint firstItem="c2z-Gj-bnT" firstAttribute="top" secondItem="mFt-QP-gFy" secondAttribute="bottom" constant="100" id="Rbg-FZ-9QR"/>
+                            <constraint firstItem="c2z-Gj-bnT" firstAttribute="top" secondItem="mFt-QP-gFy" secondAttribute="bottom" constant="80" id="Rbg-FZ-9QR"/>
                             <constraint firstItem="bCB-R1-Itr" firstAttribute="leading" secondItem="6zf-Lf-8Xr" secondAttribute="leading" id="VC4-Fw-3hV"/>
                             <constraint firstItem="c2z-Gj-bnT" firstAttribute="trailing" secondItem="hb8-aP-BaC" secondAttribute="trailingMargin" id="hV5-Oa-C4c"/>
                             <constraint firstItem="bCB-R1-Itr" firstAttribute="bottom" secondItem="7D0-uG-dZw" secondAttribute="top" id="mdT-gX-zAr"/>
@@ -371,7 +371,7 @@
         <!--More Options View Controller-->
         <scene sceneID="tbD-Ma-H5N">
             <objects>
-                <viewController id="vM8-QH-99o" customClass="MoreOptionsViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vM8-QH-99o" customClass="MoreOptionsViewController" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Sto-iB-PPX"/>
                         <viewControllerLayoutGuide type="bottom" id="MZ7-vB-q6U"/>
@@ -515,7 +515,7 @@
         <!--View Controller Two-->
         <scene sceneID="lxu-To-Q5x">
             <objects>
-                <viewController storyboardIdentifier="ViewControllerTwo" id="qmu-aJ-MRN" customClass="ViewControllerTwo" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerTwo" id="qmu-aJ-MRN" customClass="ViewControllerTwo" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OE7-0B-pRT"/>
                         <viewControllerLayoutGuide type="bottom" id="fVN-oa-EVc"/>
@@ -534,7 +534,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GalleryAPODCollectionViewCell" id="D7f-bW-7NO" customClass="GalleryAPODCollectionViewCell" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GalleryAPODCollectionViewCell" id="D7f-bW-7NO" customClass="GalleryAPODCollectionViewCell" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
                                         <rect key="frame" x="118" y="64" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -755,7 +755,7 @@
         <!--My Favorites View Controller-->
         <scene sceneID="QXK-rF-V5r">
             <objects>
-                <viewController storyboardIdentifier="MyFavoritesViewController" id="oq6-Um-yfC" customClass="MyFavoritesViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyFavoritesViewController" id="oq6-Um-yfC" customClass="MyFavoritesViewController" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xUF-o0-X0Y"/>
                         <viewControllerLayoutGuide type="bottom" id="cZA-H7-46v"/>
@@ -774,7 +774,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesCollectionViewCell" id="xuv-Uy-5oy" customClass="MyFavoritesCollectionViewCell" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesCollectionViewCell" id="xuv-Uy-5oy" customClass="MyFavoritesCollectionViewCell" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
                                         <rect key="frame" x="118" y="64" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -871,7 +871,7 @@
         <!--My FavoritesAPOD View Controller-->
         <scene sceneID="z5D-nk-yzF">
             <objects>
-                <viewController storyboardIdentifier="MyFavoritesAPODViewController" id="JjM-0l-TKO" customClass="MyFavoritesAPODViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyFavoritesAPODViewController" id="JjM-0l-TKO" customClass="MyFavoritesAPODViewController" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NHC-Ej-4hX"/>
                         <viewControllerLayoutGuide type="bottom" id="x6q-o0-Jgl"/>
@@ -895,7 +895,7 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesAPODCollectionViewCell" id="UVS-jN-z9T" customClass="MyFavoritesAPODCollectionViewCell" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesAPODCollectionViewCell" id="UVS-jN-z9T" customClass="MyFavoritesAPODCollectionViewCell" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="159" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1100,7 +1100,7 @@
         <!--About APOD-->
         <scene sceneID="0pG-gI-vAs">
             <objects>
-                <viewController storyboardIdentifier="AboutViewController" id="eBp-sW-8W5" customClass="AboutViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AboutViewController" id="eBp-sW-8W5" customClass="AboutViewController" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="B9a-8j-6mf"/>
                         <viewControllerLayoutGuide type="bottom" id="yXQ-L6-B8g"/>
@@ -1116,19 +1116,8 @@
                                     <constraint firstAttribute="height" constant="45" id="lqa-0F-Lz8"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTQ-ts-CwZ">
-                                <rect key="frame" x="20" y="246" width="560" height="165"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="165" id="4bH-J7-aq4"/>
-                                </constraints>
-                                <string key="text">Each day a different image or photograph of our universe is featured, along with a brief explanation by a professional astronomer.</string>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="24"/>
-                                <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Astronomy Picture of the Day (APOD) is a website provided by NASA and Michigan Technological University (MTU)." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fua-aT-MSj">
-                                <rect key="frame" x="20" y="72" width="560" height="138"/>
+                                <rect key="frame" x="20" y="80" width="560" height="138"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="138" id="P8K-g2-kCw"/>
@@ -1137,18 +1126,46 @@
                                 <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBg-NT-tkn">
+                                <rect key="frame" x="250" y="495" width="100" height="32"/>
+                                <color key="backgroundColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="17"/>
+                                <state key="normal" title="Support"/>
+                                <connections>
+                                    <action selector="sendSupportEmailButtonTapped:" destination="eBp-sW-8W5" eventType="touchUpInside" id="NY2-z7-VgI"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTQ-ts-CwZ">
+                                <rect key="frame" x="20" y="234" width="560" height="139"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="139" id="4bH-J7-aq4"/>
+                                </constraints>
+                                <string key="text">Each day a different image or photograph of our universe is featured, along with a brief explanation by a professional astronomer.</string>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="24"/>
+                                <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="fua-aT-MSj" firstAttribute="top" secondItem="B9a-8j-6mf" secondAttribute="bottom" constant="8" symbolic="YES" id="3Qp-W1-K9j"/>
+                            <constraint firstItem="fua-aT-MSj" firstAttribute="top" secondItem="B9a-8j-6mf" secondAttribute="bottom" constant="16" id="3Qp-W1-K9j"/>
                             <constraint firstItem="fua-aT-MSj" firstAttribute="leading" secondItem="1OP-9c-rgV" secondAttribute="leadingMargin" id="4Jr-WG-cEt"/>
-                            <constraint firstItem="lTQ-ts-CwZ" firstAttribute="top" secondItem="fua-aT-MSj" secondAttribute="bottom" constant="36" id="BG9-TJ-vfm"/>
+                            <constraint firstItem="lTQ-ts-CwZ" firstAttribute="top" secondItem="fua-aT-MSj" secondAttribute="bottom" constant="16" id="BG9-TJ-vfm"/>
+                            <constraint firstItem="vBg-NT-tkn" firstAttribute="leading" secondItem="v2b-nn-1vj" secondAttribute="leading" id="HLt-Uc-6uq"/>
+                            <constraint firstItem="vBg-NT-tkn" firstAttribute="trailing" secondItem="v2b-nn-1vj" secondAttribute="trailing" id="JHv-D4-3IT"/>
                             <constraint firstItem="fua-aT-MSj" firstAttribute="leading" secondItem="lTQ-ts-CwZ" secondAttribute="leading" id="JgZ-q4-QUI"/>
                             <constraint firstItem="fua-aT-MSj" firstAttribute="trailing" secondItem="lTQ-ts-CwZ" secondAttribute="trailing" id="YWJ-4c-ASN"/>
                             <constraint firstItem="lTQ-ts-CwZ" firstAttribute="centerX" secondItem="v2b-nn-1vj" secondAttribute="centerX" id="il8-JF-vtw"/>
                             <constraint firstItem="yXQ-L6-B8g" firstAttribute="top" secondItem="v2b-nn-1vj" secondAttribute="bottom" constant="20" id="rCz-69-f4v"/>
                             <constraint firstItem="v2b-nn-1vj" firstAttribute="centerX" secondItem="1OP-9c-rgV" secondAttribute="centerX" id="ufn-0j-ip8"/>
+                            <constraint firstItem="v2b-nn-1vj" firstAttribute="top" secondItem="vBg-NT-tkn" secondAttribute="bottom" constant="8" symbolic="YES" id="zds-o2-cuU"/>
                         </constraints>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="fua-aT-MSj"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="About APOD" id="Jwz-Ut-WFP">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="rai-qO-JF2">
@@ -1161,6 +1178,7 @@
                         <outlet property="labelOne" destination="fua-aT-MSj" id="d0p-ah-Saq"/>
                         <outlet property="labelTwo" destination="lTQ-ts-CwZ" id="8Jl-ys-Ou3"/>
                         <outlet property="logo" destination="v2b-nn-1vj" id="gUu-qJ-1zf"/>
+                        <outlet property="supportButton" destination="vBg-NT-tkn" id="hAm-U6-o0X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wIN-ee-cTZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1188,7 +1206,7 @@
         <!--My Favorites More Options View Controller-->
         <scene sceneID="fqy-q8-9ox">
             <objects>
-                <viewController storyboardIdentifier="MyFavoritesMoreOptionsViewController" automaticallyAdjustsScrollViewInsets="NO" id="8hE-YJ-aeF" customClass="MyFavoritesMoreOptionsViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyFavoritesMoreOptionsViewController" automaticallyAdjustsScrollViewInsets="NO" id="8hE-YJ-aeF" customClass="MyFavoritesMoreOptionsViewController" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qs4-7U-Inw"/>
                         <viewControllerLayoutGuide type="bottom" id="S5b-5N-1RE"/>
