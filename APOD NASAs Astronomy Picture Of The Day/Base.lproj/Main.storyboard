@@ -148,7 +148,7 @@
                                 </view>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="APODCollectionViewCell" id="9sO-GH-xCR" customClass="APODCollectionViewCell" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="159" width="364" height="347"/>
+                                        <rect key="frame" x="0.0" y="158.5" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
@@ -895,7 +895,7 @@
                                 </view>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesAPODCollectionViewCell" id="UVS-jN-z9T" customClass="MyFavoritesAPODCollectionViewCell" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="159" width="364" height="347"/>
+                                        <rect key="frame" x="0.0" y="158.5" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
