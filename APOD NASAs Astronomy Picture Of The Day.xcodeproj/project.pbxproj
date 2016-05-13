@@ -65,15 +65,15 @@
 		01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesAPODViewController.swift; sourceTree = "<group>"; };
 		01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesAPODCollectionViewCell.swift; sourceTree = "<group>"; };
 		01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesMoreOptionsViewController.swift; sourceTree = "<group>"; };
-		01C1B26E1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "APOD - NASAs Astronomy Picture Of The Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C1B26E1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "APOD NASAs Astronomy Picture Of The Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C1B2711CA0024500D96DF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01C1B2761CA0024500D96DF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01C1B2781CA0024500D96DF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01C1B27B1CA0024500D96DF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01C1B27D1CA0024500D96DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01C1B2821CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "APOD - NASAs Astronomy Picture Of The Day.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C1B2821CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "APOD NASAs Astronomy Picture Of The Day.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C1B2881CA0024500D96DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01C1B28D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "APOD - NASAs Astronomy Picture Of The Day.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C1B28D1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "APOD NASAs Astronomy Picture Of The Day.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C1B2931CA0024500D96DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C1B2A21CA00C0E00D96DF6 /* APODClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APODClient.swift; sourceTree = "<group>"; };
 		01F475A41CABF6B100AC35EF /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -158,9 +158,9 @@
 		01C1B26F1CA0024500D96DF6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				01C1B26E1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.app */,
-				01C1B2821CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */,
-				01C1B28D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */,
+				01C1B26E1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day.app */,
+				01C1B2821CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day.xctest */,
+				01C1B28D1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,7 +177,7 @@
 				018B63801CA2DED300152514 /* Resources */,
 			);
 			name = "Astronomy Picture Of The Day - NASAs APOD";
-			path = "APOD - NASAs Astronomy Picture Of The Day";
+			path = "APOD NASAs Astronomy Picture Of The Day";
 			sourceTree = "<group>";
 		};
 		01C1B2851CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APODTests */ = {
@@ -186,7 +186,7 @@
 				01C1B2881CA0024500D96DF6 /* Info.plist */,
 			);
 			name = "Astronomy Picture Of The Day - NASAs APODTests";
-			path = "APOD - NASAs Astronomy Picture Of The Day";
+			path = "APOD NASAs Astronomy Picture Of The DayTests";
 			sourceTree = "<group>";
 		};
 		01C1B2901CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APODUITests */ = {
@@ -194,7 +194,8 @@
 			children = (
 				01C1B2931CA0024500D96DF6 /* Info.plist */,
 			);
-			path = "Astronomy Picture Of The Day - NASAs APODUITests";
+			name = "Astronomy Picture Of The Day - NASAs APODUITests";
+			path = "APOD NASAs Astronomy Picture Of The DayUITests";
 			sourceTree = "<group>";
 		};
 		01C1B29F1CA00BE000D96DF6 /* Controller */ = {
@@ -234,9 +235,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		01C1B26D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day */ = {
+		01C1B26D1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 01C1B2961CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The Day" */;
+			buildConfigurationList = 01C1B2961CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD NASAs Astronomy Picture Of The Day" */;
 			buildPhases = (
 				01C1B26A1CA0024500D96DF6 /* Sources */,
 				01C1B26B1CA0024500D96DF6 /* Frameworks */,
@@ -246,14 +247,14 @@
 			);
 			dependencies = (
 			);
-			name = "APOD - NASAs Astronomy Picture Of The Day";
+			name = "APOD NASAs Astronomy Picture Of The Day";
 			productName = "Astronomy Picture Of The Day - NASAs APOD";
-			productReference = 01C1B26E1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.app */;
+			productReference = 01C1B26E1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day.app */;
 			productType = "com.apple.product-type.application";
 		};
-		01C1B2811CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The DayTests */ = {
+		01C1B2811CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The DayTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 01C1B2991CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The DayTests" */;
+			buildConfigurationList = 01C1B2991CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD NASAs Astronomy Picture Of The DayTests" */;
 			buildPhases = (
 				01C1B27E1CA0024500D96DF6 /* Sources */,
 				01C1B27F1CA0024500D96DF6 /* Frameworks */,
@@ -264,14 +265,14 @@
 			dependencies = (
 				01C1B2841CA0024500D96DF6 /* PBXTargetDependency */,
 			);
-			name = "APOD - NASAs Astronomy Picture Of The DayTests";
+			name = "APOD NASAs Astronomy Picture Of The DayTests";
 			productName = "Astronomy Picture Of The Day - NASAs APODTests";
-			productReference = 01C1B2821CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */;
+			productReference = 01C1B2821CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		01C1B28C1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The DayUITests */ = {
+		01C1B28C1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The DayUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 01C1B29C1CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The DayUITests" */;
+			buildConfigurationList = 01C1B29C1CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD NASAs Astronomy Picture Of The DayUITests" */;
 			buildPhases = (
 				01C1B2891CA0024500D96DF6 /* Sources */,
 				01C1B28A1CA0024500D96DF6 /* Frameworks */,
@@ -282,9 +283,9 @@
 			dependencies = (
 				01C1B28F1CA0024500D96DF6 /* PBXTargetDependency */,
 			);
-			name = "APOD - NASAs Astronomy Picture Of The DayUITests";
+			name = "APOD NASAs Astronomy Picture Of The DayUITests";
 			productName = "Astronomy Picture Of The Day - NASAs APODUITests";
-			productReference = 01C1B28D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */;
+			productReference = 01C1B28D1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -311,7 +312,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 01C1B2691CA0024500D96DF6 /* Build configuration list for PBXProject "APOD - NASAs Astronomy Picture Of The Day" */;
+			buildConfigurationList = 01C1B2691CA0024500D96DF6 /* Build configuration list for PBXProject "APOD NASAs Astronomy Picture Of The Day" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -324,9 +325,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				01C1B26D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day */,
-				01C1B2811CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The DayTests */,
-				01C1B28C1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The DayUITests */,
+				01C1B26D1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day */,
+				01C1B2811CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The DayTests */,
+				01C1B28C1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The DayUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -405,12 +406,12 @@
 /* Begin PBXTargetDependency section */
 		01C1B2841CA0024500D96DF6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 01C1B26D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day */;
+			target = 01C1B26D1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day */;
 			targetProxy = 01C1B2831CA0024500D96DF6 /* PBXContainerItemProxy */;
 		};
 		01C1B28F1CA0024500D96DF6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 01C1B26D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day */;
+			target = 01C1B26D1CA0024500D96DF6 /* APOD NASAs Astronomy Picture Of The Day */;
 			targetProxy = 01C1B28E1CA0024500D96DF6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -523,10 +524,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "APOD - NASAs Astronomy Picture Of The Day/Info.plist";
+				INFOPLIST_FILE = "APOD NASAs Astronomy Picture Of The Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.APOD---NASAs Astronomy Picture Of The Day";
-				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.APOD-NASAs-Astronomy-Picture-Of-The-Day";
+				PRODUCT_NAME = "APOD NASAs Astronomy Picture Of The Day";
 			};
 			name = Debug;
 		};
@@ -535,10 +536,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "APOD - NASAs Astronomy Picture Of The Day/Info.plist";
+				INFOPLIST_FILE = "APOD NASAs Astronomy Picture Of The Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.APOD---NASAs Astronomy Picture Of The Day";
-				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.APOD-NASAs-Astronomy-Picture-Of-The-Day";
+				PRODUCT_NAME = "APOD NASAs Astronomy Picture Of The Day";
 			};
 			name = Release;
 		};
@@ -549,8 +550,8 @@
 				INFOPLIST_FILE = "Astronomy Picture Of The Day - NASAs APODTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.Astronomy-Picture-Of-The-Day---NASAs-APODTests";
-				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/APOD - NASAs Astronomy Picture Of The Day.app/APOD - NASAs Astronomy Picture Of The Day";
+				PRODUCT_NAME = "APOD NASAs Astronomy Picture Of The Day";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/APOD NASAs Astronomy Picture Of The Day.app/APOD NASAs Astronomy Picture Of The Day";
 			};
 			name = Debug;
 		};
@@ -561,8 +562,8 @@
 				INFOPLIST_FILE = "Astronomy Picture Of The Day - NASAs APODTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.Astronomy-Picture-Of-The-Day---NASAs-APODTests";
-				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/APOD - NASAs Astronomy Picture Of The Day.app/APOD - NASAs Astronomy Picture Of The Day";
+				PRODUCT_NAME = "APOD NASAs Astronomy Picture Of The Day";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/APOD NASAs Astronomy Picture Of The Day.app/APOD NASAs Astronomy Picture Of The Day";
 			};
 			name = Release;
 		};
@@ -572,7 +573,7 @@
 				INFOPLIST_FILE = "Astronomy Picture Of The Day - NASAs APODUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.Astronomy-Picture-Of-The-Day---NASAs-APODUITests";
-				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
+				PRODUCT_NAME = "APOD NASAs Astronomy Picture Of The Day";
 				TEST_TARGET_NAME = "Astronomy Picture Of The Day - NASAs APOD";
 				USES_XCTRUNNER = YES;
 			};
@@ -584,7 +585,7 @@
 				INFOPLIST_FILE = "Astronomy Picture Of The Day - NASAs APODUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.Astronomy-Picture-Of-The-Day---NASAs-APODUITests";
-				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
+				PRODUCT_NAME = "APOD NASAs Astronomy Picture Of The Day";
 				TEST_TARGET_NAME = "Astronomy Picture Of The Day - NASAs APOD";
 				USES_XCTRUNNER = YES;
 			};
@@ -593,7 +594,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		01C1B2691CA0024500D96DF6 /* Build configuration list for PBXProject "APOD - NASAs Astronomy Picture Of The Day" */ = {
+		01C1B2691CA0024500D96DF6 /* Build configuration list for PBXProject "APOD NASAs Astronomy Picture Of The Day" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				01C1B2941CA0024500D96DF6 /* Debug */,
@@ -602,7 +603,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		01C1B2961CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The Day" */ = {
+		01C1B2961CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD NASAs Astronomy Picture Of The Day" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				01C1B2971CA0024500D96DF6 /* Debug */,
@@ -611,7 +612,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		01C1B2991CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The DayTests" */ = {
+		01C1B2991CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD NASAs Astronomy Picture Of The DayTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				01C1B29A1CA0024500D96DF6 /* Debug */,
@@ -620,7 +621,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		01C1B29C1CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The DayUITests" */ = {
+		01C1B29C1CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD NASAs Astronomy Picture Of The DayUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				01C1B29D1CA0024500D96DF6 /* Debug */,

@@ -9,7 +9,7 @@
         <!--Main Menu-->
         <scene sceneID="TwD-Tg-1q1">
             <objects>
-                <tableViewController storyboardIdentifier="MenuTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="4NU-5c-oWf" customClass="MenuTableViewController" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MenuTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="4NU-5c-oWf" customClass="MenuTableViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5fn-Pd-V1t">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,7 +124,7 @@
         <!--View Controller One-->
         <scene sceneID="CFi-a6-8Aj">
             <objects>
-                <viewController storyboardIdentifier="ViewControllerOne" id="khL-fS-72U" customClass="ViewControllerOne" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerOne" id="khL-fS-72U" customClass="ViewControllerOne" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mFt-QP-gFy"/>
                         <viewControllerLayoutGuide type="bottom" id="7D0-uG-dZw"/>
@@ -148,8 +148,8 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="APODCollectionViewCell" id="9sO-GH-xCR" customClass="APODCollectionViewCell" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="158.5" width="364" height="347"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="APODCollectionViewCell" id="9sO-GH-xCR" customClass="APODCollectionViewCell" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="159" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
@@ -371,7 +371,7 @@
         <!--More Options View Controller-->
         <scene sceneID="tbD-Ma-H5N">
             <objects>
-                <viewController id="vM8-QH-99o" customClass="MoreOptionsViewController" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vM8-QH-99o" customClass="MoreOptionsViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Sto-iB-PPX"/>
                         <viewControllerLayoutGuide type="bottom" id="MZ7-vB-q6U"/>
@@ -515,7 +515,7 @@
         <!--View Controller Two-->
         <scene sceneID="lxu-To-Q5x">
             <objects>
-                <viewController storyboardIdentifier="ViewControllerTwo" id="qmu-aJ-MRN" customClass="ViewControllerTwo" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerTwo" id="qmu-aJ-MRN" customClass="ViewControllerTwo" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OE7-0B-pRT"/>
                         <viewControllerLayoutGuide type="bottom" id="fVN-oa-EVc"/>
@@ -534,7 +534,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GalleryAPODCollectionViewCell" id="D7f-bW-7NO" customClass="GalleryAPODCollectionViewCell" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GalleryAPODCollectionViewCell" id="D7f-bW-7NO" customClass="GalleryAPODCollectionViewCell" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
                                         <rect key="frame" x="118" y="64" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -755,7 +755,7 @@
         <!--My Favorites View Controller-->
         <scene sceneID="QXK-rF-V5r">
             <objects>
-                <viewController storyboardIdentifier="MyFavoritesViewController" id="oq6-Um-yfC" customClass="MyFavoritesViewController" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyFavoritesViewController" id="oq6-Um-yfC" customClass="MyFavoritesViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xUF-o0-X0Y"/>
                         <viewControllerLayoutGuide type="bottom" id="cZA-H7-46v"/>
@@ -774,7 +774,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesCollectionViewCell" id="xuv-Uy-5oy" customClass="MyFavoritesCollectionViewCell" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesCollectionViewCell" id="xuv-Uy-5oy" customClass="MyFavoritesCollectionViewCell" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
                                         <rect key="frame" x="118" y="64" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -871,7 +871,7 @@
         <!--My FavoritesAPOD View Controller-->
         <scene sceneID="z5D-nk-yzF">
             <objects>
-                <viewController storyboardIdentifier="MyFavoritesAPODViewController" id="JjM-0l-TKO" customClass="MyFavoritesAPODViewController" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyFavoritesAPODViewController" id="JjM-0l-TKO" customClass="MyFavoritesAPODViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NHC-Ej-4hX"/>
                         <viewControllerLayoutGuide type="bottom" id="x6q-o0-Jgl"/>
@@ -895,8 +895,8 @@
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesAPODCollectionViewCell" id="UVS-jN-z9T" customClass="MyFavoritesAPODCollectionViewCell" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="158.5" width="364" height="347"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesAPODCollectionViewCell" id="UVS-jN-z9T" customClass="MyFavoritesAPODCollectionViewCell" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="159" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
@@ -1100,7 +1100,7 @@
         <!--About APOD-->
         <scene sceneID="0pG-gI-vAs">
             <objects>
-                <viewController storyboardIdentifier="AboutViewController" id="eBp-sW-8W5" customClass="AboutViewController" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AboutViewController" id="eBp-sW-8W5" customClass="AboutViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="B9a-8j-6mf"/>
                         <viewControllerLayoutGuide type="bottom" id="yXQ-L6-B8g"/>
@@ -1188,7 +1188,7 @@
         <!--My Favorites More Options View Controller-->
         <scene sceneID="fqy-q8-9ox">
             <objects>
-                <viewController storyboardIdentifier="MyFavoritesMoreOptionsViewController" automaticallyAdjustsScrollViewInsets="NO" id="8hE-YJ-aeF" customClass="MyFavoritesMoreOptionsViewController" customModule="Astronomy_Picture_Of_The_Day___NASAs_APOD" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyFavoritesMoreOptionsViewController" automaticallyAdjustsScrollViewInsets="NO" id="8hE-YJ-aeF" customClass="MyFavoritesMoreOptionsViewController" customModule="APOD___NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qs4-7U-Inw"/>
                         <viewControllerLayoutGuide type="bottom" id="S5b-5N-1RE"/>
