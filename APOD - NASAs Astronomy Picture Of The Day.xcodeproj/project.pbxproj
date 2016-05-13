@@ -1,0 +1,648 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */; };
+		014DF3421CB2AE3E00E5DAF2 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DF3411CB2AE3E00E5DAF2 /* AboutViewController.swift */; };
+		01525C691CB278C6007E4783 /* MoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */; };
+		015EE8AA1CB159E4009B1217 /* MyFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */; };
+		015EE8AC1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */; };
+		018B63851CA2DF3900152514 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63811CA2DF3900152514 /* SidebarViewController.swift */; };
+		018B63861CA2DF3900152514 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63821CA2DF3900152514 /* MenuTableViewController.swift */; };
+		018B63871CA2DF3900152514 /* ViewControllerTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63831CA2DF3900152514 /* ViewControllerTwo.swift */; };
+		018B63881CA2DF3900152514 /* ViewControllerOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63841CA2DF3900152514 /* ViewControllerOne.swift */; };
+		018B63941CA2E9B000152514 /* APODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */; };
+		019EBF471CA3E36100AE2B85 /* APOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019EBF461CA3E36100AE2B85 /* APOD.swift */; };
+		01A56FCD1CD34410008E9613 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A56FCC1CD34410008E9613 /* Reachability.swift */; };
+		01B9DD661CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */; };
+		01B9DD681CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */; };
+		01B9DD6A1CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */; };
+		01C1B2721CA0024500D96DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C1B2711CA0024500D96DF6 /* AppDelegate.swift */; };
+		01C1B2771CA0024500D96DF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C1B2751CA0024500D96DF6 /* Main.storyboard */; };
+		01C1B2791CA0024500D96DF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C1B2781CA0024500D96DF6 /* Assets.xcassets */; };
+		01C1B27C1CA0024500D96DF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C1B27A1CA0024500D96DF6 /* LaunchScreen.storyboard */; };
+		01C1B2A31CA00C0E00D96DF6 /* APODClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C1B2A21CA00C0E00D96DF6 /* APODClient.swift */; };
+		01F475A51CABF6B100AC35EF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F475A41CABF6B100AC35EF /* ImageCache.swift */; };
+		01F475A71CABFDC500AC35EF /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F475A61CABFDC500AC35EF /* CoreDataStackManager.swift */; };
+		01F475AA1CABFDEB00AC35EF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01F475A81CABFDEB00AC35EF /* Model.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		01C1B2831CA0024500D96DF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01C1B2661CA0024500D96DF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01C1B26D1CA0024500D96DF6;
+			remoteInfo = "Astronomy Picture Of The Day - NASAs APOD";
+		};
+		01C1B28E1CA0024500D96DF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01C1B2661CA0024500D96DF6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01C1B26D1CA0024500D96DF6;
+			remoteInfo = "Astronomy Picture Of The Day - NASAs APOD";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryAPODCollectionViewCell.swift; sourceTree = "<group>"; };
+		014DF3411CB2AE3E00E5DAF2 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewController.swift; sourceTree = "<group>"; };
+		015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesViewController.swift; sourceTree = "<group>"; };
+		015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesCollectionViewCell.swift; sourceTree = "<group>"; };
+		018B63811CA2DF3900152514 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
+		018B63821CA2DF3900152514 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		018B63831CA2DF3900152514 /* ViewControllerTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTwo.swift; sourceTree = "<group>"; };
+		018B63841CA2DF3900152514 /* ViewControllerOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerOne.swift; sourceTree = "<group>"; };
+		018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APODCollectionViewCell.swift; sourceTree = "<group>"; };
+		019EBF461CA3E36100AE2B85 /* APOD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APOD.swift; sourceTree = "<group>"; };
+		01A56FCC1CD34410008E9613 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesAPODViewController.swift; sourceTree = "<group>"; };
+		01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesAPODCollectionViewCell.swift; sourceTree = "<group>"; };
+		01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesMoreOptionsViewController.swift; sourceTree = "<group>"; };
+		01C1B26E1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "APOD - NASAs Astronomy Picture Of The Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C1B2711CA0024500D96DF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		01C1B2761CA0024500D96DF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		01C1B2781CA0024500D96DF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		01C1B27B1CA0024500D96DF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		01C1B27D1CA0024500D96DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01C1B2821CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "APOD - NASAs Astronomy Picture Of The Day.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C1B2881CA0024500D96DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01C1B28D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "APOD - NASAs Astronomy Picture Of The Day.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C1B2931CA0024500D96DF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01C1B2A21CA00C0E00D96DF6 /* APODClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APODClient.swift; sourceTree = "<group>"; };
+		01F475A41CABF6B100AC35EF /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		01F475A61CABFDC500AC35EF /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
+		01F475A91CABFDEB00AC35EF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		01C1B26B1CA0024500D96DF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C1B27F1CA0024500D96DF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C1B28A1CA0024500D96DF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01525C671CB2680A007E4783 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */,
+				0128A0A41CAC84210094D172 /* GalleryAPODCollectionViewCell.swift */,
+				015EE8AB1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift */,
+				01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */,
+				019EBF4A1CA40D1200AE2B85 /* SideBar */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		016941021CC6800600F45131 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				01A56FCC1CD34410008E9613 /* Reachability.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		018B63801CA2DED300152514 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				01C1B2711CA0024500D96DF6 /* AppDelegate.swift */,
+				01C1B27D1CA0024500D96DF6 /* Info.plist */,
+				01C1B27A1CA0024500D96DF6 /* LaunchScreen.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		019EBF4A1CA40D1200AE2B85 /* SideBar */ = {
+			isa = PBXGroup;
+			children = (
+				018B63821CA2DF3900152514 /* MenuTableViewController.swift */,
+				018B63811CA2DF3900152514 /* SidebarViewController.swift */,
+			);
+			name = SideBar;
+			sourceTree = "<group>";
+		};
+		01C1B2651CA0024500D96DF6 = {
+			isa = PBXGroup;
+			children = (
+				01C1B2701CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APOD */,
+				01C1B2851CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APODTests */,
+				01C1B2901CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APODUITests */,
+				01C1B26F1CA0024500D96DF6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		01C1B26F1CA0024500D96DF6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01C1B26E1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.app */,
+				01C1B2821CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */,
+				01C1B28D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		01C1B2701CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APOD */ = {
+			isa = PBXGroup;
+			children = (
+				01C1B2A11CA00BF300D96DF6 /* API */,
+				01C1B2A01CA00BE800D96DF6 /* Model */,
+				01525C671CB2680A007E4783 /* View */,
+				01C1B29F1CA00BE000D96DF6 /* Controller */,
+				01C1B2751CA0024500D96DF6 /* Main.storyboard */,
+				01C1B2781CA0024500D96DF6 /* Assets.xcassets */,
+				018B63801CA2DED300152514 /* Resources */,
+			);
+			name = "Astronomy Picture Of The Day - NASAs APOD";
+			path = "APOD - NASAs Astronomy Picture Of The Day";
+			sourceTree = "<group>";
+		};
+		01C1B2851CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APODTests */ = {
+			isa = PBXGroup;
+			children = (
+				01C1B2881CA0024500D96DF6 /* Info.plist */,
+			);
+			name = "Astronomy Picture Of The Day - NASAs APODTests";
+			path = "APOD - NASAs Astronomy Picture Of The Day";
+			sourceTree = "<group>";
+		};
+		01C1B2901CA0024500D96DF6 /* Astronomy Picture Of The Day - NASAs APODUITests */ = {
+			isa = PBXGroup;
+			children = (
+				01C1B2931CA0024500D96DF6 /* Info.plist */,
+			);
+			path = "Astronomy Picture Of The Day - NASAs APODUITests";
+			sourceTree = "<group>";
+		};
+		01C1B29F1CA00BE000D96DF6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				018B63841CA2DF3900152514 /* ViewControllerOne.swift */,
+				018B63831CA2DF3900152514 /* ViewControllerTwo.swift */,
+				01525C681CB278C6007E4783 /* MoreOptionsViewController.swift */,
+				015EE8A91CB159E4009B1217 /* MyFavoritesViewController.swift */,
+				01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */,
+				01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */,
+				014DF3411CB2AE3E00E5DAF2 /* AboutViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		01C1B2A01CA00BE800D96DF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				01F475A81CABFDEB00AC35EF /* Model.xcdatamodeld */,
+				019EBF461CA3E36100AE2B85 /* APOD.swift */,
+				01F475A61CABFDC500AC35EF /* CoreDataStackManager.swift */,
+				01F475A41CABF6B100AC35EF /* ImageCache.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		01C1B2A11CA00BF300D96DF6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				01C1B2A21CA00C0E00D96DF6 /* APODClient.swift */,
+				016941021CC6800600F45131 /* Network */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		01C1B26D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01C1B2961CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The Day" */;
+			buildPhases = (
+				01C1B26A1CA0024500D96DF6 /* Sources */,
+				01C1B26B1CA0024500D96DF6 /* Frameworks */,
+				01C1B26C1CA0024500D96DF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "APOD - NASAs Astronomy Picture Of The Day";
+			productName = "Astronomy Picture Of The Day - NASAs APOD";
+			productReference = 01C1B26E1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.app */;
+			productType = "com.apple.product-type.application";
+		};
+		01C1B2811CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The DayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01C1B2991CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The DayTests" */;
+			buildPhases = (
+				01C1B27E1CA0024500D96DF6 /* Sources */,
+				01C1B27F1CA0024500D96DF6 /* Frameworks */,
+				01C1B2801CA0024500D96DF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01C1B2841CA0024500D96DF6 /* PBXTargetDependency */,
+			);
+			name = "APOD - NASAs Astronomy Picture Of The DayTests";
+			productName = "Astronomy Picture Of The Day - NASAs APODTests";
+			productReference = 01C1B2821CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		01C1B28C1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The DayUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01C1B29C1CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The DayUITests" */;
+			buildPhases = (
+				01C1B2891CA0024500D96DF6 /* Sources */,
+				01C1B28A1CA0024500D96DF6 /* Frameworks */,
+				01C1B28B1CA0024500D96DF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01C1B28F1CA0024500D96DF6 /* PBXTargetDependency */,
+			);
+			name = "APOD - NASAs Astronomy Picture Of The DayUITests";
+			productName = "Astronomy Picture Of The Day - NASAs APODUITests";
+			productReference = 01C1B28D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		01C1B2661CA0024500D96DF6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Darren Leith";
+				TargetAttributes = {
+					01C1B26D1CA0024500D96DF6 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = GUREEK3429;
+					};
+					01C1B2811CA0024500D96DF6 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 01C1B26D1CA0024500D96DF6;
+					};
+					01C1B28C1CA0024500D96DF6 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 01C1B26D1CA0024500D96DF6;
+					};
+				};
+			};
+			buildConfigurationList = 01C1B2691CA0024500D96DF6 /* Build configuration list for PBXProject "APOD - NASAs Astronomy Picture Of The Day" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 01C1B2651CA0024500D96DF6;
+			productRefGroup = 01C1B26F1CA0024500D96DF6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				01C1B26D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day */,
+				01C1B2811CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The DayTests */,
+				01C1B28C1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The DayUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		01C1B26C1CA0024500D96DF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C1B27C1CA0024500D96DF6 /* LaunchScreen.storyboard in Resources */,
+				01C1B2791CA0024500D96DF6 /* Assets.xcassets in Resources */,
+				01C1B2771CA0024500D96DF6 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C1B2801CA0024500D96DF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C1B28B1CA0024500D96DF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		01C1B26A1CA0024500D96DF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C1B2A31CA00C0E00D96DF6 /* APODClient.swift in Sources */,
+				019EBF471CA3E36100AE2B85 /* APOD.swift in Sources */,
+				018B63941CA2E9B000152514 /* APODCollectionViewCell.swift in Sources */,
+				01F475A71CABFDC500AC35EF /* CoreDataStackManager.swift in Sources */,
+				01F475A51CABF6B100AC35EF /* ImageCache.swift in Sources */,
+				018B63861CA2DF3900152514 /* MenuTableViewController.swift in Sources */,
+				01C1B2721CA0024500D96DF6 /* AppDelegate.swift in Sources */,
+				018B63881CA2DF3900152514 /* ViewControllerOne.swift in Sources */,
+				018B63851CA2DF3900152514 /* SidebarViewController.swift in Sources */,
+				014DF3421CB2AE3E00E5DAF2 /* AboutViewController.swift in Sources */,
+				01B9DD661CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift in Sources */,
+				01B9DD681CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift in Sources */,
+				01B9DD6A1CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift in Sources */,
+				01525C691CB278C6007E4783 /* MoreOptionsViewController.swift in Sources */,
+				015EE8AC1CB16117009B1217 /* MyFavoritesCollectionViewCell.swift in Sources */,
+				015EE8AA1CB159E4009B1217 /* MyFavoritesViewController.swift in Sources */,
+				0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */,
+				01F475AA1CABFDEB00AC35EF /* Model.xcdatamodeld in Sources */,
+				01A56FCD1CD34410008E9613 /* Reachability.swift in Sources */,
+				018B63871CA2DF3900152514 /* ViewControllerTwo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C1B27E1CA0024500D96DF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C1B2891CA0024500D96DF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		01C1B2841CA0024500D96DF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01C1B26D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day */;
+			targetProxy = 01C1B2831CA0024500D96DF6 /* PBXContainerItemProxy */;
+		};
+		01C1B28F1CA0024500D96DF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01C1B26D1CA0024500D96DF6 /* APOD - NASAs Astronomy Picture Of The Day */;
+			targetProxy = 01C1B28E1CA0024500D96DF6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		01C1B2751CA0024500D96DF6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01C1B2761CA0024500D96DF6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		01C1B27A1CA0024500D96DF6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01C1B27B1CA0024500D96DF6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		01C1B2941CA0024500D96DF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		01C1B2951CA0024500D96DF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		01C1B2971CA0024500D96DF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "APOD - NASAs Astronomy Picture Of The Day/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.APOD---NASAs Astronomy Picture Of The Day";
+				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
+			};
+			name = Debug;
+		};
+		01C1B2981CA0024500D96DF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "APOD - NASAs Astronomy Picture Of The Day/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.APOD---NASAs Astronomy Picture Of The Day";
+				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
+			};
+			name = Release;
+		};
+		01C1B29A1CA0024500D96DF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Astronomy Picture Of The Day - NASAs APODTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.Astronomy-Picture-Of-The-Day---NASAs-APODTests";
+				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/APOD - NASAs Astronomy Picture Of The Day.app/APOD - NASAs Astronomy Picture Of The Day";
+			};
+			name = Debug;
+		};
+		01C1B29B1CA0024500D96DF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Astronomy Picture Of The Day - NASAs APODTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.Astronomy-Picture-Of-The-Day---NASAs-APODTests";
+				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/APOD - NASAs Astronomy Picture Of The Day.app/APOD - NASAs Astronomy Picture Of The Day";
+			};
+			name = Release;
+		};
+		01C1B29D1CA0024500D96DF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Astronomy Picture Of The Day - NASAs APODUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.Astronomy-Picture-Of-The-Day---NASAs-APODUITests";
+				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
+				TEST_TARGET_NAME = "Astronomy Picture Of The Day - NASAs APOD";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		01C1B29E1CA0024500D96DF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Astronomy Picture Of The Day - NASAs APODUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.Astronomy-Picture-Of-The-Day---NASAs-APODUITests";
+				PRODUCT_NAME = "APOD - NASAs Astronomy Picture Of The Day";
+				TEST_TARGET_NAME = "Astronomy Picture Of The Day - NASAs APOD";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		01C1B2691CA0024500D96DF6 /* Build configuration list for PBXProject "APOD - NASAs Astronomy Picture Of The Day" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C1B2941CA0024500D96DF6 /* Debug */,
+				01C1B2951CA0024500D96DF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01C1B2961CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The Day" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C1B2971CA0024500D96DF6 /* Debug */,
+				01C1B2981CA0024500D96DF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01C1B2991CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The DayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C1B29A1CA0024500D96DF6 /* Debug */,
+				01C1B29B1CA0024500D96DF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01C1B29C1CA0024500D96DF6 /* Build configuration list for PBXNativeTarget "APOD - NASAs Astronomy Picture Of The DayUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C1B29D1CA0024500D96DF6 /* Debug */,
+				01C1B29E1CA0024500D96DF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		01F475A81CABFDEB00AC35EF /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				01F475A91CABFDEB00AC35EF /* Model.xcdatamodel */,
+			);
+			currentVersion = 01F475A91CABFDEB00AC35EF /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 01C1B2661CA0024500D96DF6 /* Project object */;
+}
