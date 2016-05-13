@@ -18,7 +18,6 @@
 		018B63881CA2DF3900152514 /* ViewControllerOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63841CA2DF3900152514 /* ViewControllerOne.swift */; };
 		018B63941CA2E9B000152514 /* APODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */; };
 		019EBF471CA3E36100AE2B85 /* APOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019EBF461CA3E36100AE2B85 /* APOD.swift */; };
-		01A56FCD1CD34410008E9613 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A56FCC1CD34410008E9613 /* Reachability.swift */; };
 		01B9DD661CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */; };
 		01B9DD681CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */; };
 		01B9DD6A1CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */; };
@@ -61,7 +60,6 @@
 		018B63841CA2DF3900152514 /* ViewControllerOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerOne.swift; sourceTree = "<group>"; };
 		018B63931CA2E9B000152514 /* APODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APODCollectionViewCell.swift; sourceTree = "<group>"; };
 		019EBF461CA3E36100AE2B85 /* APOD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APOD.swift; sourceTree = "<group>"; };
-		01A56FCC1CD34410008E9613 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		01B9DD651CB1CBE5007FECC3 /* MyFavoritesAPODViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesAPODViewController.swift; sourceTree = "<group>"; };
 		01B9DD671CB1CF47007FECC3 /* MyFavoritesAPODCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesAPODCollectionViewCell.swift; sourceTree = "<group>"; };
 		01B9DD691CB1D355007FECC3 /* MyFavoritesMoreOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFavoritesMoreOptionsViewController.swift; sourceTree = "<group>"; };
@@ -116,14 +114,6 @@
 				019EBF4A1CA40D1200AE2B85 /* SideBar */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		016941021CC6800600F45131 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				01A56FCC1CD34410008E9613 /* Reachability.swift */,
-			);
-			name = Network;
 			sourceTree = "<group>";
 		};
 		018B63801CA2DED300152514 /* Resources */ = {
@@ -227,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				01C1B2A21CA00C0E00D96DF6 /* APODClient.swift */,
-				016941021CC6800600F45131 /* Network */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -382,7 +371,6 @@
 				015EE8AA1CB159E4009B1217 /* MyFavoritesViewController.swift in Sources */,
 				0128A0A51CAC84210094D172 /* GalleryAPODCollectionViewCell.swift in Sources */,
 				01F475AA1CABFDEB00AC35EF /* Model.xcdatamodeld in Sources */,
-				01A56FCD1CD34410008E9613 /* Reachability.swift in Sources */,
 				018B63871CA2DF3900152514 /* ViewControllerTwo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
