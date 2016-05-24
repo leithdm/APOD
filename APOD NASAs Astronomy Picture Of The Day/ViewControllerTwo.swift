@@ -38,13 +38,14 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		APODarray = fetchAllAPODS()
+		print("DEBUG: viewDidLoad on VC2 called")
+		APODarray = fetchAllAPODS() //Is this line really necessary ..?
 		title = formatDateStringForTitle(dates[0])
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
+		print("DEBUG: viewWillAppear on VC2 called")
 		
 		APODarray = fetchAllAPODS()
 		collectionView.reloadData()
@@ -54,11 +55,13 @@ class ViewControllerTwo: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
+		print("DEBUG: viewDidLayoutSubviews on VC2 called")
 		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
 	}
 	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
+		print("DEBUG: viewDidAppear on VC2 called")
 		getImages()
 		collectionView.reloadData()
 	}

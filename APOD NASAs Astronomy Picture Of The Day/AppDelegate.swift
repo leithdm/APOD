@@ -26,8 +26,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var sideBarVC: SidebarViewController!
 	
 	
+	func applicationDidEnterBackground(application: UIApplication) {
+		print("DEBUG: application went into the background")
+	}
+	
+	func applicationWillEnterForeground(application: UIApplication) {
+		print("DEBUG: application has entered the foreground")
+	}
+	
+	func applicationDidBecomeActive(application: UIApplication) {
+		print("DEBUG: application has become active")
+	}
+	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		
+		print("DEBUG: didFinishLaunchingWithOptions has been called")
 		
 		let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
 		
@@ -81,7 +94,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: ViewControllerOneDelegate {
 	func viewControllerOneDidTapMenuButton(controller: ViewControllerOne) {
-		print("app delegate called")
 		sideBarVC.toggleLeftMenuAnimated(true)
 	}
 }

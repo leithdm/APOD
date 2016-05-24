@@ -29,6 +29,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	//MARK: properties
 	
 	var dates: [String] = APODClient.sharedInstance.getAllAPODDates()
+	var datesTesting: [String] = APODClient.sharedInstance.getAllAPODDatesTesting()
 	var APODarray = [APOD]()
 	weak var delegate: ViewControllerOneDelegate?
 	var apodIndex: NSIndexPath?
@@ -48,6 +49,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		print("DEBUG: viewDidLoad on VC1 called")
 		setupMoreOptionsView()
 		loadingNotification.alpha = 0.0
 	}
@@ -55,7 +57,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		
+		print("DEBUG: viewWillAppear on VC1 called")
 		collectionView.reloadData()
 		APODarray = fetchAllAPODS()
 
@@ -69,15 +71,19 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
+		print("DEBUG: viewDidLayoutSubview on VC1 called")
+
 		collectionView.frame.size = CGSizeMake(view.frame.size.width, view.frame.size.height)
 		
 		//if we are navigating to this view from the galleryImage view
 		if let index = apodIndex {
+		print("DEBUG: scrolling to item at indexPath")
 			APODarray = fetchAllAPODS()
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 			barButton.image = UIImage(named: "leftArrow")
-			collectionView.reloadData()
+			collectionView.reloadData() //this is NOT necessary since it it called in viewWillAppear
 		} else { //otherwise always scroll to the most recent APOD
+			print("DEBUG: scrolling to row0, section0")
 			let index = NSIndexPath(forRow: 0, inSection: 0)
 			collectionView.scrollToItemAtIndexPath(index, atScrollPosition: .None, animated: false)
 		}
@@ -95,6 +101,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		
 		//delay the downloading of first APOD so user doesnt decide to try interact with app
 		delay(APODConstants.InitialDelay, closure: {
+			//TESTING: replace dates array with datesTesting
 			self.getPhotoProperties([self.dates.first!])
 			self.view.userInteractionEnabled = true
 			self.barButton.enabled = true
@@ -110,7 +117,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			print("DEBUG: the missing dates (including today) are: \(dates)")
 			var datesToCheck: [String] = []
 			for date in dates  {
-				//modify array so it does not include todays date
+				//modify array so it does not include the "current" most recent date i.e. this will not match the servers most current date
 				if date != self.APODarray.first?.dateString {
 					datesToCheck.append(date)
 				}
@@ -119,7 +126,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			if datesToCheck.count != 0 {
 				print("DEBUG: new apod cells will be created for these dates: \(datesToCheck)")
 				self.insertBlankAPODCells(datesToCheck.count)
-				self.performUIUpdatesOnMain({ 
+				self.performUIUpdatesOnMain({
 					self.APODarray = self.fetchAllAPODS()
 					self.getPhotoProperties([self.dates.first!])
 				})
@@ -492,8 +499,11 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		let downloadQueue = dispatch_queue_create("download", nil)
 		
 		dispatch_async(downloadQueue) { () -> Void in
+			//TESTING: replace dates.count with datesTesting.count
 			for i in 0..<self.dates.count {
 				//do this work using the background shared context rather than block the main UI
+				
+				//TESTING: replace dates array with datesTesting
 				let newAPOD = APOD(dateString: self.dates[i], context: self.backgroundSharedContext)
 				self.APODarray.append(newAPOD)
 				print("DEBUG: APOD array count is: \(self.APODarray.count)")
@@ -502,6 +512,10 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			
 			dispatch_async(dispatch_get_main_queue(), { () -> Void in
 				CoreDataStackManager.sharedInstance.saveBackgroundContext()
+				
+				//****THIS IS CRUCIAL.
+				//***APP had to be removed from appstore because this one line was not included in the final build. We were
+				//seeing really strange behavious when going from VC1 to VC2 without this line. 
 				self.APODarray = self.fetchAllAPODS()
 				self.collectionView.reloadData()
 			})
@@ -510,10 +524,18 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	
 	func insertBlankAPODCells(noBlankCells: Int) {
 		for i in 0..<noBlankCells {
+			
+			/*
+			 * Version 1.1 - The dates were not being updated as it was not really a computed property
+			 * Version 1.0 used the global variable dates, as opposed to the local one introduced in version 1.1 below. 
+			 * This meant that new dates were never actually created.
+			*/
+			let dates = APODClient.sharedInstance.getAllAPODDates()
 			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
+			print("DEBUG: creating APOD with dateString \(dates[i])")
 			APODarray.insert(newAPOD, atIndex: 0)
 			CoreDataStackManager.sharedInstance.saveContext()
-			print("DEBUG: saving the newly inserted blank apod cells")
+			print("DEBUG: saving the newly inserted blank apod cell(s)")
 		}
 	}
 	

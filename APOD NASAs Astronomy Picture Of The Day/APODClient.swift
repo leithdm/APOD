@@ -55,7 +55,7 @@ class APODClient {
 		let request = NSURLRequest(URL: createURLFromParameters(methodParameters))
 		let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
 			
-			print("downloading photo properties for \(date)")
+			print("DEBUG: APODClient now downloading photo properties for \(date)")
 
 			guard (error == nil) else {
 				completionHandler(data: nil, error: "There was an error with your request: \(error?.localizedDescription)")
@@ -171,22 +171,43 @@ class APODClient {
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		
 		let dateValue1 = dateFormatter.dateFromString(originDateString) as NSDate!
-		
-		//TESTING BLOCK ****
-		//1.Uncomment these 2 lines to create array of dates from 1995 up until 10 days ago
-//		let calendar = NSCalendar.currentCalendar()
-//		let dateValue2 = calendar.dateByAddingUnit(.Day, value: -10, toDate: NSDate(), options: [])
-		//TESTING BLOCK ****
-		
-		//TESTING BLOCK ****
-		//1. Then uncomment these 2 lines to get the missing dates
 		let dateValue2 = NSDate()
 		let calendar = NSCalendar.currentCalendar()
-		//TESTING BLOCK ****
 		
-		//remove ! when using TESTING BLOCK
 		let flags: NSCalendarUnit = NSCalendarUnit.Day
 		let components = calendar.components(flags, fromDate: dateValue1, toDate: dateValue2, options: NSCalendarOptions.MatchStrictly)
+		
+		for index in 0...components.day {
+			let components = NSDateComponents()
+			components.day = index
+			let newDate = calendar.dateByAddingComponents(components, toDate: dateValue1, options: NSCalendarOptions.MatchStrictly)!
+			returnArray.insert(dateFormatter.stringFromDate(newDate), atIndex: 0)
+		}
+		return returnArray
+	}
+	
+	/*
+	 * Test method for getting all apod dates
+	 * creates an array of strings for every date from 15th July 1995 to 1 day ago
+	*/
+	func getAllAPODDatesTesting() -> [String] {
+		var returnArray = [String]()
+		
+		//TODO: remove magic number and date format
+		let originDateString = "1995-09-22"
+		
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		
+		let dateValue1 = dateFormatter.dateFromString(originDateString) as NSDate!
+
+		//1.Uncomment these 2 lines to create array of dates from 1995 up until 10 days ago
+				let calendar = NSCalendar.currentCalendar()
+				let dateValue2 = calendar.dateByAddingUnit(.Day, value: -10, toDate: NSDate(), options: [])
+		//TESTING BLOCK ****
+
+		let flags: NSCalendarUnit = NSCalendarUnit.Day
+		let components = calendar.components(flags, fromDate: dateValue1, toDate: dateValue2!, options: NSCalendarOptions.MatchStrictly)
 		
 		for index in 0...components.day {
 			let components = NSDateComponents()
