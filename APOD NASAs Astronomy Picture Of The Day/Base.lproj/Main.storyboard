@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V1d-cC-928">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V1d-cC-928">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -768,13 +768,13 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="hbT-h2-haA">
                                     <size key="itemSize" width="364" height="347"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="1"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyFavoritesCollectionViewCell" id="xuv-Uy-5oy" customClass="MyFavoritesCollectionViewCell" customModule="APOD_NASAs_Astronomy_Picture_Of_The_Day" customModuleProvider="target">
-                                        <rect key="frame" x="118" y="64" width="364" height="347"/>
+                                        <rect key="frame" x="118" y="65" width="364" height="347"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="364" height="347"/>
@@ -844,13 +844,52 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="NtB-1C-u62">
+                                    <rect key="frame" x="0.0" y="64" width="600" height="1"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="oq6-Um-yfC" id="rjr-0Z-nG2"/>
                                     <outlet property="delegate" destination="oq6-Um-yfC" id="hC7-Uy-LU8"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJs-VK-6kK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="92W-J0-vCD">
+                                        <rect key="frame" x="140" y="175.5" width="320" height="249"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="249" id="WgU-Q7-u4O"/>
+                                            <constraint firstAttribute="width" constant="320" id="ic1-ew-QBh"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save an APOD to your favorites and it will appear here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOe-DF-jA5">
+                                        <rect key="frame" x="183" y="432" width="235" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="j35-UP-WZS"/>
+                                            <constraint firstAttribute="width" constant="235" id="nLc-ia-aCj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                                        <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="92W-J0-vCD" firstAttribute="centerX" secondItem="TJs-VK-6kK" secondAttribute="centerX" id="eoU-of-U7f"/>
+                                    <constraint firstItem="IOe-DF-jA5" firstAttribute="top" secondItem="92W-J0-vCD" secondAttribute="bottom" constant="7.5" id="mcj-bo-gK0"/>
+                                    <constraint firstItem="92W-J0-vCD" firstAttribute="centerY" secondItem="TJs-VK-6kK" secondAttribute="centerY" id="msQ-9k-Wss"/>
+                                    <constraint firstItem="IOe-DF-jA5" firstAttribute="centerX" secondItem="TJs-VK-6kK" secondAttribute="centerX" id="xSM-BQ-5Ju"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TJs-VK-6kK" firstAttribute="leading" secondItem="MfR-Bd-wFs" secondAttribute="leading" id="JsZ-t1-r3t"/>
+                            <constraint firstAttribute="trailing" secondItem="TJs-VK-6kK" secondAttribute="trailing" id="RHd-aN-7T0"/>
+                            <constraint firstItem="cZA-H7-46v" firstAttribute="top" secondItem="TJs-VK-6kK" secondAttribute="bottom" id="kCE-GD-6Mk"/>
+                            <constraint firstItem="TJs-VK-6kK" firstAttribute="top" secondItem="MfR-Bd-wFs" secondAttribute="top" id="p8i-al-R66"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DfP-24-ixV">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="f13-YG-Gze">
@@ -861,6 +900,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="D6F-7v-T5K" id="Xz7-Uv-07h"/>
+                        <outlet property="noFavoritesLabel" destination="IOe-DF-jA5" id="Zcn-Dw-7rJ"/>
+                        <outlet property="noFavoritesView" destination="TJs-VK-6kK" id="Vkb-WH-LmA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoO-Lj-fWj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1367,6 +1408,7 @@
         <image name="menu" width="24" height="24"/>
         <image name="more" width="36" height="36"/>
         <image name="myFavorites" width="24" height="24"/>
+        <image name="noPhoto" width="320" height="249"/>
         <image name="share" width="24" height="24"/>
         <image name="todaysAPOD" width="24" height="24"/>
         <image name="upArrow" width="36" height="36"/>

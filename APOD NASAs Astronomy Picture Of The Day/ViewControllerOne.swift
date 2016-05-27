@@ -58,6 +58,10 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		print("DEBUG: viewWillAppear on VC1 called")
+		
+		//compute the latest dates
+		dates = APODClient.sharedInstance.getAllAPODDates()
+		
 		collectionView.reloadData()
 		APODarray = fetchAllAPODS()
 
@@ -102,6 +106,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 		//delay the downloading of first APOD so user doesnt decide to try interact with app
 		delay(APODConstants.InitialDelay, closure: {
 			//TESTING: replace dates array with datesTesting
+//			let dates = APODClient.sharedInstance.getAllAPODDates()
 			self.getPhotoProperties([self.dates.first!])
 			self.view.userInteractionEnabled = true
 			self.barButton.enabled = true
@@ -128,6 +133,12 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				self.insertBlankAPODCells(datesToCheck.count)
 				self.performUIUpdatesOnMain({
 					self.APODarray = self.fetchAllAPODS()
+					/*
+					* Version 1.2 - The dates were not being updated as it was not really a computed property
+					* Version 1.0 and 1.1 used the global variable dates, as opposed to the local one.
+					* This meant that new dates were never actually created.
+					*/
+//					let dates = APODClient.sharedInstance.getAllAPODDates()
 					self.getPhotoProperties([self.dates.first!])
 				})
 			}
@@ -173,7 +184,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 				max = index.row
 			}
 		}
-		title = formatDateString(dates[max])
+		title = formatDateString(self.dates[max])
 	}
 	
 	func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -210,7 +221,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			let index: NSIndexPath = collectionView.indexPathForCell(cell)!
 			let apod = APODarray[index.item]
 			if apod.image == nil {
-				getPhotoProperties([dates[index.row]])
+				getPhotoProperties([self.dates[index.row]])
 			}
 		}
 	}
@@ -497,7 +508,7 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 	func createBlankAPODCells() {
 		// create a queue
 		let downloadQueue = dispatch_queue_create("download", nil)
-		
+//		let dates = APODClient.sharedInstance.getAllAPODDates()
 		dispatch_async(downloadQueue) { () -> Void in
 			//TESTING: replace dates.count with datesTesting.count
 			for i in 0..<self.dates.count {
@@ -530,9 +541,9 @@ class ViewControllerOne: UIViewController, UICollectionViewDataSource, UICollect
 			 * Version 1.0 used the global variable dates, as opposed to the local one introduced in version 1.1 below. 
 			 * This meant that new dates were never actually created.
 			*/
-			let dates = APODClient.sharedInstance.getAllAPODDates()
-			let newAPOD = APOD(dateString: dates[i], context: self.sharedContext)
-			print("DEBUG: creating APOD with dateString \(dates[i])")
+//			let dates = APODClient.sharedInstance.getAllAPODDates()
+			let newAPOD = APOD(dateString: self.dates[i], context: self.sharedContext)
+			print("DEBUG: creating APOD with dateString \(self.dates[i])")
 			APODarray.insert(newAPOD, atIndex: 0)
 			CoreDataStackManager.sharedInstance.saveContext()
 			print("DEBUG: saving the newly inserted blank apod cell(s)")

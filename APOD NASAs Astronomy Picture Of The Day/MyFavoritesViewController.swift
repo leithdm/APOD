@@ -14,6 +14,8 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 	//MARK: properties
 	
 	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var noFavoritesView: UIView!
+	@IBOutlet weak var noFavoritesLabel: UILabel!
 	
 	var APODarray = [APOD]()
 	weak var delegate: MyFavoritesViewControllerDelegate?
@@ -22,19 +24,26 @@ class MyFavoritesViewController: UIViewController, UICollectionViewDataSource, U
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		noFavoritesView.hidden = true
+		noFavoritesLabel.hidden = true 
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		APODarray = fetchFavoriteAPODs()
-		collectionView.reloadData()
 		
 		if APODarray.count == 0 {
 			title = "No Favorites"
+			noFavoritesView.hidden = false
+			noFavoritesLabel.hidden = false
 		} else {
 			title = "My Favorites"
+			noFavoritesView.hidden = true
+			noFavoritesLabel.hidden = true
 		}
+		
+		collectionView.reloadData()
 	}
 	
 	override func viewDidLayoutSubviews() {

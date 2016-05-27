@@ -516,6 +516,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.APOD-NASAs-Astronomy-Picture-Of-The-Day";
 				PRODUCT_NAME = "APOD NASAs Astronomy Picture Of The Day";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -529,6 +530,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.darrenmartinleith.APOD-NASAs-Astronomy-Picture-Of-The-Day";
 				PRODUCT_NAME = "APOD NASAs Astronomy Picture Of The Day";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
